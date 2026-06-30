@@ -1,4 +1,4 @@
-export interface OSP {
+export interface RepositoriesResponse {
     full_name: string
     html_url: string
     description: string

@@ -1,14 +1,14 @@
 import { create } from "zustand";
-import { api } from "../services/Api";
-import { type OSP } from "../types/Repo"
+import { apiResponse } from "../services/Api";
+import { type RepositoriesResponse } from "../types/Repo"
 import axios from "axios";
 
 interface SearchResponse {
-    items: OSP[]
+    items: RepositoriesResponse[]
 }
 
 interface OSPStore {
-    opss: OSP[]
+    opss: RepositoriesResponse[]
     loading: boolean
     error: string | null 
 
@@ -25,10 +25,10 @@ export const useOSPStore = create<OSPStore>((set) => ({
         try {
             set({ loading: true, error: null })
 
-            const reponse = await api.get<SearchResponse>("/repositories?q=topic:open-source-project&sort=stars&order=desc&per_page=921");
+            const response = await apiResponse.get<SearchResponse>("/repositories?q=topic:open-source-project&sort=stars&order=desc&per_page=921");
 
             set({
-                opss: reponse.data.items,
+                opss: response.data.items,
                 loading: false
             })
 
