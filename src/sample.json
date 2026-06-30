@@ -1,0 +1,50 @@
+{
+
+    "items": [
+      {
+        "full_name": "refinedev/refine",
+      
+        "owner": {
+          "avatar_url": "https://avatars.githubusercontent.com/u/104967037?v=4"
+        },
+
+        "html_url": "https://github.com/refinedev/refine",
+        "description": "A React Framework for building  internal tools, admin panels, dashboards & B2B apps with unmatched flexibility.",
+        "updated_at": "2026-06-29T16:45:41Z",
+        "homepage": "https://refine.dev",
+        "stargazers_count": 34985,
+        "language": "TypeScript",
+        "forks_count": 3110,
+        "open_issues_count": 43,
+
+        "license": {
+          "name": "MIT License"
+        },
+        
+        "topics": [
+          "admin",
+          "admin-ui",
+          "ant-design",
+          "crud",
+          "developer-tools",
+          "frontend-framework",
+          "good-first-issue",
+          "graphql",
+          "hacktoberfest",
+          "headless",
+          "internal-tools",
+          "javascript",
+          "low-code",
+          "nestjs",
+          "nextjs",
+          "open-source-project",
+          "react",
+          "react-framework",
+          "react-hooks",
+          "typescript"
+        ],
+        "forks": 3110,
+        "watchers": 34985
+      }
+    ]
+  }
