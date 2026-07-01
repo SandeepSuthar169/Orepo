@@ -1,2 +1,5 @@
 @plugin "daisyui";
 @import "tailwindcss";
+body {
+    font-family: 'Roboto', sans-serif;
+}
