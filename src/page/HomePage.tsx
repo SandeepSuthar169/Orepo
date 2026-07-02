@@ -2,6 +2,32 @@ import Footer from "../components/Footer";
 import { FiArrowUpRight } from "react-icons/fi";
 import { Store  } from 'lucide-react';
 
+interface TextAreaType {
+  number: number
+  Paregrapgtext: string
+  Span1: string
+  Span2: string
+  
+}
+
+const TextArea = ({number, Paregrapgtext, Span1, Span2}: TextAreaType) => {
+    return (
+      <div className="flex flex-col gap-3 items-start w-full cursor-pointer group">
+      <div className="flex gap-4">
+        <h3 className="inline-flex items-center font-medium border box-content transition-colors focus:outline-none focus-visible:outline-none whitespace-nowrap bg-white text-gray-700 border-black/10 group-hover:text-gray-900 group-hover:border-black/20 h-6 px-2 gap-1.5 text-sm rounded-full">
+          {number}
+        </h3>
+        <p className="font-semibold leading-6 text-gray-700 text-xl mb-0">
+          {Paregrapgtext}
+        </p>
+      </div>
+      <div >
+        <span className="block text-gray-700 text-base font-normal mt-1">{Span1}</span>
+        <span className="block text-gray-700 text-base font-normal ">{Span2}</span>
+      </div>
+    </div>
+    )
+}
 
 
 
@@ -92,96 +118,48 @@ const HomePage = () => {
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-10 items-start w-full mt-6">
-            <div className="flex flex-col gap-3 items-start w-full cursor-pointer group">
-              <div className="flex gap-4">
-                <h3 className="inline-flex items-center font-medium border box-content transition-colors focus:outline-none focus-visible:outline-none whitespace-nowrap bg-white text-gray-700 border-black/10 group-hover:text-gray-900 group-hover:border-black/20 h-6 px-2 gap-1.5 text-sm rounded-full">
-                  1
-                </h3>
-                <p className="font-semibold leading-6 text-gray-700 text-xl mb-0">
-                  Build business apps, fast
-                </p>
-              </div>
-              <div >
-                <span className="block text-gray-700 text-base font-normal mt-1">Prompt to build the software you need.</span>
-                <span className="block text-gray-700 text-base font-normal ">Describe your app and watch Zite get to work.</span>
-              </div>
-            </div>
-
-            <div className="flex flex-col gap-3 items-start w-full cursor-pointer group">
-              <div className="flex gap-4">
-                <h3 className="inline-flex items-center font-medium border box-content transition-colors focus:outline-none focus-visible:outline-none whitespace-nowrap bg-white text-gray-700 border-black/10 group-hover:text-gray-900 group-hover:border-black/20 h-6 px-2 gap-1.5 text-sm rounded-full">
-                  2
-                </h3>
-                <p className="font-semibold leading-6 text-gray-700 text-xl mb-0">
-                  Build business apps, fast
-                </p>
-              </div>
-              <div >
-                <span className="block text-gray-700  font-normal mt-1">Prompt to build the software you need.</span>
-                <span className="block text-gray-700  font-normal ">Describe your app and watch Zite get to work.</span>
-              </div>
-            </div>
-
-            <div className="flex flex-col gap-3 items-start w-full cursor-pointer group">
-              <div className="flex gap-4">
-                <h3 className="inline-flex items-center font-medium border box-content transition-colors focus:outline-none focus-visible:outline-none whitespace-nowrap bg-white text-gray-700 border-black/10 group-hover:text-gray-900 group-hover:border-black/20 h-6 px-2 gap-1.5 text-sm rounded-full">
-                  3
-                </h3>
-                <p className="font-semibold leading-6 text-gray-700 text-xl mb-0">
-                  Build business apps, fast
-                </p>
-              </div>
-              <div >
-                <span className="block text-gray-700 text-base font-normal mt-1">Prompt to build the software you need.</span>
-                <span className="block text-gray-700 text-base font-normal ">Describe your app and watch Zite get to work.</span>
-              </div>
-            </div>
+            <TextArea 
+              number={1}
+              Paregrapgtext={"Build business apps, fast"}
+              Span1={"Prompt to build the software you need."}
+              Span2={"Describe your app and watch Zite get to work."}
+            
+            />
+            <TextArea 
+              number={2}
+              Paregrapgtext={"Build business apps, fast"}
+              Span1={"Prompt to build the software you need."}
+              Span2={"Describe your app and watch Zite get to work."}
+            />
+            <TextArea 
+              number={3}
+              Paregrapgtext={"Build business apps, fast"}
+              Span1={"Prompt to build the software you need."}
+              Span2={"Describe your app and watch Zite get to work."}
+            />
          </div>
+
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-10 items-start w-full mt-6">
-            <div className="flex flex-col gap-3 items-start w-full cursor-pointer group">
-              <div className="flex gap-4">
-                <h3 className="inline-flex items-center font-medium border box-content transition-colors focus:outline-none focus-visible:outline-none whitespace-nowrap bg-white text-gray-700 border-black/10 group-hover:text-gray-900 group-hover:border-black/20 h-6 px-2 gap-1.5 text-sm rounded-full">
-                  4
-                </h3>
-                <p className="font-semibold leading-6 text-gray-700 text-xl mb-0">
-                  Build business apps, fast
-                </p>
-              </div>
-              <div >
-                <span className="block text-gray-700 text-base font-normal mt-1">Prompt to build the software you need.</span>
-                <span className="block text-gray-700 text-base font-normal ">Describe your app and watch Zite get to work.</span>
-              </div>
-            </div>
+           <TextArea 
+              number={4}
+              Paregrapgtext={"Build business apps, fast"}
+              Span1={"Prompt to build the software you need."}
+              Span2={"Describe your app and watch Zite get to work."}
+            />
 
-            <div className="flex flex-col gap-3 items-start w-full cursor-pointer group">
-              <div className="flex gap-4">
-                <h3 className="inline-flex items-center font-medium border box-content transition-colors focus:outline-none focus-visible:outline-none whitespace-nowrap bg-white text-gray-700 border-black/10 group-hover:text-gray-900 group-hover:border-black/20 h-6 px-2 gap-1.5 text-sm rounded-full">
-                  5
-                </h3>
-                <p className="font-semibold leading-6 text-gray-700 text-xl mb-0">
-                  Build business apps, fast
-                </p>
-              </div>
-              <div >
-                <span className="block text-gray-700  font-normal mt-1">Prompt to build the software you need.</span>
-                <span className="block text-gray-700  font-normal ">Describe your app and watch Zite get to work.</span>
-              </div>
-            </div>
+             <TextArea 
+              number={5}
+              Paregrapgtext={"Build business apps, fast"}
+              Span1={"Prompt to build the software you need."}
+              Span2={"Describe your app and watch Zite get to work."}
+            />
 
-            <div className="flex flex-col gap-3 items-start w-full cursor-pointer group">
-              <div className="flex gap-4">
-                <h3 className="inline-flex items-center font-medium border box-content transition-colors focus:outline-none focus-visible:outline-none whitespace-nowrap bg-white text-gray-700 border-black/10 group-hover:text-gray-900 group-hover:border-black/20 h-6 px-2 gap-1.5 text-sm rounded-full">
-                  6
-                </h3>
-                <p className="font-semibold leading-6 text-gray-700 text-xl mb-0">
-                  Build business apps, fast
-                </p>
-              </div>
-              <div >
-                <span className="block text-gray-700 text-base font-normal mt-1">Prompt to build the software you need.</span>
-                <span className="block text-gray-700 text-base font-normal ">Describe your app and watch Zite get to work.</span>
-              </div>
-            </div>
+            <TextArea 
+              number={6}
+              Paregrapgtext={"Build business apps, fast"}
+              Span1={"Prompt to build the software you need."}
+              Span2={"Describe your app and watch Zite get to work."}
+            />
 
          </div>
         </div>
