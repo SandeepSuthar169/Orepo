@@ -22,4 +22,3 @@ export interface RepositoriesResponse {
     
     topics: string[]
 }
-
