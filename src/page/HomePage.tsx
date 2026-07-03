@@ -2,6 +2,8 @@ import Footer from "../components/Footer";
 import { FiArrowUpRight } from "react-icons/fi";
 import { Store  } from 'lucide-react';
 
+
+
 interface TextAreaType {
   number: number
   Paregrapgtext: string
@@ -29,6 +31,102 @@ const TextArea = ({number, Paregrapgtext, Span1, Span2}: TextAreaType) => {
     )
 }
 
+
+import { ChevronDown } from "lucide-react";
+import { useState } from "react";
+
+type FAQ = {
+  question: string;
+  answer: string;
+};
+
+const faqs: FAQ[] = [
+  {
+    question: "How can I get started?",
+    answer: "Getting started is easy! Sign up for an account, and you'll have access to our platform's features. No credit card required for the initial signup.",
+  },
+  {
+    question: "What is the pricing structure?",
+    answer: "Our pricing structure is flexible. We offer both free and paid plans. You can choose the one that suits your needs and budget.",
+  },
+  {
+    question: "What kind of support do you provide?",
+    answer: "We offer comprehensive customer support through email, live chat, and our knowledge base.",
+  },
+  {
+    question: "Can I cancel my subscription anytime?",
+    answer: "Yes. You can cancel your subscription at any time without any hidden fees.",
+  },
+  {
+    question: "Can I cancel my subscription anytime?",
+    answer: "Yes. You can cancel your subscription at any time without any hidden fees.",
+  },  
+];
+
+const FAQSection = ()  => {
+  const [openIndex, setOpenIndex] = useState<number | null>(0);
+
+  const toggleFAQ = (index: number) => {
+    setOpenIndex(openIndex === index ? null : index);
+  };
+
+  return (
+    <section className="bg-white py-16">
+      <div className="mx-auto max-w-7xl px-6">
+        <div className="mx-auto max-w-2xl text-center">
+          <h2 className="text-4xl font-bold tracking-tight text-black md:text-5xl">
+            Explore Common Questions
+          </h2>
+        </div>
+
+        <div className="mx-auto mt-12 max-w-3xl space-y-4">
+          {faqs.map((faq, index) => {
+            const isOpen = openIndex === index;
+
+            return (
+              <div
+                key={index}
+                className="overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm transition-all duration-300 hover:shadow-md"
+              >
+                <button
+                  onClick={() => toggleFAQ(index)}
+                  aria-expanded={isOpen}
+                  className="flex w-full items-center justify-between p-4 text-left"
+                >
+                  <span className="text-lg font-semibold">
+                    {faq.question}
+                  </span>
+
+                  <ChevronDown
+                    className={`h-5 w-5 text-gray-500 transition-transform duration-300 ${
+                      isOpen ? "rotate-180" : ""
+                    }`}
+                  />
+                </button>
+
+                <div
+                  className={`grid transition-all duration-300 ease-in-out ${
+                    isOpen
+                      ? "grid-rows-[1fr] opacity-100"
+                      : "grid-rows-[0fr] opacity-0"
+                  }`}
+                >
+                  <div className="overflow-hidden">
+                    <div className="px-6 pb-6 text-gray-600">
+                      {faq.answer}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+
+
+      </div>
+    </section>
+  );
+}
 
 
 const HomePage = () => {
@@ -188,6 +286,11 @@ const HomePage = () => {
               </div>
             </div>
           </div>
+          <div className="pt-4">
+            <FAQSection />
+          </div>
+
+          
         <Footer />
       </div>
 
