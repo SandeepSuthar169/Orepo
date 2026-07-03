@@ -1,20 +1,19 @@
-@plugin "daisyui";
 @import "tailwindcss";
+@plugin "daisyui";
+
 
 @theme {
   --animate-marquee: marquee 20s linear infinite;
   --color-background: #ffffff;
+}
 
-  @keyframes marquee {
-    from {
-      transform: translateX(0);
-    }
-    to {
-      transform: translateX(-50%);
-    }
+@keyframes marquee {
+  from {
+    transform: translateX(0);
   }
-
-
+  to {
+    transform: translateX(-150%);
+  }
 }
 
 :root {
@@ -24,26 +23,4 @@
 body {
   background-color: var(--color-background);
   font-family: 'Roboto', sans-serif;
-  background-color: #ffffff;
 }
-
-
-@theme {
-  --animate-marquee: marquee 20s linear infinite;
-
-  @keyframes marquee {
-    from {
-      transform: translateX(0);
-    }
-    to {
-      transform: translateX(-150%);
-    }
-  }
-}
-
-
-
-.animate-marquee {
-  animation: var(--animate-marquee);
-} 
-
