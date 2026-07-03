@@ -1,5 +1,22 @@
 import { BsAsterisk } from "react-icons/bs";
 
+interface LiType {
+  name: string
+}
+
+const LiA = ({name}:LiType) => {
+  return (
+    <>
+      <div>
+        <li className="list-none">
+            <a href="#" className="hover:text-text-neutral-800 transition-colors">{name}</a>
+        </li>
+      </div>
+    </>
+  )
+
+}
+
 
 const Footer = () => {
   return (
@@ -19,53 +36,30 @@ const Footer = () => {
               <div className="flex w-full flex-col justify-center space-y-4">
                 <p className="hover:text-text-neutral-800 font-bold text-neutral-600 transition-colors">Pages</p>
                 <ul className="hover:text-text-neutral-800  text-neutral-600 transition-colors">
-                  <li className="list-none">
-                    <a href="#" className="hover:text-text-neutral-800 transition-colors">All Collection</a>
-                  </li>
-                  <li className="list-none">
-                    <a href="#" className="hover:text-text-neutral-800 transition-colors">Collection</a>
-                  </li>
-                  <li className="list-none">
-                    <a href="#" className="hover:text-text-neutral-800 transition-colors">Repositories</a>
-                  </li>
-        
+                  <LiA name="All Collection" />
+                  <LiA name="Collection" />
+                  <LiA name="Repositories" />
                 </ul>
               </div>
+              
               <div className="flex w-full flex-col justify-center space-y-4">
                 <p className="hover:text-text-neutral-800 font-bold text-neutral-600 transition-colors">Socials</p>
                 <ul className="hover:text-text-neutral-800  text-neutral-600 transition-colors">
-                  <li className="list-none">
-                    <a href="#" className="hover:text-text-neutral-800 transition-colors">LinkedIn</a>
-                  </li>
-                  <li className="list-none">
-                    <a href="#" className="hover:text-text-neutral-800 transition-colors">Twitter</a>
-                  </li>
-                  <li className="list-none">
-                    <a href="#" className="hover:text-text-neutral-800 transition-colors">Peerlist</a>
-                  </li>
-                  <li className="list-none">
-                    <a href="#" className="hover:text-text-neutral-800 transition-colors">GitHub</a>
-                  </li>
+                  <LiA name="Linkedin" />
+                  <LiA name="Twitter" />
+                  <LiA name="Peerlist" />
+                  <LiA name="Github" />
                 </ul>
               </div>
+
               <div className="flex w-full flex-col justify-center space-y-4">
                 <p className="hover:text-text-neutral-800 font-bold text-neutral-600 transition-colors">Collection</p>
                 <ul className="hover:text-text-neutral-800  text-neutral-600 transition-colors">
-                  <li className="list-none">
-                    <a href="#" className="hover:text-text-neutral-800 transition-colors">DataBase</a>
-                  </li>
-                  <li className="list-none">
-                    <a href="#" className="hover:text-text-neutral-800 transition-colors">TypeScript</a>
-                  </li>
-                  <li className="list-none">
-                    <a href="#" className="hover:text-text-neutral-800 transition-colors">Scala</a>
-                  </li>
-                  <li className="list-none">
-                    <a href="#" className="hover:text-text-neutral-800 transition-colors">npm</a>
-                  </li>
-                  <li className="list-none">
-                    <a href="#" className="hover:text-text-neutral-800 transition-colors">Node.js</a>
-                  </li>
+                  <LiA name="DataBase" />
+                  <LiA name="TypeScript" />
+                  <LiA name="Scala" />
+                  <LiA name="npm" />
+                  <LiA name="Node.js" />
                 </ul>
               </div>
 
