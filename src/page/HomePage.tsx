@@ -42,24 +42,28 @@ type FAQ = {
 
 const faqs: FAQ[] = [
   {
-    question: "How can I get started?",
-    answer: "Getting started is easy! Sign up for an account, and you'll have access to our platform's features. No credit card required for the initial signup.",
+    question: "What exactly is Orapo?",
+    answer: "Orapo is a free, open-source platform to help developers easily discover open-source projects on GitHub. Whether you are looking for your next contribution,",
   },
   {
-    question: "What is the pricing structure?",
-    answer: "Our pricing structure is flexible. We offer both free and paid plans. You can choose the one that suits your needs and budget.",
+    question: "Is Orapo completely free to use?",
+    answer: "Yes. Screenshot Studio is 100% free with no hidden costs. Unlimited exports, all features, no watermarks. No signup required.",
   },
   {
-    question: "What kind of support do you provide?",
-    answer: "We offer comprehensive customer support through email, live chat, and our knowledge base.",
+    question: "How many projects are listed on the platform?",
+    answer: "We currently feature a growing collection of over 1,700+ open-source projects.",
   },
   {
-    question: "Can I cancel my subscription anytime?",
+    question: "How do I find projects that match my tech stack?",
+    answer: "Orapo organizes projects into multiple easy-to-navigate categories. You can filter our collection by specific technologies and topics—including TypeScript, npm, Databases, and many more—so you can find exactly what you want to work with.",
+  },
+  {
+    question: "Do I need to create an account to search for projects? ",
     answer: "Yes. You can cancel your subscription at any time without any hidden fees.",
-  },
+  },  
   {
-    question: "Can I cancel my subscription anytime?",
-    answer: "Yes. You can cancel your subscription at any time without any hidden fees.",
+    question: "Is Orapo itself open-source?",
+    answer: "Yes, Orapo is proudly open-source. If you would like to help us build a better discovery tool for developers, you can find our repository on GitHub and contribute to the platform.",
   },  
 ];
 
@@ -151,7 +155,7 @@ const HomePage = () => {
                 <div className="z-10 flex w-full max-w-206.5 flex-col items-center justify-center gap-8  md:gap-12.5">
                   <div className="flex flex-col items-center gap-2 mb-1">
                       <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white text-center [text-shadow:0_2px_3px_rgb(75_85_99/30%)]">
-                          Here are 1700+ Projects <br />
+                          Here are 1700+ Open Source Project <br />
                       </h1>
                       <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white/70 text-center [text-shadow:0_2px_3px_rgb(75_85_99/30%)]">
                         you can <span className="text-rose-500 " >contribute</span>   

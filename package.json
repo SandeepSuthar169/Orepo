@@ -1,8 +1,8 @@
 {
-  "name": "opel",
+  "name": " Orepo",
   "private": true,
-  "version": "0.0.0",
-  "type": "module",
+  "version": "1.0.0",
+  "type": "module", 
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",

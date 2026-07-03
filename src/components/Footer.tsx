@@ -68,7 +68,7 @@ const Footer = () => {
 
           </div>
             <div>
-              <p className="inset-x-0 mt-10 bg-linear-to-b from-neutral-50 to-neutral-300 bg-clip-text text-center text-6xl font-bold text-transparent md:text-9xl lg:text-[12rem] xl:text-[13rem]  ">Opare</p>
+              <p className="inset-x-0 mt-10 bg-linear-to-b from-neutral-50 to-neutral-300 bg-clip-text text-center text-6xl font-bold text-transparent md:text-9xl lg:text-[12rem] xl:text-[13rem]  ">Orepo</p>
             </div>
         </div>
       </div>

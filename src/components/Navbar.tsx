@@ -11,7 +11,7 @@ const Navbar = () => {
       <div className=" flex items-center gap-2 rounded-xl py-0.5 transition-colors duration-300 left-1 px-2">
         <Link to="/"  className="m-1.5 p-1.5 flex gap-2 items-center">
           <BsAsterisk  className="text-xl sm:text-2xl text-rose-400 font-bold " />
-            <span className="font-bold text-lg sm:text-xl text-gray-800">Opel</span>
+            <span className="font-bold text-lg sm:text-xl text-gray-800">Orepo</span>
         </Link>
       </div>
 
