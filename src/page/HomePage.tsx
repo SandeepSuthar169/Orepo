@@ -1,7 +1,8 @@
 import Footer from "../components/Footer";
 import { FiArrowUpRight } from "react-icons/fi";
 import { Store  } from 'lucide-react';
-
+import { ChevronDown } from "lucide-react";
+import { useState } from "react";
 
 
 interface TextAreaType {
@@ -19,21 +20,20 @@ const TextArea = ({number, Paregrapgtext, Span1, Span2}: TextAreaType) => {
         <h3 className="inline-flex items-center font-medium border box-content transition-colors focus:outline-none focus-visible:outline-none whitespace-nowrap bg-white text-gray-700 border-black/10 group-hover:text-gray-900 group-hover:border-black/20 h-6 px-2 gap-1.5 text-sm rounded-full">
           {number}
         </h3>
-        <p className="font-semibold leading-6 text-gray-700 text-xl mb-0">
+        <p className="font-semibold leading-6 text-gray-700 text-lg sm:text-xl mb-0">
           {Paregrapgtext}
         </p>
       </div>
       <div >
-        <span className="block text-gray-700 text-base font-normal mt-1">{Span1}</span>
-        <span className="block text-gray-700 text-base font-normal ">{Span2}</span>
+        <span className="block text-gray-700 text-sm sm:text-base font-normal mt-1">{Span1}</span>
+        <span className="block text-gray-700 text-sm sm:text-base font-normal ">{Span2}</span>
       </div>
     </div>
     )
 }
 
 
-import { ChevronDown } from "lucide-react";
-import { useState } from "react";
+
 
 type FAQ = {
   question: string;
@@ -71,15 +71,15 @@ const FAQSection = ()  => {
   };
 
   return (
-    <section className="bg-white py-16">
-      <div className="mx-auto max-w-7xl px-6">
+    <section className="bg-white py-10 sm:py-16">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6">
         <div className="mx-auto max-w-2xl text-center">
-          <h2 className="text-4xl font-bold tracking-tight text-black md:text-5xl">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-black">
             Explore Common Questions
           </h2>
         </div>
 
-        <div className="mx-auto mt-12 max-w-3xl space-y-4">
+        <div className="mx-auto mt-8 sm:mt-12 max-w-3xl space-y-4">
           {faqs.map((faq, index) => {
             const isOpen = openIndex === index;
 
@@ -91,14 +91,14 @@ const FAQSection = ()  => {
                 <button
                   onClick={() => toggleFAQ(index)}
                   aria-expanded={isOpen}
-                  className="flex w-full items-center justify-between p-4 text-left"
+                  className="flex w-full items-center justify-between gap-4 p-4 text-left"
                 >
-                  <span className="text-lg font-semibold">
+                  <span className="text-base sm:text-lg font-semibold">
                     {faq.question}
                   </span>
 
                   <ChevronDown
-                    className={`h-5 w-5 text-gray-500 transition-transform duration-300 ${
+                    className={`h-5 w-5 shrink-0 text-gray-500 transition-transform duration-300 ${
                       isOpen ? "rotate-180" : ""
                     }`}
                   />
@@ -112,7 +112,7 @@ const FAQSection = ()  => {
                   }`}
                 >
                   <div className="overflow-hidden">
-                    <div className="px-6 pb-6 text-gray-600">
+                    <div className="px-4 sm:px-6 pb-6 text-gray-600">
                       {faq.answer}
                     </div>
                   </div>
@@ -136,7 +136,7 @@ const HomePage = () => {
         className="flex min-h-screen flex-col bg-white"
         style={{ colorScheme: 'light' }}
       >
-        <main className="flex ">
+                <main className="flex ">
           <section className="mx-auto min-h-screen w-full h-full">
             <img 
               src="src\assets\hero.webp" 
@@ -148,12 +148,12 @@ const HomePage = () => {
 
             <div className="relative flex min-h-dvh w-full">
               <div className="flex w-full items-center justify-center">
-                <div className="z-10 flex w-full max-w-206.5 flex-col items-center justify-center gap-8 md:gap-12.5">
+                <div className="z-10 flex w-full max-w-206.5 flex-col items-center justify-center gap-8  md:gap-12.5">
                   <div className="flex flex-col items-center gap-2 mb-1">
-                      <h1 className="text-5xl font-bold text-white text-center [text-shadow:0_2px_3px_rgb(75_85_99/30%)]">
+                      <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white text-center [text-shadow:0_2px_3px_rgb(75_85_99/30%)]">
                           Here are 1700+ Projects <br />
                       </h1>
-                      <h1 className="text-5xl font-bold text-white/70 text-center [text-shadow:0_2px_3px_rgb(75_85_99/30%)]">
+                      <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white/70 text-center [text-shadow:0_2px_3px_rgb(75_85_99/30%)]">
                         you can <span className="text-rose-500 " >contribute</span>   
                       </h1>
                   </div>
@@ -180,42 +180,37 @@ const HomePage = () => {
                 
               </div>
             </div>
-
-
-
-            <div className="relative mx-auto max-w-4xl rounded-3xl border border-neutral-200/50 bg-neutral-100 p-2 backdrop-blur-lg md:p-4">
-              <div className="rounded-3xl border border-neutral-200 bg-white p-2">
+            
+            <div className="relative mx-auto w-[95%] sm:w-[90%] md:w-full max-w-4xl rounded-2xl md:rounded-3xl border border-neutral-200/50 bg-neutral-100 p-1.5 sm:p-2 backdrop-blur-lg md:p-4">
+              <div className="rounded-xl md:rounded-[20px] border border-neutral-200 bg-white p-1 md:p-2">
                 <img 
                   src="src\assets\dashboard-new.webp" 
-                  alt="" 
-                  className="rounded-[20px] select-none"
+                  alt="Dashboard preview" 
+                  className="rounded-lg md:rounded-2xl select-none w-full h-auto object-cover"
                   onContextMenu={(e) => e.preventDefault()} 
                   onDragStart={(e) => e.preventDefault()}
-                  />
+                />
               </div>
             </div>
-
-
-            
           </section>
         </main>
 
-        <div className="mx-auto flex w-full max-w-310 flex-col items-center gap-7 px-4 pb-20 pt-25 md:px-6 borde [text-shadow:0_2px_3px_rgb(75_85_99/30%)]">
+        <div className="mx-auto flex w-full max-w-310 flex-col items-center gap-6 sm:gap-7 px-4 pb-16 sm:pb-20 pt-16 sm:pt-25 md:px-6 borde [text-shadow:0_2px_3px_rgb(75_85_99/30%)]">
           <div className=" flex items-center  border-3 text-sm rounded-3xl gap-1.5 px-2.5 py-1.5 border-gray-300 hover:border-gray-400">  
             <Store className="text-gray-800 text-sm"  />
             <h3 className=" font-bold text-gray-800 text-sm [text-shadow:0_2px_3px_rgb(75_85_99/20%)]">Why Orepo?</h3>
           </div>
           
-          <div className="flex flex-col items-start sm:items-center gap-3 sm:text-center">
-            <h2 className="font-blMelody text-[32px] sm:text-[40px] font-semibold leading-8.75 sm:leading-11 text-gray-800 mb-0">
+          <div className="flex flex-col items-center gap-3 text-center">
+            <h2 className="font-blMelody text-[26px] sm:text-[32px] md:text-[40px] font-semibold leading-tight sm:leading-8.75 md:leading-11 text-gray-800 mb-0">
                 Contribute and Skill Up with 
             </h2>
-            <h2 className="font-blMelody text-[32px] sm:text-[40px] font-semibold leading-8.75 sm:leading-11 text-gray-800 mb-0">
+            <h2 className="font-blMelody text-[26px] sm:text-[32px] md:text-[40px] font-semibold leading-tight sm:leading-8.75 md:leading-11 text-gray-800 mb-0">
                 Confidence 
             </h2>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-10 items-start w-full mt-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-10 items-start w-full mt-6">
             <TextArea 
               number={1}
               Paregrapgtext={"Build business apps, fast"}
@@ -237,7 +232,7 @@ const HomePage = () => {
             />
          </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-10 items-start w-full mt-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-10 items-start w-full mt-6">
            <TextArea 
               number={4}
               Paregrapgtext={"Build business apps, fast"}
@@ -262,26 +257,26 @@ const HomePage = () => {
          </div>
         </div>
 
-        <div className="flex flex-col items-start sm:items-center gap-3 mt-4 mb-5 sm:text-center">
-            <h2 className="font-blMelody text-[32px] sm:text-[40px] font-semibold leading-8.75 sm:leading-11 text-gray-800 mb-0">
+        <div className="flex flex-col items-center gap-3 mt-4 mb-5 px-4 text-center">
+            <h2 className="font-blMelody text-[26px] sm:text-[32px] md:text-[40px] font-semibold leading-tight sm:leading-8.75 md:leading-11 text-gray-800 mb-0">
               Everything you need to go             
             </h2>
           </div>
 
-          <div className="flex  max-w-310   flex-col md:flex-row gap-2 lg:gap-2">
-            <div className="flex  bg-white  shadow-marketing-outline ">
-              <div className="flex flex-col rounded-3xl mr-2  items-center justify-center bg-gray-50  md:p-6">
-                <img src="src\assets\SecureForms.webp" alt=""  className="h-50"/>
-                <div className="flex flex-col  p-6 sm:p-8 sm:text-center">
-                  <h3 className="flex flex-col text-gray-700  p-6 sm:p-8 sm:text-center">Built-in login & authentication</h3>
-                  <p className="text-base font-normal text-brand-gray-500 text-gray-700  leading-normal mb-0">Login via magic link, Google, or single sign-on (SSO). Build internal-only or external-facing apps.</p>
+          <div className="flex mx-auto w-full max-w-310 px-4 md:px-6 flex-col md:flex-row gap-2 lg:gap-2">
+            <div className="flex flex-col sm:flex-row w-full bg-white shadow-marketing-outline ">
+              <div className="flex flex-col rounded-3xl sm:mr-2 mb-2 sm:mb-0 items-center justify-center bg-gray-50 w-full sm:w-1/2 p-4 md:p-6">
+                <img src="src/assets/SecureForms.webp" alt=""  className="h-40 sm:h-50"/>
+                <div className="flex flex-col  p-4 sm:p-6 md:p-8 text-center">
+                  <h3 className="text-gray-700 text-lg font-semibold mb-2">Built-in login &amp; authentication</h3>
+                  <p className="text-sm sm:text-base font-normal text-brand-gray-500 text-gray-700  leading-normal mb-0">Login via magic link, Google, or single sign-on (SSO). Build internal-only or external-facing apps.</p>
                 </div>
               </div>
-              <div className="flex flex-col rounded-3xl  items-center justify-center bg-gray-50  md:p-6">
-                <img src="src\assets\SecurityFirstIllustration.7037f7d0.svg" alt=""  className="h-50"/>
-                <div className="flex flex-col  p-6 sm:p-8 sm:text-center">
-                  <h3 className="flex flex-col text-gray-700  p-6 sm:p-8 sm:text-center">Built-in login & authentication</h3>
-                  <p className="text-base font-normal text-gray-700  text-brand-gray-500 leading-normal mb-0">Login via magic link, Google, or single sign-on (SSO). Build internal-only or external-facing apps.</p>
+              <div className="flex flex-col rounded-3xl items-center justify-center bg-gray-50 w-full sm:w-1/2 p-4 md:p-6">
+                <img src="src/assets/SecurityFirstIllustration.7037f7d0.svg" alt=""  className="h-40 sm:h-50"/>
+                <div className="flex flex-col  p-4 sm:p-6 md:p-8 text-center">
+                  <h3 className="text-gray-700 text-lg font-semibold mb-2">Built-in login &amp; authentication</h3>
+                  <p className="text-sm sm:text-base font-normal text-gray-700  text-brand-gray-500 leading-normal mb-0">Login via magic link, Google, or single sign-on (SSO). Build internal-only or external-facing apps.</p>
                 </div>
               </div>
             </div>
