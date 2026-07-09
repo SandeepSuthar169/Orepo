@@ -9,12 +9,14 @@ const App = () => {
     <>
       <div className="flex felx-col items-center  justify-center">
         <Routes>
-          <Route path="/" element={<Layout />}>
+          {/* layout for home page */}
+          <Route path="/" element={<Layout />}>     
             <Route index element={<HomePage />} />
             
+            {/* layout for other pages  */}
               <Route element={<SidebarLayout />} >
                 <Route path="/user" element={<UserPage />} />
-            </Route>
+              </Route>
 
             </Route>
           {/* </Route> */}
