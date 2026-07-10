@@ -97,7 +97,7 @@ const FAQSection = ()  => {
                   aria-expanded={isOpen}
                   className="flex w-full items-center justify-between gap-4 p-4 text-left"
                 >
-                  <span className="text-base sm:text-lg font-semibold">
+                  <span className="text-base sm:text-lg text-gray-800 font-semibold">
                     {faq.question}
                   </span>
 
@@ -174,13 +174,13 @@ const HomePage = () => {
                      <button className="h-12 px-8 rounded-full bg-linear-to-b from-white to-gray-200 text-black font-semibold shadow-[0_4px_20px_rgba(59,130,246,0.4)] hover:shadow-[0_4px_25px_rgba(59,130,246,0.6)] hover:scale-105 transition-all duration-300">
                         Get Started
                     </button>
-                    <button className="h-12 px-8 rounded-full border border-gray-700 bg-gray-900/50 text-white font-medium hover:bg-gray-800 transition-colors backdrop-blur-sm flex items-center gap-2 group">
+                    <button className="h-12 px-8 rounded-full border border-gray-950 bg-mist-800  text-white font-medium 0 transition-colors backdrop-blur-sm flex items-center gap-2 group">
                         Source
                         <FiArrowUpRight className="w-4 h-4 fill-white group-hover:scale-110 transition-transform" />
                     </button>
                     
                   </div>
-                </div>
+                </div>  
                 
               </div>
             </div>

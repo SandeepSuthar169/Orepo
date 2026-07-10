@@ -5,12 +5,6 @@ interface OpenProps {
   isOpen: boolean
   setIsOpen?: Dispatch<SetStateAction<boolean>>
 }
-// 
-// interface OpenProps {
-//   activeDropdown: string
-//   setActiveDropdown: string
-// }
-
 
 interface BarTypes {
   title: string;
@@ -25,16 +19,43 @@ const Sidebar = ({ isOpen, setIsOpen }: OpenProps) => {
   const [activeDropdown, setActiveDropdown] = useState<string>("")
 
   const BarItems: BarTypes[] = [
-
-    { title: "AI", icon: Bot, hasDropdown: true, dropdownItems: ["Machine Learning", "Deep Learning", "Data Science", "LLM", "Computer Vision", "NLP"] },
-    { title: "Frontend", icon: LaptopMinimal, hasDropdown: true, dropdownItems: ["React", "Vue.js", "Angular", "TypeScript", "Next.js", "Tailwind CSS"] },
-    { title: "Backend", icon: Server, hasDropdown: true, dropdownItems: ["Node.js", "Django", "GO", "Rust", "Spring Boot", "Laravel"] },
-    { title: "Mobile Dev", icon: Smartphone, hasDropdown: true, dropdownItems: ["Flutter", "React Native", "GSwift", "Android Development", "iOS Development"] },
-    { title: "DevOps", icon: CloudSync, hasDropdown: true, dropdownItems: ["Docker", "Kubernetes", "Terraform", "CI/CD"] },
-    { title: "Databases", icon: Database, hasDropdown: true, dropdownItems: ["PostgreSQL", "Redis", "MongoDB", "MySQL"] },
-
-
-
+    { 
+      title: "AI", 
+      icon: Bot, 
+      hasDropdown: true, 
+      dropdownItems: ["Machine Learning", "Deep Learning", "Data Science", "LLM", "Computer Vision", "NLP"] 
+      
+    },
+    { 
+      title: "Frontend", 
+      icon: LaptopMinimal,
+      hasDropdown: true, 
+      dropdownItems: ["React", "Vue.js", "Angular", "TypeScript", "Next.js", "Tailwind CSS"] 
+    },
+    { 
+      title: "Backend", 
+      icon: Server, 
+      hasDropdown: true, 
+      dropdownItems: ["Node.js", "Django", "GO", "Rust", "Spring Boot", "Laravel"] 
+    },
+    { 
+      title: "Mobile Dev", 
+      icon: Smartphone, 
+      hasDropdown: true, 
+      dropdownItems: ["Flutter", "React Native", "GSwift", "Android Development", "iOS Development"] 
+    },
+    { 
+      title: "DevOps", 
+      icon: CloudSync, 
+      hasDropdown: true, 
+      dropdownItems: ["Docker", "Kubernetes", "Terraform", "CI/CD"] 
+    },
+    { 
+      title: "Databases", 
+      icon: Database, 
+      hasDropdown: true, 
+      dropdownItems: ["PostgreSQL", "Redis", "MongoDB", "MySQL"] 
+    },
   ]
 
   return (
@@ -88,7 +109,7 @@ const Sidebar = ({ isOpen, setIsOpen }: OpenProps) => {
                   <div className="bg-[#F5F5F5] overflow-hidden transition-all duration-200">
                     {j.dropdownItems.map((item) => (
                       <div
-                        key={item}
+                        key={item}                                                       
                         className="px-11 py-2 text-black  hover:bg-gray-200 cursor-pointer text-sm rounded-sm hover:duration-100"
                       >
                         {item}
