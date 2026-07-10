@@ -1,4 +1,13 @@
-export interface RepositoriesResponse {
+export interface Owner {
+    avatar_url: string
+}
+
+export interface License {
+    name: string
+}
+
+export interface Repository {
+    id: number
     full_name: string
     html_url: string
     description: string
@@ -12,13 +21,22 @@ export interface RepositoriesResponse {
     forks: number
     watchers: number
 
-    owner: {
-        avatar_url: string
-    }
+    owner: Owner
 
-    license?: {
-        name: string 
-    }
+    license?: License
     
     topics: string[]
+}
+
+export interface GithubResponse {
+    totalCount: number
+    incomplete_results: boolean;
+    items: Repository[]
+} 
+
+export type SortDirection = 'asc' | 'desc' | null;
+
+export interface SortConfig {
+  key: keyof Repository | null;
+  direction: SortDirection;
 }

@@ -1,16 +1,16 @@
 import { create } from "zustand";
 import { apiResponse } from "../services/Api"
-import { type RepositoriesResponse  } from "../types/Repo";
+import { type Repository  } from "../types/Repo";
 import axios from "axios";
 
 interface SearchResponse {
-    items: RepositoriesResponse[]
+    items: Repository[]
 }
 
 //  TypeScript =================================
 
 interface TypeScriptStore {
-    typescript: RepositoriesResponse[]
+    typescript: Repository[]
     loading: boolean
     error: string | null
 
@@ -47,7 +47,7 @@ export const useTypeScriptStore = create<TypeScriptStore>((set) => ({
 //  Awesome ==========================
 
 interface AwesomeStore {
-    awesome: RepositoriesResponse[]
+    awesome: Repository[]
     loading: boolean
     error: string | null
 
@@ -84,7 +84,7 @@ export const useAwesomeStore = create<AwesomeStore>((set) => ({
 //  Chrome ==========================
 
 interface ChromeStore {
-    chrome: RepositoriesResponse[]
+    chrome: Repository[]
     loading: boolean
     error: string | null
 
@@ -122,7 +122,7 @@ export const useChromeStore = create<ChromeStore>((set) => ({
 //  code-quality ==========================
 
 interface CodeQualityStore {
-    codequality: RepositoriesResponse[]
+    codequality: Repository[]
     loading: boolean
     error: string | null
 
@@ -160,7 +160,7 @@ export const useCodeQualityStore = create<CodeQualityStore>((set) => ({
 //  Compiler ==========================
 
 interface CompilerStore {
-    compiler: RepositoriesResponse[]
+    compiler: Repository[]
     loading: boolean
     error: string | null
 
