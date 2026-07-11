@@ -73,7 +73,7 @@ const Sidebar = ({ isOpen, setIsOpen }: OpenProps) => {
             onClick={() => setIsOpen?.(!isOpen)}
             className='hover:bg-gray-100 p-2 rounded-lg items-center justify-center'
           >
-            {isOpen ? <SquareChevronLeft size={20} strokeWidth={2.5} /> : <SquareChevronRight size={20} strokeWidth={2.5} />}
+            {isOpen ? <SquareChevronLeft size={20} strokeWidth={2.1} /> : <SquareChevronRight size={20} strokeWidth={2.1} />}
           </button>
         </div>
 
@@ -81,11 +81,11 @@ const Sidebar = ({ isOpen, setIsOpen }: OpenProps) => {
           {BarItems.map((j) => (
             <div key={j.title}>
               <div 
-                className='px-1 py-2  hover:bg-gray-200 hover:duration-100 rounded-sm cursor-pointer flex items-center justify-between '
+                className='px-1 py-2  hover:bg-[#dedede63] hover:duration-100 rounded-sm cursor-pointer flex items-center justify-between '
                 onClick={() => j.hasDropdown && isOpen && setActiveDropdown(activeDropdown === j.title ? "" : j.title)}  
               >
                   <div className='flex items-center justify-between'>
-                    <j.icon size={19} strokeWidth={1.5} color='#000' />                   {/* icons layser  */}
+                    <j.icon size={19} strokeWidth={2.1} color='#000' />                   {/* icons layser  */}
                     <span className={`ml-4 whitespace-normal overflow-hidden transition-all duration-300 
                       ${isOpen ? 'w-32 opacity-100' : 'w-0 opacity-0'}`}>     
                         {
@@ -106,11 +106,11 @@ const Sidebar = ({ isOpen, setIsOpen }: OpenProps) => {
               </div>
               {
                 j.hasDropdown && isOpen && activeDropdown === j.title && (
-                  <div className="bg-[#F5F5F5] overflow-hidden transition-all duration-200">
+                  <div className="bg-[#F5F5F5] overflow-hidden transition-all  border-[#dedede63] ml-4 mt-1 space-y-1 border-l-2   pl-1 duration-200">
                     {j.dropdownItems.map((item) => (
-                      <div
+                      <div  
                         key={item}                                                       
-                        className="px-11 py-2 text-black  hover:bg-gray-200 cursor-pointer text-sm rounded-sm hover:duration-100"
+                        className="px-11 py-2 text-black hover:bg-[#dedede63]  cursor-pointer text-sm rounded-sm hover:duration-100"
                       >
                         {item}
                       </div>

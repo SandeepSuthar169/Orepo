@@ -19,7 +19,7 @@ export const SidebarLayout = () => {
 
   return (
     <div>
-      <Sidebar isOpen={isOpen} setIsOpen={setIsOpen} activeDropdown={""} setActiveDropdown={""} />
+      <Sidebar isOpen={isOpen} setIsOpen={setIsOpen}   />
       <Outlet />
     </div>
   )
