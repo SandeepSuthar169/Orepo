@@ -30,7 +30,7 @@ const Sidebar = ({ isOpen, setIsOpen }: OpenProps) => {
       title: "Frontend", 
       icon: LaptopMinimal,
       hasDropdown: true, 
-      dropdownItems: ["React", "Vue.js", "Angular", "TypeScript", "Next.js", "Tailwind CSS"] 
+      dropdownItems: ["React.js", "Vue.js", "Angular", "TypeScript", "Next.js", "Tailwind CSS"] 
     },
     { 
       title: "Backend", 

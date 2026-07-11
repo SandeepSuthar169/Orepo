@@ -1,6 +1,6 @@
 import { create } from "zustand";
 import { apiResponse } from "../services/Api"
-import { type Repository  } from "../types/Repo";
+import { type Repository } from "../types/Types";
 import axios from "axios";
 
 interface SearchResponse {
@@ -36,7 +36,7 @@ export const useTypeScriptStore = create<TypeScriptStore>((set) => ({
             set({
                 loading: false
             })
-            if(axios.isAxiosError(error)) {
+            if (axios.isAxiosError(error)) {
                 console.log(error.message)
             }
         }
@@ -59,7 +59,7 @@ export const useAwesomeStore = create<AwesomeStore>((set) => ({
     loading: false,
     error: null,
 
-    fetchAwesome : async () => {
+    fetchAwesome: async () => {
         try {
             set({ loading: true, error: null })
 
@@ -73,13 +73,13 @@ export const useAwesomeStore = create<AwesomeStore>((set) => ({
             set({
                 loading: false
             })
-            if(axios.isAxiosError(error)) {
+            if (axios.isAxiosError(error)) {
                 console.log(error.message)
             }
         }
     }
 }))
- 
+
 
 //  Chrome ==========================
 
@@ -96,7 +96,7 @@ export const useChromeStore = create<ChromeStore>((set) => ({
     loading: false,
     error: null,
 
-    fetchChrome : async () => {
+    fetchChrome: async () => {
         try {
             set({ loading: true, error: null })
 
@@ -110,14 +110,14 @@ export const useChromeStore = create<ChromeStore>((set) => ({
             set({
                 loading: false
             })
-            if(axios.isAxiosError(error)) {
+            if (axios.isAxiosError(error)) {
                 console.log(error.message)
             }
         }
     }
 }))
- 
- 
+
+
 
 //  code-quality ==========================
 
@@ -134,7 +134,7 @@ export const useCodeQualityStore = create<CodeQualityStore>((set) => ({
     loading: false,
     error: null,
 
-    fetchChrome : async () => {
+    fetchChrome: async () => {
         try {
             set({ loading: true, error: null })
 
@@ -148,14 +148,14 @@ export const useCodeQualityStore = create<CodeQualityStore>((set) => ({
             set({
                 loading: false
             })
-            if(axios.isAxiosError(error)) {
+            if (axios.isAxiosError(error)) {
                 console.log(error.message)
             }
         }
     }
 }))
- 
- 
+
+
 
 //  Compiler ==========================
 
@@ -172,7 +172,7 @@ export const useCompilerStore = create<CompilerStore>((set) => ({
     loading: false,
     error: null,
 
-    fetchChrome : async () => {
+    fetchChrome: async () => {
         try {
             set({ loading: true, error: null })
 
@@ -186,7 +186,7 @@ export const useCompilerStore = create<CompilerStore>((set) => ({
             set({
                 loading: false
             })
-            if(axios.isAxiosError(error)) {
+            if (axios.isAxiosError(error)) {
                 console.log(error.message)
             }
         }

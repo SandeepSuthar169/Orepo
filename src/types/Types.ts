@@ -36,7 +36,9 @@ export interface GithubResponse {
 
 export type SortDirection = 'asc' | 'desc' | null;
 
-export interface SortConfig {
-  key: keyof Repository | null;
-  direction: SortDirection;
-}
+export type SortConfig = 
+    "stargazers_count" | 
+    "forks_count" | 
+    "open_issues_count" | 
+    "forks" | 
+    "watchers"
