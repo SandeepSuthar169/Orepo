@@ -1,5 +1,6 @@
 import { Bot, CloudSync, Database, LaptopMinimal, Server, Smartphone, SquareChevronLeft,ChevronDown , SquareChevronRight, type LucideIcon } from 'lucide-react';
 import { useState, type Dispatch, type SetStateAction } from 'react';
+import { useRepoStore } from "../store/useRepositoryStore"
 
 interface OpenProps {
   isOpen: boolean
@@ -11,67 +12,79 @@ interface BarTypes {
   icon: LucideIcon;
   hasDropdown?: boolean;
   dropdownItems: string[];
+  topic: string[]
 }
+
 
 
 const Sidebar = ({ isOpen, setIsOpen }: OpenProps) => {
 
   const [activeDropdown, setActiveDropdown] = useState<string>("")
 
+  const {topic, setTopic } = useRepoStore()
+  
+
+
   const BarItems: BarTypes[] = [
     { 
       title: "AI", 
       icon: Bot, 
       hasDropdown: true, 
-      dropdownItems: ["Machine Learning", "Deep Learning", "Data Science", "LLM", "Computer Vision", "NLP"] 
+      dropdownItems: ["Machine Learning", "Deep Learning", "Data Science", "LLM", "Computer Vision", "NLP"],
+      topic: ["machine-learning", "deep-learning", "data-science", "llm", "computer-vision", "nlp"],
       
     },
     { 
       title: "Frontend", 
       icon: LaptopMinimal,
       hasDropdown: true, 
-      dropdownItems: ["React.js", "Vue.js", "Angular", "TypeScript", "Next.js", "Tailwind CSS"] 
+      dropdownItems: ["React.js", "Vue.js", "Angular", "TypeScript", "Next.js", "Tailwind CSS"],
+      topic: ["react", "vue", "angular", "typescript", "nextjs", "tailwindcss"]
     },
     { 
       title: "Backend", 
       icon: Server, 
       hasDropdown: true, 
-      dropdownItems: ["Node.js", "Django", "GO", "Rust", "Spring Boot", "Laravel"] 
+      dropdownItems: ["Node.js", "Django", "GO", "Rust", "Spring Boot", "Laravel"],
+      topic: ["nodejs", "django", "go", "rust", "spring-boot", "laravel"]
     },
     { 
       title: "Mobile Dev", 
       icon: Smartphone, 
       hasDropdown: true, 
-      dropdownItems: ["Flutter", "React Native", "GSwift", "Android Development", "iOS Development"] 
+      dropdownItems: ["Flutter", "React Native", "GSwift", "Android Development", "iOS Development"],
+      topic: ["flutter", "react-native", "android", "ios"] 
     },
     { 
       title: "DevOps", 
       icon: CloudSync, 
       hasDropdown: true, 
-      dropdownItems: ["Docker", "Kubernetes", "Terraform", "CI/CD"] 
+      dropdownItems: ["Docker", "Kubernetes", "Terraform", "CI-CD"],
+      topic: ["docker", "kubernetes", "terraform", "ci-cd"] 
     },
     { 
       title: "Databases", 
       icon: Database, 
       hasDropdown: true, 
-      dropdownItems: ["PostgreSQL", "Redis", "MongoDB", "MySQL"] 
+      dropdownItems: ["PostgreSQL", "Redis", "MongoDB", "MySQL"],
+      topic: ["postgresql", "redis", "mongodb", "mysql"] 
     },
   ]
 
   return (
     <>
-      <section className={`left-0 top-0 h-screen  mt-12   transition-all duration-300  inset-y-0 absolute bg-[#F5F5F5] text-gray-700 p-4  
+      <section className={`left-0 top-0 h-screen  mt-12   transition-all duration-300  inset-y-0 absolute bg-[#f5f5f5dd] text-gray-700 p-4  
          ${isOpen ? "w-64" : "w-16"}`}>
         
         <div className='px-1  cursor-pointer flex items-center justify-between '>
-          <h1 className={`font-bold overflow-hidden transition-all duration-300 text-lg text-nowrap text-taupe-800 
+          <h1 className={`font-bold overflow-hidden  transition-all duration-300 text-lg text-nowrap text-taupe-800 
             ${isOpen ? "opacity-100" : "opacity-0"}`}>
             Dashboard
           </h1>
-        
+            
           <button
             onClick={() => setIsOpen?.(!isOpen)}
-            className='hover:bg-gray-100 p-2 rounded-lg items-center justify-center'
+            className='hover:bg-[#dedede63] p-2 cursor-pointer rounded-lg items-center justify-center'
           >
             {isOpen ? <SquareChevronLeft size={20} strokeWidth={2.1} /> : <SquareChevronRight size={20} strokeWidth={2.1} />}
           </button>
@@ -81,7 +94,7 @@ const Sidebar = ({ isOpen, setIsOpen }: OpenProps) => {
           {BarItems.map((j) => (
             <div key={j.title}>
               <div 
-                className='px-1 py-2  hover:bg-[#dedede63] hover:duration-100 rounded-sm cursor-pointer flex items-center justify-between '
+                className='px-2 py-2  hover:bg-[#dedede63] hover:duration-100 rounded-sm cursor-pointer flex items-center justify-between '
                 onClick={() => j.hasDropdown && isOpen && setActiveDropdown(activeDropdown === j.title ? "" : j.title)}  
               >
                   <div className='flex items-center justify-between'>
@@ -106,14 +119,20 @@ const Sidebar = ({ isOpen, setIsOpen }: OpenProps) => {
               </div>
               {
                 j.hasDropdown && isOpen && activeDropdown === j.title && (
-                  <div className="bg-[#F5F5F5] overflow-hidden transition-all  border-[#dedede63] ml-4 mt-1 space-y-1 border-l-2   pl-1 duration-200">
-                    {j.dropdownItems.map((item) => (
-                      <div  
-                        key={item}                                                       
-                        className="px-11 py-2 text-black hover:bg-[#dedede63]  cursor-pointer text-sm rounded-sm hover:duration-100"
-                      >
-                        {item}
+                  <div className="bg-[#F5F5F5] overflow-hidden transition-all  border-[#dedede63] ml-2 mt-0 space-y-1 border-l-2   pl-1 duration-200">
+                    {j.topic && j.dropdownItems.map((item) => (
+                      
+                      <div className='hover:bg-[#dedede63] hover:duration-100 rounded-sm'>
+                        <button  
+                          key={item}
+                          value={topic}
+                          onClick={() => setTopic(item)}                                                 
+                          className="px-9 py-1.5 text-black   cursor-pointer text-sm"
+                        >
+                          {item}
+                        </button>
                       </div>
+
                     ))}
                   </div>
                 ) 
