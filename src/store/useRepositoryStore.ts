@@ -3,7 +3,8 @@ import type { Repository, } from '../types/Types';
 import { fetchRepositories } from "../api/Api";
 
 
-export type SortKey = keyof Repository | 'owner.avatar_url' | 'license.name';
+export type SortKey =  | Exclude<keyof Repository, 'owner' | 'license' | 'topics' | 'full_name'>  | 'license.name';
+
 
 interface RepoState {
   repositories: Repository[];
