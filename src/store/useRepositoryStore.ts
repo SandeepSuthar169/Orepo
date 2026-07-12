@@ -1,6 +1,8 @@
 import { create } from 'zustand';
 import type { Repository, } from '../types/Types';
 import { fetchRepositories } from "../api/Api";
+
+
 export type SortKey = keyof Repository | 'owner.avatar_url' | 'license.name';
 
 interface RepoState {
@@ -24,17 +26,21 @@ interface RepoState {
   setSort: (key: SortKey) => void;
 }
 
+const DEFAULT_TOPIC = "ionic"
+const Default_DIRECTION = "asc"
+const PER_Page  = 15
+
 export const useRepoStore = create<RepoState>((set, get) => ({
   repositories: [],
   totalCount: 0,
   loading: false,
   error: null,
 
-  topic: 'ionic',
+  topic: DEFAULT_TOPIC,
   searchTerm: '',
   currentPage: 1,
   sortKey: null,
-  sortDirection: 'asc',
+  sortDirection: Default_DIRECTION,
 
   fetchData: async () => {
     const { topic, currentPage } = get();
@@ -42,8 +48,8 @@ export const useRepoStore = create<RepoState>((set, get) => ({
     set({ loading: true, error: null })
 
     try {
-      const data = await fetchRepositories({ topic, page: currentPage, perPage: 15});      
-      
+      const data = await fetchRepositories({ topic, page: currentPage, perPage: PER_Page});
+
       set({ repositories: data.items, totalCount: data.total_count, loading: false });
 
     } catch (error: unknown) {
@@ -52,18 +58,20 @@ export const useRepoStore = create<RepoState>((set, get) => ({
       if (error instanceof Error) {
         message = error.message;
       }
-  
-      set({ error: message, loading: false });  
+
+    } finally {
+
+      set({ loading: false })
     }
   },
 
   setTopic: (topic) => {
-    set({topic, currentPage: 1})
+    set({ topic, currentPage: 1 })
     get().fetchData()
   },
 
   setSearchTerm: (searchTerm) => set({ searchTerm }),
- 
+
   setPage: (currentPage) => {
     set({ currentPage })
     get().fetchData()
@@ -78,5 +86,5 @@ export const useRepoStore = create<RepoState>((set, get) => ({
     });
   }
 
-  
+
 }));

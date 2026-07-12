@@ -21,14 +21,19 @@ export const fetchRepositories  = async ({topic, page = 1, perPage = 15}: FetchR
         page,
         per_page: perPage,
       },
+      timeout: 10000
     })
-    return  response.data
+    return  response.data 
 
-  } catch (error) {
-    
-    console.error("Failed to fetch repositories:", error);
-    throw error;
+  }  catch (error) {
+
+    if (axios.isAxiosError(error)) {
+      throw new Error(error.response?.data?.message || error.message || error.code);
+      
+    }
+
+    throw new Error("Failed to fetch repositories.");
   }
-
 }
-  // e "https://api.github.com/search/repositories?q=topic:typescript&sort=stars&order=desc&per_page=100&page=2"
+
+//  "https://api.github.com/search/repositories?q=topic:typescript&sort=stars&order=desc&per_page=100&page=2"

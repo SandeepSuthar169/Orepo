@@ -52,7 +52,7 @@ const Sidebar = ({ isOpen, setIsOpen }: OpenProps) => {
       title: "Mobile Dev", 
       icon: Smartphone, 
       hasDropdown: true, 
-      dropdownItems: ["Flutter", "React Native", "GSwift", "Android Development", "iOS Development"],
+      dropdownItems: ["Flutter", "React Native", "GSwift", "Android Dev", "iOS Dev"],
       topic: ["flutter", "react-native", "android", "ios"] 
     },
     { 
@@ -73,7 +73,7 @@ const Sidebar = ({ isOpen, setIsOpen }: OpenProps) => {
 
   return (
     <>
-      <section className={`left-0 top-0 h-screen  mt-12   transition-all duration-300  inset-y-0 absolute bg-[#f5f5f5dd] text-gray-700 p-4  
+      <section className={`left-2 top-3  border-2 border-[#dedede63]   mt-12 h-screen  transition-all duration-300 rounded-xl  inset-y-0 absolute bg-[#f5f5f5dd] text-gray-700 p-3  
          ${isOpen ? "w-64" : "w-16"}`}>
         
         <div className='px-1  cursor-pointer flex items-center justify-between '>

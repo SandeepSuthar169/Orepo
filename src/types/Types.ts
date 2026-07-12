@@ -8,10 +8,10 @@ export interface License {
 
 export interface Repository {        // repository collect data
     id: number
-    full_name: string
-    html_url: string
-    description: string
-    language: string
+    full_name: string    
+    html_url: string       
+    description: string      
+    language: string         
     homepage: string | null
 
     stargazers_count: number
