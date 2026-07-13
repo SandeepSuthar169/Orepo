@@ -4,7 +4,7 @@ import type { GithubSearchResponse } from "../types/Types";
 const fetchIonicRepositoriesApi = async () : Promise<GithubSearchResponse> => {
     try {
         const response = await axios.get<GithubSearchResponse>(
-           "https://api.github.com/search/repositories?q=topic:postgresql&sort=stars&order=desc"
+           "https://api.github.com/search/repositories?q=topic:machine-learning&sort=stars&order=desc&per_page=100"
         );    
         return response.data
     

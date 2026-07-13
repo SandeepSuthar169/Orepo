@@ -50,7 +50,7 @@ const RepositoryTable: React.FC = () => {
               transition={{ delay: index * 0.03, duration: 0.2, ease: 'easeOut' }}
               className="border-b border-gray-100 last:border-none hover:bg-gray-50/80 transition-colors"
             >
-              <td className="px-4 py-3 align-top">
+              <td className="px-4  py-3 align-top">
                 <img
                   src={repo.owner.avatar_url}
                   alt={`${repo.owner.login} avatar`}
@@ -120,9 +120,9 @@ const RepositoryTable: React.FC = () => {
                       {topic}
                     </span>
                   ))}
-                  {repo.topics.length > 4 && (
+                  {repo.topics.length > 2 && (
                     <span className="mt-0.5 text-xs text-gray-400">
-                      +{repo.topics.length - 4}
+                      +{repo.topics.length - 2}
                     </span>
                   )}
                 </div>
