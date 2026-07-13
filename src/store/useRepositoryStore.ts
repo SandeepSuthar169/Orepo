@@ -1,91 +1,37 @@
 import { create } from 'zustand';
-import type { Repository, } from '../types/Types';
-import { fetchRepositories } from "../api/Api";
-
-
-export type SortKey =  | Exclude<keyof Repository, 'owner' | 'license' | 'topics' | 'full_name'>  | 'license.name';
-
+import type { Repository } from '../types/Types';
+import fetchIonicRepositoriesApi from "../api/Api"
+import axios from 'axios';
 
 interface RepoState {
   repositories: Repository[];
-  totalCount: number;
   loading: boolean;
   error: string | null;
+  fetchRepositories: () => Promise<void>;
+}   
 
-  topic: string;
-  searchTerm: string;
-
-  currentPage: number;
-
-  sortKey: SortKey | null;
-  sortDirection: "asc" | "desc";
-
-  fetchData: () => Promise<void>;
-  setTopic: (topic: string) => void;
-  setSearchTerm: (term: string) => void;
-  setPage: (page: number) => void;
-  setSort: (key: SortKey) => void;
-}
-
-const DEFAULT_TOPIC = "ionic"
-const Default_DIRECTION = "asc"
-const PER_Page  = 15
-
-export const useRepoStore = create<RepoState>((set, get) => ({
+export const useRepoStore = create<RepoState>((set) => ({
   repositories: [],
-  totalCount: 0,
   loading: false,
   error: null,
-
-  topic: DEFAULT_TOPIC,
-  searchTerm: '',
-  currentPage: 1,
-  sortKey: null,
-  sortDirection: Default_DIRECTION,
-
-  fetchData: async () => {
-    const { topic, currentPage } = get();
-
-    set({ loading: true, error: null })
-
+  
+  fetchRepositories: async () => {
+    set({ loading: true, error: null });
     try {
-      const data = await fetchRepositories({ topic, page: currentPage, perPage: PER_Page});
+        const data = await fetchIonicRepositoriesApi();
+        set({ repositories: data.items, loading: false });
 
-      set({ repositories: data.items, totalCount: data.total_count, loading: false });
+    } catch (error: any) {
+        let errorMessage = "Failed to fetch repositories. Please try again later.";
 
-    } catch (error: unknown) {
+        if (axios.isAxiosError(error) && error.response?.data?.message) {
+            errorMessage = error.response.data.message;
+        }  else if (error instanceof Error) {
+            errorMessage = error.message;
+        }
 
-      let message = "Failed to fetch";
-      if (error instanceof Error) {
-        message = error.message;
-      }
-
-    } finally {
-
-      set({ loading: false })
+        set({  error: errorMessage, loading: false  });
+        console.error(error);
     }
   },
-
-  setTopic: (topic) => {
-    set({ topic, currentPage: 1 })
-    get().fetchData()
-  },
-
-  setSearchTerm: (searchTerm) => set({ searchTerm }),
-
-  setPage: (currentPage) => {
-    set({ currentPage })
-    get().fetchData()
-  },
-
-  setSort: (key) => {
-    const { sortKey, sortDirection } = get();
-    const isAsc = sortKey === key && sortDirection === 'asc';
-    set({
-      sortKey: key,
-      sortDirection: isAsc ? 'desc' : 'asc',
-    });
-  }
-
-
 }));
