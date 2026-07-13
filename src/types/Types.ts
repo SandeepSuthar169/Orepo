@@ -1,4 +1,5 @@
 export interface Owner {
+    [x: string]: any;
     avatar_url: string;
   }
   

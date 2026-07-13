@@ -14,15 +14,8 @@ interface BarTypes {
   topic: string[]
 }
 
-
-
 const Sidebar = ({ isOpen, setIsOpen }: OpenProps) => {
-
-  const [activeDropdown, setActiveDropdown] = useState<string>("")
-
-  // const { topic, setTopic } = useRepoStore()
-
-
+  const [activeDropdown, setActiveDropdown] = useState<string>("");
 
   const BarItems: BarTypes[] = [
     {
@@ -31,7 +24,6 @@ const Sidebar = ({ isOpen, setIsOpen }: OpenProps) => {
       hasDropdown: true,
       dropdownItems: ["Machine Learning", "Deep Learning", "Data Science", "LLM", "Computer Vision", "NLP"],
       topic: ["machine-learning", "deep-learning", "data-science", "llm", "computer-vision", "nlp"],
-
     },
     {
       title: "Frontend",
@@ -51,7 +43,7 @@ const Sidebar = ({ isOpen, setIsOpen }: OpenProps) => {
       title: "Mobile Dev",
       icon: Smartphone,
       hasDropdown: true,
-      dropdownItems: ["Flutter", "React Native", "GSwift", "Android Dev", "iOS Dev"],
+      dropdownItems: ["Flutter", "React Native", "Swift", "Android Dev", "iOS Dev"],
       topic: ["flutter", "react-native", "android", "ios"]
     },
     {
@@ -68,79 +60,67 @@ const Sidebar = ({ isOpen, setIsOpen }: OpenProps) => {
       dropdownItems: ["PostgreSQL", "Redis", "MongoDB", "MySQL"],
       topic: ["postgresql", "redis", "mongodb", "mysql"]
     },
-  ]
+  ];
 
   return (
-    <>
-      <section className={`left-0 top-0  border-2 border-[#dedede63]   mt-12 h-screen  transition-all duration-300   inset-y-0 absolute bg-[#f5f5f5dd] text-gray-700 p-3  
-         ${isOpen ? "w-64" : "w-16"}`}>
+    // Removed fixed positioning. Added flex-shrink-0, h-full, overflow-y-auto and rounded-lg.
+    <section className={`relative border mt-11 border-gray-200 h-full transition-all duration-300 bg-white text-gray-700 p-3 shrink-0 rounded-lg shadow-sm overflow-y-auto
+         ${isOpen ? "w-60" : "w-16"}`}>
 
-        <div className='px-1  cursor-pointer flex items-center justify-between '>
-          <h1 className={`font-bold overflow-hidden  transition-all duration-300 text-lg text-nowrap text-taupe-800 
-            ${isOpen ? "opacity-100" : "opacity-0"}`}>
-            Dashboard
-          </h1>
+      <div className='px-1 cursor-pointer flex items-center justify-between'>
+        <h1 className={`font-bold overflow-hidden transition-all duration-300 text-lg text-nowrap text-taupe-800 
+            ${isOpen ? "opacity-100" : "opacity-0 w-0"}`}>
+          Dashboard
+        </h1>
 
-          <button
-            onClick={() => setIsOpen?.(!isOpen)}
-            className='hover:bg-[#dedede63] p-2 cursor-pointer rounded-lg items-center justify-center'
-          >
-            {isOpen ? <SquareChevronLeft size={20} strokeWidth={2.1} /> : <SquareChevronRight size={20} strokeWidth={2.1} />}
-          </button>
-        </div>
+        <button
+          onClick={() => setIsOpen?.(!isOpen)}
+          className='hover:bg-gray-100 p-2 cursor-pointer rounded-lg items-center justify-center transition-colors'
+        >
+          {isOpen ? <SquareChevronLeft size={20} strokeWidth={2.1} /> : <SquareChevronRight size={20} strokeWidth={2.1} />}
+        </button>
+      </div>
 
-        <div className={`mt-6`}>
-          {BarItems.map((j) => (
-            <div key={j.title}>
-              <div
-                className='px-2 py-2  hover:bg-[#dedede63] hover:duration-100 rounded-sm cursor-pointer flex items-center justify-between '
-                onClick={() => j.hasDropdown && isOpen && setActiveDropdown(activeDropdown === j.title ? "" : j.title)}
-              >
-                <div className='flex items-center justify-between'>
-                  <j.icon size={19} strokeWidth={2.1} color='#000' />                   {/* icons layser  */}
-                  <span className={`ml-4 whitespace-normal overflow-hidden transition-all duration-300 
+      <div className={`mt-6`}>
+        {BarItems.map((j) => (
+          <div key={j.title}>
+            <div
+              className='px-2 py-2 hover:bg-gray-100 transition-colors duration-100 rounded-md cursor-pointer flex items-center justify-between'
+              onClick={() => j.hasDropdown && isOpen && setActiveDropdown(activeDropdown === j.title ? "" : j.title)}
+            >
+              <div className='flex items-center justify-between'>
+                <j.icon size={19} strokeWidth={2.1} className="text-gray-700" />
+                <span className={`ml-4 whitespace-nowrap overflow-hidden transition-all duration-300 
                       ${isOpen ? 'w-32 opacity-100' : 'w-0 opacity-0'}`}>
-                    {
-                      j.title
-                    }                                                                   {/* title layser  */}
-                  </span>
-                </div>
-                {
-                  j.hasDropdown && isOpen && (
-                    <ChevronDown
-                      size={16}
-                      strokeWidth={2.5}
-                      className={`transition-transform duration-200
-                                      ${activeDropdown === j.title ? 'rotate-180' : ''}`}
-                    />
-                  )
-                }
+                  {j.title}
+                </span>
               </div>
-              {
-                j.hasDropdown && isOpen && activeDropdown === j.title && (
-                  <div className="bg-[#F5F5F5] overflow-hidden transition-all  border-[#dedede63] ml-2 mt-0 space-y-1 border-l-2   pl-1 duration-200">
-                    {j.dropdownItems.map((item) => (
-
-                      <div className='hover:bg-[#dedede63] hover:duration-100 rounded-sm'>
-                        <button
-                          key={item}
-                          className="px-9 py-1.5 text-black   cursor-pointer text-sm"
-                        >
-                          {item}
-                        </button>
-                      </div>
-
-                    ))}
-                  </div>
-                )
-              }
+              {j.hasDropdown && isOpen && (
+                <ChevronDown
+                  size={16}
+                  strokeWidth={2.5}
+                  className={`transition-transform duration-200 text-gray-500
+                              ${activeDropdown === j.title ? 'rotate-180' : ''}`}
+                />
+              )}
             </div>
-          ))}
-        </div>
-      </section>
-    </>
+            {j.hasDropdown && isOpen && activeDropdown === j.title && (
+              <div className="bg-gray-50/50 overflow-hidden transition-all border-gray-200 ml-2 mt-1 space-y-1 border-l-2 pl-2 duration-200">
+                {j.dropdownItems.map((item) => (
+                  // Moved the key prop to the outermost mapped element to clear React warnings
+                  <div key={item} className='hover:bg-gray-100 transition-colors duration-100 rounded-md'>
+                    <button className="px-7 py-1.5 text-gray-600 w-full text-left cursor-pointer text-sm font-medium">
+                      {item}
+                    </button>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+};
 
-  )
-}
-
-export default Sidebar 
+export default Sidebar;

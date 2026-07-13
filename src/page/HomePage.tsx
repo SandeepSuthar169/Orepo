@@ -3,6 +3,7 @@ import { FiArrowUpRight } from "react-icons/fi";
 import { Store  } from 'lucide-react';
 import { ChevronDown } from "lucide-react";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 
 interface TextAreaType {
@@ -171,13 +172,18 @@ const HomePage = () => {
                     </p>
                   </div>
                   <div className="flex items-center gap-6 font-medium">
-                     <button className="h-12 px-8 rounded-full bg-linear-to-b from-white to-gray-200 text-black font-semibold shadow-[0_4px_20px_rgba(59,130,246,0.4)] hover:shadow-[0_4px_25px_rgba(59,130,246,0.6)] hover:scale-105 transition-all duration-300">
-                        Get Started
-                    </button>
-                    <button className="h-12 px-8 rounded-full border border-gray-950 bg-mist-800  text-white font-medium 0 transition-colors backdrop-blur-sm flex items-center gap-2 group">
-                        Source
-                        <FiArrowUpRight className="w-4 h-4 fill-white group-hover:scale-110 transition-transform" />
-                    </button>
+                    <Link to="/dashboard">
+                      <button className="h-12 px-8 rounded-full bg-linear-to-b from-white to-gray-200 text-black font-semibold shadow-[0_4px_20px_rgba(59,130,246,0.4)] hover:shadow-[0_4px_25px_rgba(59,130,246,0.6)] hover:scale-105 transition-all duration-300">
+                          Get Started
+                      </button>
+                    </Link>
+            
+                    <Link to="https://github.com/SandeepSuthar169/Orepo">
+                      <button className="h-12 px-8 rounded-full border border-gray-950 bg-mist-800  text-white font-medium 0 transition-colors backdrop-blur-sm flex items-center gap-2 group">
+                          Source
+                          <FiArrowUpRight className="w-4 h-4 fill-white group-hover:scale-110 transition-transform" />
+                      </button>
+                    </Link>
                     
                   </div>
                 </div>  
