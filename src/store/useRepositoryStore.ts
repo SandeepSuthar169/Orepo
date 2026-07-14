@@ -4,21 +4,29 @@ import fetchIonicRepositoriesApi from "../api/Api"
 import axios from 'axios';
 
 interface RepoState {
+  topic: string,
   repositories: Repository[];
   loading: boolean;
   error: string | null;
+  setTopic: (topic: string) => void;
   fetchRepositories: () => Promise<void>;
 }   
 
-export const useRepoStore = create<RepoState>((set) => ({
+export const useRepoStore = create<RepoState>((set, get) => ({
   repositories: [],
   loading: false,
   error: null,
+  topic: "postgresql",
+
+  setTopic: (newTopic: string) => set({ topic: newTopic }),
   
   fetchRepositories: async () => {
+    
+    const {topic} = get()
+
     set({ loading: true, error: null });
     try {
-        const data = await fetchIonicRepositoriesApi();
+        const data = await fetchIonicRepositoriesApi(topic);
         set({ repositories: data.items, loading: false });
 
     } catch (error: any) {

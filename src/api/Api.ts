@@ -1,10 +1,10 @@
 import axios, { isAxiosError } from "axios";
 import type { GithubSearchResponse } from "../types/Types";
 
-const fetchIonicRepositoriesApi = async () : Promise<GithubSearchResponse> => {
+const fetchIonicRepositoriesApi = async (topic: string) : Promise<GithubSearchResponse> => {
     try {
         const response = await axios.get<GithubSearchResponse>(
-           "https://api.github.com/search/repositories?q=topic:machine-learning&sort=stars&order=desc&per_page=100"
+           `https://api.github.com/search/repositories?q=topic:${topic}&sort=stars&order=desc&per_page=1000`
         );    
         return response.data
     

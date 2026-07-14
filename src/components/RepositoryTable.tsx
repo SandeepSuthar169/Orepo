@@ -3,11 +3,11 @@ import { motion } from 'framer-motion';
 import { useRepoStore } from '../store/useRepositoryStore';
 
 const RepositoryTable: React.FC = () => {
-  const { repositories, loading, error, fetchRepositories } = useRepoStore();
+  const { repositories, loading, error, fetchRepositories, topic } = useRepoStore();
 
   useEffect(() => {
     fetchRepositories();
-  }, [fetchRepositories]);
+  }, [topic, fetchRepositories]);
 
   if (loading) {
     return (
@@ -25,8 +25,12 @@ const RepositoryTable: React.FC = () => {
     );
   }
 
+
   return (
+    <>
+
     <div className="flex-1 mt-11 w-full overflow-auto h-full rounded-lg border border-gray-200 bg-white shadow-sm">
+
       <table className="w-full min-w-250  text-sm text-gray-600">
         <thead className="sticky top-0 text-center z-10 border-b border-gray-200 bg-gray-50 text-gray-500 shadow-sm">
           <tr>
@@ -135,6 +139,7 @@ const RepositoryTable: React.FC = () => {
         </tbody>
       </table>
     </div>
+    </>
   );
 };
 
