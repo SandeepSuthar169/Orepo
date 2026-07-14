@@ -1,4 +1,15 @@
-import { Bot, CloudSync, Database, LaptopMinimal, Server, Smartphone, SquareChevronLeft, ChevronDown, SquareChevronRight, type LucideIcon } from 'lucide-react';
+import { 
+  Bot, 
+  CloudSync, 
+  Database, 
+  LaptopMinimal, 
+  Server, 
+  Smartphone, 
+  SquareChevronLeft, 
+  ChevronDown, 
+  SquareChevronRight, 
+  type LucideIcon 
+} from 'lucide-react';
 import { useState, type Dispatch, type SetStateAction } from 'react';
 import { useRepoStore } from '../store/useRepositoryStore';
 
@@ -20,10 +31,9 @@ interface BarTypes {
 }
 
 const Sidebar = ({ isOpen, setIsOpen }: OpenProps) => {
-  const [activeDropdown, setActiveDropdown] = useState<string>("");
 
+  const [activeDropdown, setActiveDropdown] = useState<string>("");
   const { setTopic } = useRepoStore();
-  
 
   const BarItems: BarTypes[] = [
     {
@@ -102,8 +112,14 @@ const Sidebar = ({ isOpen, setIsOpen }: OpenProps) => {
   ];
 
   return (
-    <section className={`relative border mt-11 border-gray-200 h-full transition-all duration-300 bg-white text-gray-700 p-3 shrink-0 rounded-lg shadow-sm overflow-y-auto ${isOpen ? "w-60" : "w-16"}`}>
-
+    <section 
+      className={`mt-11 h-full bg-white text-gray-700 p-3 shrink-0 rounded-lg shadow-sm border border-gray-200 overflow-y-auto transition-all duration-300 ease-in-out absolute z-50 md:relative
+        ${isOpen 
+          ? "w-60 translate-x-0" 
+          : "-translate-x-full w-60 md:translate-x-0 md:w-16"
+        }
+      `}
+    >
       <div className='px-1 cursor-pointer flex items-center justify-between'>
         <h1 className={`font-bold overflow-hidden transition-all duration-300 text-lg text-nowrap text-taupe-800 ${isOpen ? "opacity-100" : "opacity-0 w-0"}`}>
           Dashboard
@@ -142,11 +158,13 @@ const Sidebar = ({ isOpen, setIsOpen }: OpenProps) => {
               <div className="bg-gray-50/50 overflow-hidden transition-all border-gray-200 ml-2 mt-1 space-y-1 border-l-2 pl-2 duration-200">
                 {j.available_topics.map((t) => (
                   <div 
-                  className='hover:bg-gray-100 transition-colors duration-100 rounded-md'>
+                    key={t.id} 
+                    className='hover:bg-gray-100 transition-colors duration-100 rounded-md'
+                  >
                     <button 
-                      key={t.id} 
                       onClick={() => setTopic(t.id)}
-                      className="px-7 py-1.5 text-gray-600 w-full text-left cursor-pointer text-sm font-medium">
+                      className="px-7 py-1.5 text-gray-600 w-full text-left cursor-pointer text-sm font-medium"
+                    >
                       {t.label} 
                     </button>
                   </div>
