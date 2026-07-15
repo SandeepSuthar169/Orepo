@@ -1,12 +1,19 @@
 import axios, { isAxiosError } from "axios";
 import type { GithubSearchResponse } from "../types/Types";
+import { GITHUB_SEARCH_BASE_URL } from "../ApiUrl"
 
-const fetchIonicRepositoriesApi = async (topic: string) : Promise<GithubSearchResponse> => {
+const fetchIonicRepositoriesApi = async (topic: string): Promise<GithubSearchResponse> => {
     try {
-        const response = await axios.get<GithubSearchResponse>(
-           `https://api.github.com/search/repositories?q=topic:${topic}&sort=stars&order=desc&per_page=1000`
-        );    
-        return response.data
+        const response = await axios.get<GithubSearchResponse>(GITHUB_SEARCH_BASE_URL, {
+            params: {
+                q: `topic:${topic}`,
+                sort: 'stars',
+                order: 'desc',
+                per_page: 100
+            }
+        });
+        
+        return response.data;
     
     } catch (error) {
 

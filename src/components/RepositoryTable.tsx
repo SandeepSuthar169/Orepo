@@ -11,7 +11,7 @@ const RepositoryTable: React.FC = () => {
 
   if (loading) {
     return (
-      <div className="flex-1 p-8 text-center text-sm text-gray-500 animate-pulse bg-white rounded-lg border border-gray-200 shadow-sm">
+      <div className="flex-1 p-8 text-center text-sm text-gray-500 animate-pulse bg-gray-50/50 rounded-lg border  shadow-sm">
         Loading repositories...
       </div>
     );
