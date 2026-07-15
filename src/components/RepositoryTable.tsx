@@ -91,7 +91,7 @@ const RepositoryTable: React.FC = () => {
             </tr>
           </thead>
           
-          <tbody className="divide-y text-[11px] divide-gray-100">
+          <tbody className="divide-y items-center text-[11px] divide-gray-100">
             {repositories.map((repo, index) => (
               <motion.tr
                 key={repo.full_name}
@@ -135,7 +135,7 @@ const RepositoryTable: React.FC = () => {
                     {repo.description || 'No description provided.'}
                   </p>
                 </td>
-                <td className="px-4 py-3 align-top text-gray-600">
+                <td className="px-4 py-3  align-top font-medium text-gray-600">
                 {formatStatExact(repo.stargazers_count)}
                 </td>
                 <td className="px-4 py-3 align-top text-gray-600">
@@ -161,7 +161,7 @@ const RepositoryTable: React.FC = () => {
                     {repo.topics.slice(0, 3).map((topic) => (
                       <span
                         key={topic}
-                        className="inline-flex items-center rounded-md border border-blue-200 bg-blue-50 px-2 py-1 text-xs font-medium text-blue-700"
+                        className="inline-flex items-center rounded-md border border-gray-200 bg-gray-50 px-2 py-1 text-xs font-medium text-gray-700"
                       >
                         {topic}
                       </span>
