@@ -120,7 +120,7 @@ const Sidebar = ({ isOpen, setIsOpen }: OpenProps) => {
 
   return (
     <section 
-      className={`mt-11 h-9.8/10 bg-white text-gray-700 p-3 shrink-0 rounded-lg shadow-sm border border-gray-200 overflow-y-auto transition-all duration-300 ease-in-out absolute z-50 md:relative
+      className={`mt-11 h-9.8/10 bg-white text-gray-700 p-3 shrink-0 rounded-lg shadow-sm border border-gray-100 overflow-y-auto transition-all duration-300 ease-in-out absolute z-50 md:relative
         ${isOpen 
           ? "w-60 translate-x-0" 
           : "-translate-x-full w-60 md:translate-x-0 md:w-16"

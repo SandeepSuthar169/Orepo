@@ -146,7 +146,7 @@ const HomePage = () => {
             <img 
               src="src\assets\download.webp" 
               alt=""  
-              className="mask-b-from-50% absolute inset-0 h-full w-full select-none object-cover  "
+              className="mask-b-from-50%  absolute inset-0 h-full w-full select-none object-cover  "
               onContextMenu={(e) => e.preventDefault()} 
               onDragStart={(e) => e.preventDefault()}
             />
@@ -156,19 +156,19 @@ const HomePage = () => {
                 <div className="z-10 flex w-full max-w-215.5 flex-col items-center justify-center gap-8  md:gap-12.5">
                   <div className="flex flex-col items-center gap-2 mb-1">
                       <h1 className="text-3xl font-jakarta font-semibold sm:text-3xl md:text-5xl  text-[#313131] text-center [text-shadow:0_2px_3px_rgb(75_85_99/10%)]">
-                          Here are 3100+ Open Source Project <br />
+                      Explore 3100+ open-source <br />
                       </h1>
                       <h1 className="text-3xl sm:text-3xl md:text-5xl font-bold text-[#313131] text-center [text-shadow:0_2px_3px_rgb(75_85_99/10%)]">
-                        you can <span className="text-rose-500 " >contribute</span>   
+                      projects with <span className="text-rose-500 " >Orepo</span>   
                       </h1>
                   </div>
 
                   <div className="flex flex-col items-center gap-2 mb-1">
                     <p className="text-base md:text-2xl px-5 md:px-10 font-normal [text-shadow:0_2px_3px_rgb(75_85_99/10%)] text-white tracking-normal opacity-80 max-w-3xl text-center">
-                      Search what you need and let Orepo handle the rest.
+                    Search what you need and contribute to
                     </p>
                     <p className="text-base md:text-2xl px-0 [text-shadow:0_2px_3px_rgb(75_85_99/10%)] md:px-0 font-normal text-shadow-gray-600 text-white tracking-normal opacity-80 max-w-3xl text-center">
-                      Contribute in AI, Frontend, DataBase, TypeScript <span className="text-black font-bold [text-shadow:0_2px_3px_rgb(75_85_99/30%)]"> You are needed. </span>
+                    AI, Frontend, Databases, or TypeScript. <span className="text-black font-bold [text-shadow:0_2px_3px_rgb(75_85_99/30%)]">Your skills are needed!</span>
                     </p>
                   </div>
                   <div className="flex items-center gap-6 font-medium">
@@ -188,11 +188,11 @@ const HomePage = () => {
                   </div>
                 </div>  
                 
-              </div>
+              </div>  
             </div>
             
-            <div className="relative mx-auto w-[95%] sm:w-[90%] md:w-full max-w-7xl rounded-xl md:rounded-3xl border border-neutral-200/50 bg-neutral-50 p-1  backdrop-blur-lg ">
-              <div className="rounded-xl md:rounded-[20px] border border-neutral-200 bg-white  md:p-2">
+            <div className="relative mx-auto w-[95%] sm:w-[90%] md:w-full max-w-7xl rounded-xl md:rounded-3xl  border-2 border-neutral-200 bg-white p-1  backdrop-blur-lg ">
+              <div className="rounded-xl md:rounded-[20px] border-2 border-neutral-200 bg-white   md:p-2">
                 <img 
                   src="src\assets\Screenshot 2026-07-15 112046.png" 
                   alt="Dashboard preview" 
@@ -276,14 +276,26 @@ const HomePage = () => {
           <div className="flex mx-auto w-full max-w-310 px-4 md:px-6 flex-col md:flex-row gap-2 lg:gap-2">
             <div className="flex flex-col sm:flex-row w-full bg-white shadow-marketing-outline ">
               <div className="flex flex-col rounded-3xl sm:mr-2 mb-2 sm:mb-0 items-center justify-center bg-gray-50 w-full sm:w-1/2 p-4 md:p-6">
-                <img src="src/assets/SecureForms.webp" alt=""  className="h-40 sm:h-50"/>
+                <img 
+                  src="src/assets/SecureForms.webp" 
+                  alt=""  
+                  className="h-40 sm:h-50"
+                  onContextMenu={(e) => e.preventDefault()} 
+                  onDragStart={(e) => e.preventDefault()}  
+                />
                 <div className="flex flex-col  p-4 sm:p-6 md:p-8 text-center">
                   <h3 className="text-gray-700 text-lg font-semibold mb-2">Built-in login &amp; authentication</h3>
                   <p className="text-sm sm:text-base font-normal text-brand-gray-500 text-gray-700  leading-normal mb-0">Login via magic link, Google, or single sign-on (SSO). Build internal-only or external-facing apps.</p>
                 </div>
               </div>
               <div className="flex flex-col rounded-3xl items-center justify-center bg-gray-50 w-full sm:w-1/2 p-4 md:p-6">
-                <img src="src/assets/SecurityFirstIllustration.7037f7d0.svg" alt=""  className="h-40 sm:h-50"/>
+                <img 
+                  src="src/assets/SecurityFirstIllustration.7037f7d0.svg" 
+                  alt=""  
+                  className="h-40 sm:h-50"
+                  onContextMenu={(e) => e.preventDefault()} 
+                  onDragStart={(e) => e.preventDefault()}
+                />
                 <div className="flex flex-col  p-4 sm:p-6 md:p-8 text-center">
                   <h3 className="text-gray-700 text-lg font-semibold mb-2">Built-in login &amp; authentication</h3>
                   <p className="text-sm sm:text-base font-normal text-gray-700  text-brand-gray-500 leading-normal mb-0">Login via magic link, Google, or single sign-on (SSO). Build internal-only or external-facing apps.</p>

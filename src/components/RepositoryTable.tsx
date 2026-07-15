@@ -45,6 +45,14 @@ const RepositoryTable: React.FC = () => {
     Scala: 'border border-[#d2b 48c] bg-[#f7f0e7] px-2 py-1 text-[#d2b48c]',
     "Jupyter Notebook": 'border border-cyan-300 bg-cyan-50 px-2 py-1 text-cyan-700',
     Vue: 'border border-emerald-300 bg-emerald-50 px-2 py-1 text-emerald-700',
+    Dart: 'border border-fuchsia-300 bg-fuchsia-50 px-2 py-1 text-fuchsia-700',
+    Astro: 'border border-green-300 bg-green-50 px-2 py-1 text-green-700',
+    MDX: 'border border-indigo-300 bg-indigo-50 px-2 py-1 text-indigo-700',
+    Kotlin: 'border border-lime-300 bg-lime-50 px-2 py-1 text-lime-700',
+    Swift: 'border border-mauve-300 bg-mauve-50 px-2 py-1 text-mauve-700',
+    "Objective-C": 'border border-olive-300 bg-olive-50 px-2 py-1 text-olive-700',
+    "Assembly": 'border border-orange-300 bg-orange-50 px-2 py-1 text-orange-700',
+    "CSS": 'border border-fuchsia-300 bg-fuchsia-50 px-2 py-1 text-fuchsia-700',
   };  
 
   const fallbackStyles = 'bg-gray-100 px-2 py-1 text-gray-700 border border-gray-400 border-transparent';
@@ -58,7 +66,7 @@ const RepositoryTable: React.FC = () => {
   }
 
   return (
-    <div className="flex-1 mt-11  w-full h-9.8/10 rounded-lg border border-gray-200 bg-white shadow-sm overflow-hidden flex flex-col">
+    <div className="flex-1 mt-11  w-full h-9.8/10 rounded-xl  border border-gray-200 bg-white shadow-sm overflow-hidden flex flex-col">
       <div className="overflow-x-auto  mb-4 h-full">
         <table className="w-full min-w-250 lg:min-w-full text-[14px] text-gray-900 text-left">
           <thead className="sticky top-0 z-20 border-b border-gray-200 bg-gray-50 text-gray-600 shadow-sm">

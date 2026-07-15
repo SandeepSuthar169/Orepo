@@ -1,11 +1,9 @@
 
 const ErrorRateLimit = () => {
     return (
-            <div className="flex-1 mt-6 p-8 flex flex-col items-center justify-center bg-white rounded-2xl border border-red-50 shadow-[0_2px_10px_-3px_rgba(239,68,68,0.1)] transition-all duration-300 hover:shadow-[0_8px_30px_-4px_rgba(239,68,68,0.1)]">
-
+            <div className="flex-1 mt-11 p-8 flex flex-col items-center justify-center bg-white rounded-xl border border-gray-100 shadow-[0_2px_10px_-3px_rgba(133, 133, 133, 0.24)] transition-all duration-300 hover:shadow-[0_8px_30px_-4px_rgba(133, 133, 133, 0.24)]">
                 <div className="relative flex items-center justify-center mb-4">
                     <div className="absolute w-12 h-12 bg-red-100 rounded-full animate-ping opacity-60"></div>
-
                     <div className="relative z-10 flex items-center justify-center w-12 h-12 bg-red-50 rounded-full border border-red-100">
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
