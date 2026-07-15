@@ -144,7 +144,7 @@ const HomePage = () => {
                 <main className="flex ">
           <section className="mx-auto min-h-screen w-full h-full">
             <img 
-              src="src\assets\hero.webp" 
+              src="src\assets\download.webp" 
               alt=""  
               className="mask-b-from-50% absolute inset-0 h-full w-full select-none object-cover  "
               onContextMenu={(e) => e.preventDefault()} 
@@ -153,22 +153,22 @@ const HomePage = () => {
 
             <div className="relative flex min-h-dvh w-full">
               <div className="flex w-full items-center justify-center">
-                <div className="z-10 flex w-full max-w-206.5 flex-col items-center justify-center gap-8  md:gap-12.5">
+                <div className="z-10 flex w-full max-w-215.5 flex-col items-center justify-center gap-8  md:gap-12.5">
                   <div className="flex flex-col items-center gap-2 mb-1">
-                      <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white text-center [text-shadow:0_2px_3px_rgb(75_85_99/30%)]">
-                          Here are 1700+ Open Source Project <br />
+                      <h1 className="text-3xl font-jakarta font-semibold sm:text-3xl md:text-5xl  text-[#313131] text-center [text-shadow:0_2px_3px_rgb(75_85_99/10%)]">
+                          Here are 3100+ Open Source Project <br />
                       </h1>
-                      <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white/70 text-center [text-shadow:0_2px_3px_rgb(75_85_99/30%)]">
+                      <h1 className="text-3xl sm:text-3xl md:text-5xl font-bold text-[#313131] text-center [text-shadow:0_2px_3px_rgb(75_85_99/10%)]">
                         you can <span className="text-rose-500 " >contribute</span>   
                       </h1>
                   </div>
 
                   <div className="flex flex-col items-center gap-2 mb-1">
-                    <p className="text-base md:text-2xl px-5 md:px-10 font-normal [text-shadow:0_2px_3px_rgb(75_85_99/30%)] text-white tracking-normal opacity-80 max-w-2xl text-center">
-                      Search what you need and let Ople handle the rest.
+                    <p className="text-base md:text-2xl px-5 md:px-10 font-normal [text-shadow:0_2px_3px_rgb(75_85_99/10%)] text-white tracking-normal opacity-80 max-w-3xl text-center">
+                      Search what you need and let Orepo handle the rest.
                     </p>
-                    <p className="text-base md:text-2xl px-0 [text-shadow:0_2px_3px_rgb(75_85_99/30%)] md:px-0 font-normal text-shadow-gray-600 text-white tracking-normal opacity-80 max-w-2xl text-center">
-                      Contribute in AI, Frontend, DataBase, npm. <span className="text-black font-bold [text-shadow:0_2px_3px_rgb(75_85_99/30%)]"> You are needed. </span>
+                    <p className="text-base md:text-2xl px-0 [text-shadow:0_2px_3px_rgb(75_85_99/10%)] md:px-0 font-normal text-shadow-gray-600 text-white tracking-normal opacity-80 max-w-3xl text-center">
+                      Contribute in AI, Frontend, DataBase, TypeScript <span className="text-black font-bold [text-shadow:0_2px_3px_rgb(75_85_99/30%)]"> You are needed. </span>
                     </p>
                   </div>
                   <div className="flex items-center gap-6 font-medium">
@@ -191,8 +191,8 @@ const HomePage = () => {
               </div>
             </div>
             
-            <div className="relative mx-auto w-[95%] sm:w-[90%] md:w-full max-w-6xl rounded-xl md:rounded-3xl border border-neutral-200/50 bg-neutral-100 p-1 sm:p-2 backdrop-blur-lg md:p-4">
-              <div className="rounded-xl md:rounded-[20px] border border-neutral-200 bg-white p-1 md:p-2">
+            <div className="relative mx-auto w-[95%] sm:w-[90%] md:w-full max-w-7xl rounded-xl md:rounded-3xl border border-neutral-200/50 bg-neutral-50 p-1  backdrop-blur-lg ">
+              <div className="rounded-xl md:rounded-[20px] border border-neutral-200 bg-white  md:p-2">
                 <img 
                   src="src\assets\Screenshot 2026-07-15 112046.png" 
                   alt="Dashboard preview" 

@@ -83,8 +83,10 @@ const Sidebar = ({ isOpen, setIsOpen }: OpenProps) => {
         { id: 'flutter', label: 'Flutter' },
         { id: 'react-native', label: 'React Native' },
         { id: 'swift', label: 'Swift' },
+        { id: 'swiftui', label: 'SwiftUI' },
         { id: 'android', label: 'Android Dev' },
-        { id: 'ios', label: 'iOS Dev' },
+        { id: 'kotlin', label: 'Kotlin' },
+        { id: 'ionic', label: 'Ionic' },
       ]
     },
     {
@@ -95,7 +97,9 @@ const Sidebar = ({ isOpen, setIsOpen }: OpenProps) => {
         { id: 'docker', label: 'Docker' },
         { id: 'kubernetes', label: 'Kubernetes' },
         { id: 'terraform', label: 'Terraform' },
-        { id: 'ci-cd', label: 'CI-CD' },
+        { id: 'jenkins', label: 'Jenkins' },
+        { id: 'grafana', label: 'Grafana' },
+        { id: 'Ansible', label: 'Ansible' },
       ]
     },
     {
@@ -107,13 +111,16 @@ const Sidebar = ({ isOpen, setIsOpen }: OpenProps) => {
         { id: 'redis', label: 'Redis' },
         { id: 'mongodb', label: 'MongoDB' },
         { id: 'mysql', label: 'MySQL' },
+        { id: 'elasticsearch', label: 'Elasticsearch' },
+        { id: 'supabase', label: 'Supabase' },
+        { id: 'sqlite', label: 'SQLite' },
       ]
     },
   ];
 
   return (
     <section 
-      className={`mt-11 h-full bg-white text-gray-700 p-3 shrink-0 rounded-lg shadow-sm border border-gray-200 overflow-y-auto transition-all duration-300 ease-in-out absolute z-50 md:relative
+      className={`mt-11 h-9.8/10 bg-white text-gray-700 p-3 shrink-0 rounded-lg shadow-sm border border-gray-200 overflow-y-auto transition-all duration-300 ease-in-out absolute z-50 md:relative
         ${isOpen 
           ? "w-60 translate-x-0" 
           : "-translate-x-full w-60 md:translate-x-0 md:w-16"
@@ -155,7 +162,7 @@ const Sidebar = ({ isOpen, setIsOpen }: OpenProps) => {
               )}
             </div>
             {j.hasDropdown && isOpen && activeDropdown === j.title && (
-              <div className=" bg-white overflow-hidden transition-all border-gray-200 ml-2 mt-1 space-y-1 border-l-2 pl-2 duration-200">
+              <div className=" bg-white overflow-hidden transition-all  border-gray-300 ml-3 m space-y-1 border-l-2 pl-2 duration-200">
                 {j.available_topics.map((t) => (
                   <div 
                     key={t.id} 

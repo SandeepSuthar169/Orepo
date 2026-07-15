@@ -33,25 +33,34 @@ const RepositoryTable: React.FC = () => {
     C: 'border border-gray-300 bg-gray-100 px-2 py-1 text-gray-700',
     Rust: 'border border-orange-300 bg-orange-50 px-2 py-1 text-orange-700',
     PHP: 'border border-emerald-300 bg-emerald-50 px-2 py-1 text-emerald-700',
-    Haskell: 'border border-lime-700 bg-lime-50 px-2 py-1 text-lime-700',
-    Elixir: 'border border-mauve-700 bg-mauve-100 px-2 py-1 text-mauve-700',
-    HTML: 'border border-olive-700 bg-olive-100 px-2 py-1 text-olive-700',
-    Shell: 'border border-amber-700 bg-amber-50 px-2 py-1 text-amber-700',
-    Svelte: 'border border-cyan-700 bg-cyan-50 px-2 py-1 text-cyan-700',
+    Haskell: 'border border-lime-300 bg-lime-50 px-2 py-1 text-lime-700',
+    Elixir: 'border border-mauve-300 bg-mauve-100 px-2 py-1 text-mauve-700',
+    HTML: 'border border-olive-300 bg-olive-100 px-2 py-1 text-olive-700',
+    Shell: 'border border-amber-300 bg-amber-50 px-2 py-1 text-amber-700',
+    Svelte: 'border border-cyan-300 bg-cyan-50 px-2 py-1 text-cyan-700',
     Pascal: 'border border-fuchsia-700 bg-fuchsia-50 px-2 py-1 text-fuchsia-700',
     Clojure: 'border border-[#d2b48c] bg-[#f7f0e7] px-2 py-1 text-[#d2b48c]',
     "C++": 'border border-[#d2b 48c] bg-[#f7f0e7] px-2 py-1 text-[#d2b48c]',
     "C#": 'border border-[#d2b 48c] bg-[#f7f0e7] px-2 py-1 text-[#d2b48c]',
     Scala: 'border border-[#d2b 48c] bg-[#f7f0e7] px-2 py-1 text-[#d2b48c]',
+    "Jupyter Notebook": 'border border-cyan-300 bg-cyan-50 px-2 py-1 text-cyan-700',
+    Vue: 'border border-emerald-300 bg-emerald-50 px-2 py-1 text-emerald-700',
   };  
 
   const fallbackStyles = 'bg-gray-100 px-2 py-1 text-gray-700 border border-gray-400 border-transparent';
   const baseStyles = 'inline-flex items-center rounded-md text-xs font-medium whitespace-nowrap';
 
+  const formatStatExact = (num: number) => {
+    if(num > 1000) {
+       return (Math.trunc(num / 100) / 10).toFixed(1) + 'K';
+    }
+    return num.toString();
+  }
+
   return (
-    <div className="flex-1 mt-11 mb-4 w-full h-full rounded-lg border border-gray-200 bg-white shadow-sm overflow-hidden flex flex-col">
+    <div className="flex-1 mt-11  w-full h-9.8/10 rounded-lg border border-gray-200 bg-white shadow-sm overflow-hidden flex flex-col">
       <div className="overflow-x-auto  mb-4 h-full">
-        <table className="w-full min-w-250 lg:min-w-full text-sm text-gray-900 text-left">
+        <table className="w-full min-w-250 lg:min-w-full text-[14px] text-gray-900 text-left">
           <thead className="sticky top-0 z-20 border-b border-gray-200 bg-gray-50 text-gray-600 shadow-sm">
             <tr>
               <th className="sticky left-0 top-0 z-30 w-20 min-w-20 bg-gray-50 px-4 py-3 font-medium whitespace-nowrap">
@@ -74,7 +83,7 @@ const RepositoryTable: React.FC = () => {
             </tr>
           </thead>
           
-          <tbody className="divide-y divide-gray-100">
+          <tbody className="divide-y text-[11px] divide-gray-100">
             {repositories.map((repo, index) => (
               <motion.tr
                 key={repo.full_name}
@@ -83,14 +92,14 @@ const RepositoryTable: React.FC = () => {
                 transition={{ delay: index * 0.03, duration: 0.2, ease: 'easeOut' }}
                 className="group hover:bg-gray-50/80 transition-colors" 
               >
-                <td className="sticky left-0 z-10 w-20 min-w-20 bg-white group-hover:bg-gray-50 px-4 py-3 align-top transition-colors">
+                <td className="sticky left-0.5 z-10 w-20 min-w-20 bg-white group-hover:bg-gray-50 px-4 py-3 align-top transition-colors">
                   <img
                     src={repo.owner.avatar_url}
                     alt={`${repo.owner.login} avatar`}
                     className="h-8 w-8 rounded-full border border-gray-200"
                   />
                 </td>
-                <td className="sticky left-20 z-10 bg-white group-hover:bg-gray-50 px-4 py-3 align-top border-r border-gray-200 transition-colors">
+                <td className="sticky left-20 z-10 bg-white max-w-62.5 group-hover:bg-gray-50 px-4 py-3 align-top border-r border-gray-200 transition-colors">
                   <a
                     href={repo.html_url}
                     target="_blank"
@@ -119,13 +128,13 @@ const RepositoryTable: React.FC = () => {
                   </p>
                 </td>
                 <td className="px-4 py-3 align-top text-gray-600">
-                  {repo.stargazers_count.toLocaleString()}
+                {formatStatExact(repo.stargazers_count)}
                 </td>
                 <td className="px-4 py-3 align-top text-gray-600">
-                  {repo.forks_count.toLocaleString()}
+                  {formatStatExact(repo.forks_count)}
                 </td>
                 <td className="px-4 py-3 align-top text-gray-600">
-                  {repo.open_issues_count.toLocaleString()}
+                  {formatStatExact(repo.open_issues_count)}
                 </td>
                 <td className="px-4 py-3 align-top">
                   <span 
@@ -139,8 +148,8 @@ const RepositoryTable: React.FC = () => {
                   </span>
                 </td>
 
-                <td className="px-3 py-2 flex align-top max-w-62.5">
-                  <div className="flex flex-wrap gap-1">
+                <td className="px-3 py-2 flex items-center justify-between align-top max-w-62.5">
+                  <div className="flex  flex-wrap gap-1">
                     {repo.topics.slice(0, 3).map((topic) => (
                       <span
                         key={topic}

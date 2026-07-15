@@ -55,11 +55,12 @@ const Footer = () => {
               <div className="flex w-full flex-col justify-center space-y-4">
                 <p className="hover:text-text-neutral-800 font-bold text-neutral-600 transition-colors">Collection</p>
                 <ul className="hover:text-text-neutral-800  text-neutral-600 transition-colors">
-                  <LiA name="DataBase" />
-                  <LiA name="TypeScript" />
-                  <LiA name="Scala" />
-                  <LiA name="npm" />
-                  <LiA name="Node.js" />
+                  <LiA name="AI" />
+                  <LiA name="Frontend" />
+                  <LiA name="Backend" />
+                  <LiA name="Mobile Development" />
+                  <LiA name="DevOps" />
+                  <LiA name="Databases" />
                 </ul>
               </div>
 

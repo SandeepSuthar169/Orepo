@@ -1,7 +1,6 @@
 
 const ErrorRateLimit = () => {
     return (
-        <div>
             <div className="flex-1 mt-6 p-8 flex flex-col items-center justify-center bg-white rounded-2xl border border-red-50 shadow-[0_2px_10px_-3px_rgba(239,68,68,0.1)] transition-all duration-300 hover:shadow-[0_8px_30px_-4px_rgba(239,68,68,0.1)]">
 
                 <div className="relative flex items-center justify-center mb-4">
@@ -34,7 +33,6 @@ const ErrorRateLimit = () => {
                 </p>
 
             </div>
-        </div>
     )
 }
 
