@@ -11,9 +11,7 @@ node_modules
 dist
 dist-ssr
 *.local
-ApiUrl.ts
-ApiUrl.ts
-src\sample.json
+
 
 # Editor directories and files
 .vscode/*

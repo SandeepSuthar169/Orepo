@@ -113,7 +113,7 @@ const Sidebar = ({ isOpen, setIsOpen }: OpenProps) => {
 
   return (
     <section 
-      className={`mt-11 h-full bg-gray-50/30 text-gray-700 p-3 shrink-0 rounded-lg shadow-sm border border-gray-200 overflow-y-auto transition-all duration-300 ease-in-out absolute z-50 md:relative
+      className={`mt-11 h-full bg-white text-gray-700 p-3 shrink-0 rounded-lg shadow-sm border border-gray-200 overflow-y-auto transition-all duration-300 ease-in-out absolute z-50 md:relative
         ${isOpen 
           ? "w-60 translate-x-0" 
           : "-translate-x-full w-60 md:translate-x-0 md:w-16"
@@ -155,7 +155,7 @@ const Sidebar = ({ isOpen, setIsOpen }: OpenProps) => {
               )}
             </div>
             {j.hasDropdown && isOpen && activeDropdown === j.title && (
-              <div className="bg-gray-50/50 overflow-hidden transition-all border-gray-200 ml-2 mt-1 space-y-1 border-l-2 pl-2 duration-200">
+              <div className=" bg-white overflow-hidden transition-all border-gray-200 ml-2 mt-1 space-y-1 border-l-2 pl-2 duration-200">
                 {j.available_topics.map((t) => (
                   <div 
                     key={t.id} 

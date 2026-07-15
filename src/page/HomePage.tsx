@@ -76,7 +76,7 @@ const FAQSection = ()  => {
   };
 
   return (
-    <section className="bg-white py-10 sm:py-16">
+    <section className="   bg-white py-10 sm:py-16">
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
         <div className="mx-auto max-w-2xl text-center">
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-black">
@@ -191,10 +191,10 @@ const HomePage = () => {
               </div>
             </div>
             
-            <div className="relative mx-auto w-[95%] sm:w-[90%] md:w-full max-w-4xl rounded-2xl md:rounded-3xl border border-neutral-200/50 bg-neutral-100 p-1.5 sm:p-2 backdrop-blur-lg md:p-4">
+            <div className="relative mx-auto w-[95%] sm:w-[90%] md:w-full max-w-6xl rounded-xl md:rounded-3xl border border-neutral-200/50 bg-neutral-100 p-1 sm:p-2 backdrop-blur-lg md:p-4">
               <div className="rounded-xl md:rounded-[20px] border border-neutral-200 bg-white p-1 md:p-2">
                 <img 
-                  src="src\assets\dashboard-new.webp" 
+                  src="src\assets\Screenshot 2026-07-15 112046.png" 
                   alt="Dashboard preview" 
                   className="rounded-lg md:rounded-2xl select-none w-full h-auto object-cover"
                   onContextMenu={(e) => e.preventDefault()} 

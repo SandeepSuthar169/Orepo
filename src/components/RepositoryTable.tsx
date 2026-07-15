@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { useRepoStore } from '../store/useRepositoryStore';
+import ErrorRateLimit from './ErrorRateLimit';
+import LoadingRepositories from './Loading';
 
 const RepositoryTable: React.FC = () => {
   const { repositories, loading, error, fetchRepositories, topic } = useRepoStore();
@@ -11,17 +13,13 @@ const RepositoryTable: React.FC = () => {
 
   if (loading) {
     return (
-      <div className="flex-1 p-8 text-center text-sm text-gray-500 animate-pulse bg-gray-50/50 rounded-lg border  shadow-sm">
-        Loading repositories...
-      </div>
+      <LoadingRepositories />
     );
   }
 
   if (error) {
     return (
-      <div className="flex-1 p-8 text-center text-sm font-medium text-red-500 bg-white rounded-lg border border-gray-200 shadow-sm">
-        Error: {error}
-      </div>
+        <ErrorRateLimit />
     );
   }
 
@@ -42,6 +40,9 @@ const RepositoryTable: React.FC = () => {
     Svelte: 'border border-cyan-700 bg-cyan-50 px-2 py-1 text-cyan-700',
     Pascal: 'border border-fuchsia-700 bg-fuchsia-50 px-2 py-1 text-fuchsia-700',
     Clojure: 'border border-[#d2b48c] bg-[#f7f0e7] px-2 py-1 text-[#d2b48c]',
+    "C++": 'border border-[#d2b 48c] bg-[#f7f0e7] px-2 py-1 text-[#d2b48c]',
+    "C#": 'border border-[#d2b 48c] bg-[#f7f0e7] px-2 py-1 text-[#d2b48c]',
+    Scala: 'border border-[#d2b 48c] bg-[#f7f0e7] px-2 py-1 text-[#d2b48c]',
   };  
 
   const fallbackStyles = 'bg-gray-100 px-2 py-1 text-gray-700 border border-gray-400 border-transparent';

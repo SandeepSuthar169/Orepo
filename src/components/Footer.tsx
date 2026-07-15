@@ -20,8 +20,8 @@ const LiA = ({name}:LiType) => {
 
 const Footer = () => {
   return (
-    <section className="theme-zinc w-full bg-white">
-      <div className="flex max-w-300 w-full items-center justify-center">
+    <section className=" flex justify-center theme-zinc w-full bg-white">
+      <div className="flex max-w-400 w-full items-center justify-center">
         <div className="relative w-full overflow-hidden border-t border-neutral-100 bg-white px-11 pt-15 pb-5">
           <div className="mx-auto flex max-w-7xl flex-col items-start justify-between text-sm text-neutral-500 sm:flex-row md:px-8">
             
@@ -68,7 +68,7 @@ const Footer = () => {
 
           </div>
             <div>
-              <p className="inset-x-0 mt-10 bg-linear-to-b from-neutral-50 to-neutral-300 bg-clip-text text-center text-8xl font-bold text-transparent md:text-9xl lg:text-[12rem] xl:text-[15rem]  ">Orepo</p>
+              <p className="inset-x-0 mt-10 bg-linear-to-b from-neutral-50 to-neutral-300 bg-clip-text text-center text-7xl font-bold text-transparent md:text-9xl lg:text-[12rem] xl:text-[15rem]  ">Orepo</p>
             </div>
         </div>
       </div>
