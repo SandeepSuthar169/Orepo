@@ -25,18 +25,40 @@ const RepositoryTable: React.FC = () => {
     );
   }
 
+  const languageStyles: Record<string, string> = {
+    TypeScript: 'border border-blue-200 bg-blue-50 px-2 py-1 text-blue-700',
+    JavaScript: 'border border-yellow-500 bg-yellow-50 px-2 py-1 text-yellow-500',
+    Ruby: 'border border-red-200 bg-red-50 px-2 py-1 text-red-700',
+    Go: 'border border-[#00ADD8] bg-[#effcff] px-2 py-1 text-[#00ADD8]',
+    Java: 'border border-[#f89820] bg-[#fdedd7] px-2 py-1 text-[#f89820]',
+    Python: 'border border-pink-300 bg-pink-50 px-2 py-1 text-pink-700',
+    C: 'border border-gray-300 bg-gray-100 px-2 py-1 text-gray-700',
+    Rust: 'border border-orange-300 bg-orange-50 px-2 py-1 text-orange-700',
+    PHP: 'border border-emerald-300 bg-emerald-50 px-2 py-1 text-emerald-700',
+    Haskell: 'border border-lime-700 bg-lime-50 px-2 py-1 text-lime-700',
+    Elixir: 'border border-mauve-700 bg-mauve-100 px-2 py-1 text-mauve-700',
+    HTML: 'border border-olive-700 bg-olive-100 px-2 py-1 text-olive-700',
+    Shell: 'border border-amber-700 bg-amber-50 px-2 py-1 text-amber-700',
+    Svelte: 'border border-cyan-700 bg-cyan-50 px-2 py-1 text-cyan-700',
+    Pascal: 'border border-fuchsia-700 bg-fuchsia-50 px-2 py-1 text-fuchsia-700',
+    Clojure: 'border border-[#d2b48c] bg-[#f7f0e7] px-2 py-1 text-[#d2b48c]',
+  };  
 
+  const fallbackStyles = 'bg-gray-100 px-2 py-1 text-gray-700 border border-gray-400 border-transparent';
+  const baseStyles = 'inline-flex items-center rounded-md text-xs font-medium whitespace-nowrap';
 
   return (
-    <div className="flex-1 mt-11 w-full h-full rounded-lg border border-gray-200 bg-white shadow-sm overflow-hidden flex flex-col">
-
-      <div className="overflow-x-auto h-full">
-
+    <div className="flex-1 mt-11 mb-4 w-full h-full rounded-lg border border-gray-200 bg-white shadow-sm overflow-hidden flex flex-col">
+      <div className="overflow-x-auto  mb-4 h-full">
         <table className="w-full min-w-250 lg:min-w-full text-sm text-gray-900 text-left">
-          <thead className="sticky top-0 z-10 border-b border-gray-200 bg-gray-50 text-gray-600 shadow-sm">
+          <thead className="sticky top-0 z-20 border-b border-gray-200 bg-gray-50 text-gray-600 shadow-sm">
             <tr>
-              <th className="px-4 py-3 font-medium whitespace-nowrap">Owner</th>
-              <th className="px-4 py-3 font-medium whitespace-nowrap">Repository</th>
+              <th className="sticky left-0 top-0 z-30 w-20 min-w-20 bg-gray-50 px-4 py-3 font-medium whitespace-nowrap">
+                Owner
+              </th>
+              <th className="sticky left-20 top-0 z-30 bg-gray-50 px-4 py-3 font-medium whitespace-nowrap border-r border-gray-300">
+                Repository
+              </th>
               <th className="px-4 py-3 font-medium">Description</th>
               <th className="px-4 py-3 font-medium whitespace-nowrap">
                 <div className="flex items-center gap-1">
@@ -50,24 +72,24 @@ const RepositoryTable: React.FC = () => {
               <th className="px-4 py-3 font-medium whitespace-nowrap">Updated</th>
             </tr>
           </thead>
+          
           <tbody className="divide-y divide-gray-100">
             {repositories.map((repo, index) => (
               <motion.tr
                 key={repo.full_name}
-                initial={{ opacity: 0, y: 8 }}
-                animate={{ opacity: 1, y: 0 }}
+                initial={{ opacity: 0 }} 
+                animate={{ opacity: 1 }}
                 transition={{ delay: index * 0.03, duration: 0.2, ease: 'easeOut' }}
-                className="hover:bg-gray-50/80 transition-colors"
+                className="group hover:bg-gray-50/80 transition-colors" 
               >
-                <td className="px-4 py-3 align-top">
+                <td className="sticky left-0 z-10 w-20 min-w-20 bg-white group-hover:bg-gray-50 px-4 py-3 align-top transition-colors">
                   <img
                     src={repo.owner.avatar_url}
                     alt={`${repo.owner.login} avatar`}
                     className="h-8 w-8 rounded-full border border-gray-200"
                   />
                 </td>
-
-                <td className="px-4 py-3 align-top">
+                <td className="sticky left-20 z-10 bg-white group-hover:bg-gray-50 px-4 py-3 align-top border-r border-gray-200 transition-colors">
                   <a
                     href={repo.html_url}
                     target="_blank"
@@ -89,6 +111,7 @@ const RepositoryTable: React.FC = () => {
                     </div>
                   )}
                 </td>
+
                 <td className="px-4 py-3 align-top max-w-62.5">
                   <p className="line-clamp-2 text-gray-500 text-sm">
                     {repo.description || 'No description provided.'}
@@ -105,19 +128,17 @@ const RepositoryTable: React.FC = () => {
                 </td>
                 <td className="px-4 py-3 align-top">
                   <span 
-                    className={`inline-flex items-center rounded-md text-xs font-medium whitespace-nowrap ${
-                      repo.language === 'TypeScript'
-                        ? 'border border-blue-200 bg-blue-50 px-2 py-1 text-blue-700'
-                        : repo.language === 'JavaScript'
-                        ? 'border border-yellow-200 bg-yellow-50 px-2 py-1 text-yellow-700'
-                        : 'bg-gray-100 px-2.5 py-0.5 border border-gray-200  text-gray-700' 
+                    className={`${baseStyles} ${
+                      repo.language && languageStyles[repo.language] 
+                        ? languageStyles[repo.language] 
+                        : fallbackStyles
                     }`}
                   >
                     {repo.language || 'N/A'}
                   </span>
                 </td>
 
-                <td className="px-3 py-2 align-top max-w-62.5">
+                <td className="px-3 py-2 flex align-top max-w-62.5">
                   <div className="flex flex-wrap gap-1">
                     {repo.topics.slice(0, 3).map((topic) => (
                       <span
@@ -128,7 +149,7 @@ const RepositoryTable: React.FC = () => {
                       </span>
                     ))}
                     {repo.topics.length > 3 && (
-                      <span className="mt-0.5 text-xs text-gray-400 font-medium">
+                      <span className="mt-0.5 text-xs flex text-gray-400 font-medium">
                         +{repo.topics.length - 3}
                       </span>
                     )}
