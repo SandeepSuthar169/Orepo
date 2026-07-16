@@ -16,7 +16,7 @@ interface TextAreaType {
 
 const TextArea = ({number, Paregrapgtext, Span1, Span2}: TextAreaType) => {
     return (
-      <div className="flex flex-col gap-3 items-start w-full cursor-pointer group">
+      <div className="flex flex-col gap-3 items-start cursor-pointer group">
       <div className="flex gap-4">
         <h3 className="inline-flex items-center font-medium border box-content transition-colors focus:outline-none focus-visible:outline-none whitespace-nowrap bg-white text-gray-700 border-black/10 group-hover:text-gray-900 group-hover:border-black/20 h-6 px-2 gap-1.5 text-sm rounded-full">
           {number}
@@ -43,11 +43,11 @@ type FAQ = {
 
 const faqs: FAQ[] = [
   {
-    question: "What exactly is Orapo?",
-    answer: "Orapo is a free, open-source platform to help developers easily discover open-source projects on GitHub. Whether you are looking for your next contribution,",
+    question: "What exactly is Orepo?",
+    answer: "Orepo is a free, open-source platform to help developers easily discover open-source projects on GitHub. Whether you are looking for your next contribution,",
   },
   {
-    question: "Is Orapo completely free to use?",
+    question: "Is Orepo completely free to use?",
     answer: "Yes. Screenshot Studio is 100% free with no hidden costs. Unlimited exports, all features, no watermarks. No signup required.",
   },
   {
@@ -56,15 +56,15 @@ const faqs: FAQ[] = [
   },
   {
     question: "How do I find projects that match my tech stack?",
-    answer: "Orapo organizes projects into multiple easy-to-navigate categories. You can filter our collection by specific technologies and topics—including TypeScript, npm, Databases, and many more—so you can find exactly what you want to work with.",
+    answer: "Orepo organizes projects into multiple easy-to-navigate categories. You can filter our collection by specific technologies and topics—including TypeScript, npm, Databases, and many more—so you can find exactly what you want to work with.",
   },
   {
     question: "Do I need to create an account to search for projects? ",
     answer: "Yes. You can cancel your subscription at any time without any hidden fees.",
   },  
   {
-    question: "Is Orapo itself open-source?",
-    answer: "Yes, Orapo is proudly open-source. If you would like to help us build a better discovery tool for developers, you can find our repository on GitHub and contribute to the platform.",
+    question: "Is Orepo itself open-source?",
+    answer: "Yes, Orepo is proudly open-source. If you would like to help us build a better discovery tool for developers, you can find our repository on GitHub and contribute to the platform.",
   },  
 ];
 
@@ -220,48 +220,48 @@ const HomePage = () => {
             </h2>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-10 items-start w-full mt-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-8 items-start w-full mt-6">
             <TextArea 
               number={1}
-              Paregrapgtext={"Build business apps, fast"}
-              Span1={"Prompt to build the software you need."}
-              Span2={"Describe your app and watch Zite get to work."}
+              Paregrapgtext={"Discover GitHub Open Source Projects"}
+              Span1={"Orepo helps developers easily find amazing"}
+              Span2={"open source projects to contribute to on GitHub."}
             
             />
             <TextArea 
               number={2}
-              Paregrapgtext={"Build business apps, fast"}
-              Span1={"Prompt to build the software you need."}
-              Span2={"Describe your app and watch Zite get to work."}
+              Paregrapgtext={"Completely Free "}
+              Span1={"Enjoy full access to all features with unlimited"}
+              Span2={"exports and absolutely no hidden costs."}
             />
             <TextArea 
               number={3}
-              Paregrapgtext={"Build business apps, fast"}
-              Span1={"Prompt to build the software you need."}
-              Span2={"Describe your app and watch Zite get to work."}
+              Paregrapgtext={"Massive Project Collection Available"}
+              Span1={"Browse through a rapidly growing collection of"}
+              Span2={"three thousand open source developer repositories."}
             />
          </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-10 items-start w-full mt-6">
            <TextArea 
               number={4}
-              Paregrapgtext={"Build business apps, fast"}
-              Span1={"Prompt to build the software you need."}
-              Span2={"Describe your app and watch Zite get to work."}
+              Paregrapgtext={"Filter By Specific Technologies"}
+              Span1={"Easily navigate multiple categories to find exactly"}
+              Span2={"what you want to work with quickly."}
             />
 
              <TextArea 
               number={5}
-              Paregrapgtext={"Build business apps, fast"}
-              Span1={"Prompt to build the software you need."}
-              Span2={"Describe your app and watch Zite get to work."}
+              Paregrapgtext={"Proudly Open Source Platform"}
+              Span1={"Join our GitHub repository to help us build"}
+              Span2={"a better discovery tool for developers."}
             />
 
             <TextArea 
               number={6}
-              Paregrapgtext={"Build business apps, fast"}
-              Span1={"Prompt to build the software you need."}
-              Span2={"Describe your app and watch Zite get to work."}
+              Paregrapgtext={"Easy To Navigate"}
+              Span1={"Orepo organizes open source projects "}
+              Span2={"categories so developers can discover them seamlessly."}
             />
 
          </div>
@@ -277,28 +277,28 @@ const HomePage = () => {
             <div className="flex flex-col sm:flex-row w-full bg-white shadow-marketing-outline ">
               <div className="flex flex-col rounded-3xl sm:mr-2 mb-2 sm:mb-0 items-center justify-center bg-gray-50 w-full sm:w-1/2 p-4 md:p-6">
                 <img 
-                  src="src/assets/SecureForms.webp" 
+                  src="src\assets\Screenshot 2026-07-16 134810.png" 
                   alt=""  
                   className="h-40 sm:h-50"
                   onContextMenu={(e) => e.preventDefault()} 
                   onDragStart={(e) => e.preventDefault()}  
                 />
                 <div className="flex flex-col  p-4 sm:p-6 md:p-8 text-center">
-                  <h3 className="text-gray-700 text-lg font-semibold mb-2">Built-in login &amp; authentication</h3>
-                  <p className="text-sm sm:text-base font-normal text-brand-gray-500 text-gray-700  leading-normal mb-0">Login via magic link, Google, or single sign-on (SSO). Build internal-only or external-facing apps.</p>
+                  <h3 className="text-gray-700 text-lg font-semibold mb-2">Filter By Specific Tech</h3>
+                  <p className="text-sm sm:text-base font-normal text-brand-gray-500 text-gray-700  leading-normal mb-0">Easily navigate multiple categories to find exactly what you want to work with quickly.</p>
                 </div>
               </div>
               <div className="flex flex-col rounded-3xl items-center justify-center bg-gray-50 w-full sm:w-1/2 p-4 md:p-6">
                 <img 
-                  src="src/assets/SecurityFirstIllustration.7037f7d0.svg" 
+                  src="src\assets\Screenshot 2026-07-16 134848.png" 
                   alt=""  
                   className="h-40 sm:h-50"
                   onContextMenu={(e) => e.preventDefault()} 
                   onDragStart={(e) => e.preventDefault()}
                 />
                 <div className="flex flex-col  p-4 sm:p-6 md:p-8 text-center">
-                  <h3 className="text-gray-700 text-lg font-semibold mb-2">Built-in login &amp; authentication</h3>
-                  <p className="text-sm sm:text-base font-normal text-gray-700  text-brand-gray-500 leading-normal mb-0">Login via magic link, Google, or single sign-on (SSO). Build internal-only or external-facing apps.</p>
+                  <h3 className="text-gray-700 text-lg font-semibold mb-2">Discover GitHub Projects</h3>
+                  <p className="text-sm sm:text-base font-normal text-gray-700  text-brand-gray-500 leading-normal mb-0">Orepo helps developers easily find amazing open source projects to contribute to on GitHub.</p>
                 </div>
               </div>
             </div>
