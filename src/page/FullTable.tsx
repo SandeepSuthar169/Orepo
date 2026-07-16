@@ -8,7 +8,7 @@ export const FullTable = () => {
   return (
     <div className="h-screen w-full   pb-3 flex bg-[#F3F5F7]  p-4 gap-4 overflow-hidden">
       <Sidebar isOpen={isOpen} setIsOpen={setIsOpen} />
-      <RepositoryTable />
+      <RepositoryTable  />
     </div>
   );
 };

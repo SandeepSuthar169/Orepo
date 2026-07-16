@@ -17,8 +17,8 @@ const Navbar = () => {
         <div className="flex items-center justify-between gap-2 sm:gap-6 font-medium text-sm pr-16">
 
           <div className="flex items-center">
-            <button className="flex items-center gap-1.5 p-1.5 m-1 sm:m-1.5 ">
-              <LuGithub className="text-gray-900 text-lg sm:text-xl " />
+            <button className="flex items-center gap-1.5 p-1.5 m-1 sm:m-1.5">
+              <LuGithub className="text-gray-700 fill-gray-300 transition-colors text-lg sm:text-xl" />
               <span className="hidden sm:inline text-gray-800 font-bold shadow-gray-100">GitHub</span>
             </button>
           </div>

@@ -1,5 +1,5 @@
 import { Outlet } from "react-router-dom"
-import Navbar from "@/components/Navbar"
+// import Navbar from "@/components/Navbar"
 // import Sidebar from "@/components/Sidebar"
 // import { useState } from "react"
 
@@ -7,7 +7,7 @@ import Navbar from "@/components/Navbar"
 export const Layout = () => {
   return (
     <div>
-      <Navbar />
+      {/* <Navbar /> */}
       <Outlet />
     </div>
   )

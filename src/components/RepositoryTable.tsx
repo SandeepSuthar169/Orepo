@@ -1,8 +1,9 @@
-import React, { useEffect } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { motion } from 'framer-motion';
 import { useRepoStore } from '../store/useRepositoryStore';
 import ErrorRateLimit from './ErrorRateLimit';
 import LoadingRepositories from './Loading';
+import { Search } from 'lucide-react';
 
 const RepositoryTable: React.FC = () => {
   const { repositories, loading, error, fetchRepositories, topic } = useRepoStore();
@@ -11,16 +12,22 @@ const RepositoryTable: React.FC = () => {
     fetchRepositories();
   }, [topic, fetchRepositories]);
 
-  if (loading) {
-    return (
-      <LoadingRepositories />
+  const [searchTerm, setSearchTerm] = useState<string>('');
+
+  const filteredRepo = useMemo(() => {
+    return repositories.filter((repo) =>
+      repo.full_name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      repo.topics.some((topic) => topic.toLowerCase().includes(searchTerm.toLowerCase())) ||
+      repo.language.toLocaleLowerCase().includes(searchTerm.toLocaleLowerCase())
     );
+  }, [repositories, searchTerm]);
+
+  if (loading) {
+    return <LoadingRepositories />;
   }
 
   if (error) {
-    return (
-        <ErrorRateLimit />
-    );
+    return <ErrorRateLimit />;
   }
 
   const languageStyles: Record<string, string> = {
@@ -40,9 +47,9 @@ const RepositoryTable: React.FC = () => {
     Svelte: 'border border-cyan-300 bg-cyan-50 px-2 py-1 text-cyan-700',
     Pascal: 'border border-fuchsia-700 bg-fuchsia-50 px-2 py-1 text-fuchsia-700',
     Clojure: 'border border-[#d2b48c] bg-[#f7f0e7] px-2 py-1 text-[#d2b48c]',
-    "C++": 'border border-[#d2b 48c] bg-[#f7f0e7] px-2 py-1 text-[#d2b48c]',
-    "C#": 'border border-[#d2b 48c] bg-[#f7f0e7] px-2 py-1 text-[#d2b48c]',
-    Scala: 'border border-[#d2b 48c] bg-[#f7f0e7] px-2 py-1 text-[#d2b48c]',
+    "C++": 'border border-[#d2b48c] bg-[#f7f0e7] px-2 py-1 text-[#d2b48c]',
+    "C#": 'border border-[#d2b48c] bg-[#f7f0e7] px-2 py-1 text-[#d2b48c]',
+    Scala: 'border border-[#d2b48c] bg-[#f7f0e7] px-2 py-1 text-[#d2b48c]',
     "Jupyter Notebook": 'border border-cyan-300 bg-cyan-50 px-2 py-1 text-cyan-700',
     Vue: 'border border-emerald-300 bg-emerald-50 px-2 py-1 text-emerald-700',
     Dart: 'border border-fuchsia-300 bg-fuchsia-50 px-2 py-1 text-fuchsia-700',
@@ -53,136 +60,158 @@ const RepositoryTable: React.FC = () => {
     "Objective-C": 'border border-olive-300 bg-olive-50 px-2 py-1 text-olive-700',
     "Assembly": 'border border-orange-300 bg-orange-50 px-2 py-1 text-orange-700',
     "CSS": 'border border-fuchsia-300 bg-fuchsia-50 px-2 py-1 text-fuchsia-700',
-  };  
+  };
 
   const fallbackStyles = 'bg-gray-100 px-2 py-1 text-gray-700 border border-gray-400 border-transparent';
   const baseStyles = 'inline-flex items-center rounded-md text-xs font-medium whitespace-nowrap';
 
   const formatStatExact = (num: number) => {
-    if(num > 1000) {
-       return (Math.trunc(num / 100) / 10).toFixed(1) + 'K';
+    if (num > 1000) {
+      return (Math.trunc(num / 100) / 10).toFixed(1) + 'K';
     }
     return num.toString();
-  }
+  };
 
   return (
-    <div className="flex-1 mt-11  w-full h-9.8/10 rounded-xl  border border-gray-200 bg-white shadow-sm overflow-hidden flex flex-col">
-      <div className="overflow-x-auto  mb-4 h-full">
-        <table className="w-full min-w-250 lg:min-w-full text-[14px] text-gray-900 text-left">
-          <thead className="sticky top-0 z-20 border-b border-gray-200 bg-gray-50 text-gray-600 shadow-sm">
-            <tr>
-              <th className="sticky left-0 top-0 z-30 w-20 min-w-20 bg-gray-50 px-4 py-3 font-medium whitespace-nowrap">
-                Owner
-              </th>
-              <th className="sticky left-20 top-0 z-30 bg-gray-50 px-4 py-3 font-medium whitespace-nowrap border-r border-gray-300">
-                Repository
-              </th>
-              <th className="px-4 py-3 font-medium">Description</th>
-              <th className="px-4 py-3 font-medium whitespace-nowrap">
-                <div className="flex items-center gap-1">
-                  <span className="text-gray-400">⭐</span> Stars
-                </div>
-              </th>
-              <th className="px-4 py-3 font-medium whitespace-nowrap">Forks</th>
-              <th className="px-4 py-3 font-medium whitespace-nowrap">Issues</th>
-              <th className="px-4 py-3 font-medium whitespace-nowrap">Language</th>
-              <th className="px-4 py-3 font-medium">Topics</th>
-              <th className="px-4 py-3 font-medium whitespace-nowrap">Updated</th>
-            </tr>
-          </thead>
-          
-          <tbody className="divide-y items-center text-[11px] divide-gray-100">
-            {repositories.map((repo, index) => (
-              <motion.tr
-                key={repo.full_name}
-                initial={{ opacity: 0 }} 
-                animate={{ opacity: 1 }}
-                transition={{ delay: index * 0.03, duration: 0.2, ease: 'easeOut' }}
-                className="group hover:bg-gray-50/80 transition-colors" 
-              >
-                <td className="sticky left-0.5 z-10 w-20 min-w-20 bg-white group-hover:bg-gray-50 px-4 py-3 align-top transition-colors">
-                  <img
-                    src={repo.owner.avatar_url}
-                    alt={`${repo.owner.login} avatar`}
-                    className="h-8 w-8 rounded-full border border-gray-200"
-                  />
-                </td>
-                <td className="sticky left-20 z-10 bg-white max-w-62.5 group-hover:bg-gray-50 px-4 py-3 align-top border-r border-gray-200 transition-colors">
-                  <a
-                    href={repo.html_url}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="font-medium text-gray-900 hover:text-mist-800 hover:underline transition-colors wrap-break-word"
-                  >
-                    {repo.full_name}
-                  </a>
-                  {repo.homepage && (
-                    <div className="mt-1 text-xs">
-                      <a
-                        href={repo.homepage}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="text-gray-400 transition-colors hover:text-mist-800"
-                      >
-                        Homepage ↗
-                      </a>
-                    </div>
-                  )}
-                </td>
+    <>
 
-                <td className="px-4 py-3 align-top max-w-62.5">
-                  <p className="line-clamp-2 text-gray-500 text-sm">
-                    {repo.description || 'No description provided.'}
-                  </p>
-                </td>
-                <td className="px-4 py-3  align-top font-medium text-gray-600">
-                {formatStatExact(repo.stargazers_count)}
-                </td>
-                <td className="px-4 py-3 align-top text-gray-600">
-                  {formatStatExact(repo.forks_count)}
-                </td>
-                <td className="px-4 py-3 align-top text-gray-600">
-                  {formatStatExact(repo.open_issues_count)}
-                </td>
-                <td className="px-4 py-3 align-top">
-                  <span 
-                    className={`${baseStyles} ${
-                      repo.language && languageStyles[repo.language] 
-                        ? languageStyles[repo.language] 
-                        : fallbackStyles
-                    }`}
-                  >
-                    {repo.language || 'N/A'}
-                  </span>
-                </td>
 
-                <td className="px-3 py-2 flex items-center justify-between align-top max-w-62.5">
-                  <div className="flex  flex-wrap gap-1">
-                    {repo.topics.slice(0, 3).map((topic) => (
-                      <span
-                        key={topic}
-                        className="inline-flex items-center rounded-md border border-gray-200 bg-gray-50 px-2 py-1 text-xs font-medium text-gray-700"
-                      >
-                        {topic}
-                      </span>
-                    ))}
-                    {repo.topics.length > 3 && (
-                      <span className="mt-0.5 text-xs flex text-gray-400 font-medium">
-                        +{repo.topics.length - 3}
-                      </span>
-                    )}
+      <div className="flex-1 mt-11 w-full h-9.8/10 rounded-xl border border-gray-200 bg-white shadow-sm overflow-hidden flex flex-col">
+        <div className="my-4 mx-3 relative group inline-block">
+          <Search
+            className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 transition-colors duration-300 group-focus-within:text-gray-500"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+          />
+
+          <input
+            type="text"
+            placeholder="Search by Repository or topic..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            aria-label="Search repositories"
+            className="w-full sm:w-72 sm:focus:w-80 py-2 pl-10 pr-7 text-sm text-gray-700 bg-gray-50/50 border border-gray-200 rounded-lg outline-none transition-all duration-500 ease-out  placeholder:text-gray-500"
+          />
+        </div>
+
+        <div className="overflow-x-auto mb-4 border border-gray-200 h-full">
+          <table className="w-full min-w-250 lg:min-w-full text-[14px] text-gray-900 text-left">
+            <thead className="sticky top-0 z-20 border-b border-gray-200 bg-gray-50 text-gray-600 shadow-sm">
+              <tr>
+                <th className="sticky left-0 top-0 z-30 w-20 min-w-20 bg-gray-50 px-4 py-3 font-medium whitespace-nowrap">
+                  Owner
+                </th>
+                <th className="sticky left-20 top-0 z-30 bg-gray-50 px-4 py-3 font-medium whitespace-nowrap border-r border-gray-300">
+                  Repository
+                </th>
+                <th className="px-4 py-3 font-medium">Description</th>
+                <th className="px-4 py-3 font-medium whitespace-nowrap">
+                  <div className="flex items-center gap-1">
+                    <span className="text-gray-400">⭐</span> Stars
                   </div>
-                </td>
+                </th>
+                <th className="px-4 py-3 font-medium whitespace-nowrap">Forks</th>
+                <th className="px-4 py-3 font-medium whitespace-nowrap">Issues</th>
+                <th className="px-4 py-3 font-medium whitespace-nowrap">Language</th>
+                <th className="px-4 py-3 font-medium">Topics</th>
+                <th className="px-4 py-3 font-medium whitespace-nowrap">Updated</th>
+              </tr>
+            </thead>
 
-                <td className="px-4 py-3 align-top text-xs text-gray-500 whitespace-nowrap">
-                  {new Date(repo.updated_at).toLocaleDateString()}
-                </td>
-              </motion.tr>
-            ))}
-          </tbody>
-        </table>
+            <tbody className="divide-y items-center text-[11px] divide-gray-100">
+              {filteredRepo.map((repo, index) => (
+                <motion.tr
+                  key={repo.full_name}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: index * 0.03, duration: 0.2, ease: 'easeOut' }}
+                  className="group hover:bg-gray-50/80 transition-colors"
+                >
+                  <td className="sticky left-0.5 z-10 w-20 min-w-20 bg-white group-hover:bg-gray-50 px-4 py-3 align-top transition-colors">
+                    <img
+                      src={repo.owner.avatar_url}
+                      alt={`${repo.owner.login} avatar`}
+                      className="h-8 w-8 rounded-full border border-gray-200"
+                    />
+                  </td>
+                  <td className="sticky left-20 z-10 bg-white max-w-62.5 group-hover:bg-gray-50 px-4 py-3 align-top border-r border-gray-200 transition-colors">
+                    <a
+                      href={repo.html_url}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="font-medium text-gray-900 hover:text-mist-800 hover:underline transition-colors wrap-break-word"
+                    >
+                      {repo.full_name}
+                    </a>
+                    {repo.homepage && (
+                      <div className="mt-1 text-xs">
+                        <a
+                          href={repo.homepage}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="text-gray-400 transition-colors hover:text-mist-800"
+                        >
+                          Homepage ↗
+                        </a>
+                      </div>
+                    )}
+                  </td>
+
+                  <td className="px-4 py-3 align-top max-w-62.5">
+                    <p className="line-clamp-2 text-gray-500 text-sm">
+                      {repo.description || 'No description provided.'}
+                    </p>
+                  </td>
+                  <td className="px-4 py-3 align-top font-medium text-gray-600">
+                    {formatStatExact(repo.stargazers_count)}
+                  </td>
+                  <td className="px-4 py-3 align-top text-gray-600">
+                    {formatStatExact(repo.forks_count)}
+                  </td>
+                  <td className="px-4 py-3 align-top text-gray-600">
+                    {formatStatExact(repo.open_issues_count)}
+                  </td>
+                  <td className="px-4 py-3 align-top">
+                    <span
+                      className={`${baseStyles} ${repo.language && languageStyles[repo.language]
+                        ? languageStyles[repo.language]
+                        : fallbackStyles
+                        }`}
+                    >
+                      {repo.language || 'N/A'}
+                    </span>
+                  </td>
+
+                  <td className="px-3 py-2 flex items-center justify-between align-top max-w-62.5">
+                    <div className="flex flex-wrap gap-1">
+                      {repo.topics.slice(0, 3).map((topic) => (
+                        <span
+                          key={topic}
+                          className="inline-flex items-center rounded-md border border-gray-200 bg-gray-50 px-2 py-1 text-xs font-medium text-gray-700"
+                        >
+                          {topic}
+                        </span>
+                      ))}
+                      {repo.topics.length > 3 && (
+                        <span className="mt-0.5 text-xs flex text-gray-400 font-medium">
+                          +{repo.topics.length - 3}
+                        </span>
+                      )}
+                    </div>
+                  </td>
+
+                  <td className="px-4 py-3 align-top text-xs text-gray-500 whitespace-nowrap">
+                    {new Date(repo.updated_at).toLocaleDateString()}
+                  </td>
+                </motion.tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 
