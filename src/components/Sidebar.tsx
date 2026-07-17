@@ -4,12 +4,13 @@ import {
   Database, 
   LaptopMinimal, 
   Server, 
-  Smartphone, 
-  SquareChevronLeft, 
+  Smartphone,  
   ChevronDown, 
-  SquareChevronRight, 
+  PanelLeft, 
   type LucideIcon 
 } from 'lucide-react';
+import { TbLayoutSidebarRightFilled } from "react-icons/tb";
+
 import { useState, type Dispatch, type SetStateAction } from 'react';
 import { useRepoStore } from '../store/useRepositoryStore';
 
@@ -119,69 +120,76 @@ const Sidebar = ({ isOpen, setIsOpen }: OpenProps) => {
   ];
 
   return (
-    <section 
-      className={`mt-11 h-9.8/10 bg-white text-gray-700 p-3 shrink-0 rounded-lg shadow-sm border border-gray-100 overflow-y-auto transition-all duration-300 ease-in-out absolute z-50 md:relative
-        ${isOpen 
-          ? "w-60 translate-x-0" 
-          : "-translate-x-full w-60 md:translate-x-0 md:w-16"
-        }
-      `}
-    >
-      <div className='px-1 cursor-pointer flex items-center justify-between'>
-        <h1 className={`font-bold overflow-hidden transition-all duration-300 text-lg text-nowrap text-taupe-800 ${isOpen ? "opacity-100" : "opacity-0 w-0"}`}>
-          Dashboard
-        </h1>
+    <>
+      {isOpen && (
+        <div 
+          className="fixed inset-0 bg-black/20 z-40 md:hidden transition-opacity duration-300" 
+          onClick={() => setIsOpen?.(false)} 
+        />
+      )}
 
-        <button
-          onClick={() => setIsOpen?.(!isOpen)}
-          className='hover:bg-gray-100 p-2 cursor-pointer rounded-lg items-center justify-center transition-colors'
-        >
-          {isOpen ? <SquareChevronLeft size={20} strokeWidth={2.1} /> : <SquareChevronRight size={20} strokeWidth={2.1} />}
-        </button>
-      </div>
+      <section 
+        className={`mt-11 h-9.8/10 bg-white text-gray-700 p-3 shrink-0 rounded-lg shadow-sm border  border-gray-100 overflow-y-auto transition-all duration-200 ease-in-out absolute z-50 md:relative
+          ${isOpen ? "w-60 translate-x-0" : "-translate-x-full w-60 md:translate-x-0 md:w-16 "}
+        `}
+      >
+        <div className={`px-1 cursor-pointer flex items-center ${isOpen ? 'justify-between' : 'justify-center'}`}>
+          <h1 className={`font-bold overflow-hidden transition-all duration-300 text-lg text-nowrap text-taupe-800 ${isOpen ? "opacity-100 w-auto" : "opacity-0 w-0"}`}>
+            Dashboard
+          </h1>
 
-      <div className={`mt-6`}>
-        {BarItems.map((j) => (
-          <div key={j.title}>
-            <div
-              className='px-2 py-2 hover:bg-gray-100 transition-colors duration-100 rounded-md cursor-pointer flex items-center justify-between'
-              onClick={() => j.hasDropdown && isOpen && setActiveDropdown(activeDropdown === j.title ? "" : j.title)}
-            >
-              <div className='flex items-center justify-between'>
-                <j.icon size={19} strokeWidth={2.1} className="text-gray-700" />
-                <span className={`ml-4 whitespace-nowrap overflow-hidden transition-all duration-300 ${isOpen ? 'w-32 opacity-100' : 'w-0 opacity-0'}`}>
-                  {j.title}
-                </span>
+          <button
+            onClick={() => setIsOpen?.(!isOpen)}
+            className='hover:bg-gray-100 p-2 cursor-pointer rounded-lg duration-600 flex items-center justify-center transition-colors shrink-0'
+          >
+            {isOpen ? <PanelLeft size={19} strokeWidth={2.1} /> : <TbLayoutSidebarRightFilled size={21} strokeWidth={1} />}
+          </button>
+        </div>
+
+        <div className={`mt-6`}>
+          {BarItems.map((j) => (
+            <div key={j.title}>
+              <div
+                className={`px-2 py-2 hover:bg-gray-100 transition-colors duration-100 rounded-md cursor-pointer flex items-center ${isOpen ? 'justify-between' : 'justify-center'}`}
+                onClick={() => j.hasDropdown && isOpen && setActiveDropdown(activeDropdown === j.title ? "" : j.title)}
+              >
+                <div className='flex items-center'>
+                  <j.icon size={19} strokeWidth={2.1} className="text-gray-700 shrink-0" />
+                  <span className={`whitespace-nowrap overflow-hidden transition-all duration-300 ${isOpen ? 'ml-4 w-32 opacity-100' : 'ml-0 w-0 opacity-0'}`}>
+                    {j.title}
+                  </span>
+                </div>
+                {j.hasDropdown && isOpen && (
+                  <ChevronDown
+                    size={16}
+                    strokeWidth={2.5}
+                    className={`transition-transform duration-200 shrink-0 text-gray-500 ${activeDropdown === j.title ? 'rotate-180' : ''}`}
+                  />
+                )}
               </div>
-              {j.hasDropdown && isOpen && (
-                <ChevronDown
-                  size={16}
-                  strokeWidth={2.5}
-                  className={`transition-transform duration-200 text-gray-500 ${activeDropdown === j.title ? 'rotate-180' : ''}`}
-                />
+
+              {j.hasDropdown && isOpen && activeDropdown === j.title && (
+                <div className="bg-white overflow-hidden transition-all border-gray-300 ml-3 space-y-1 border-l-2 pl-2 duration-200">
+                  {j.available_topics.map((t) => (
+                    <div 
+                      key={t.id} 
+                      className='hover:bg-gray-100 transition-colors duration-100 rounded-md'
+                    >
+                      <button 
+                        onClick={() => setTopic(t.id)}
+                        className="px-7 py-1.5 text-gray-600 w-full text-left cursor-pointer text-sm font-medium"
+                      >
+                        {t.label} 
+                      </button>
+                    </div>
+                  ))}
+                </div>
               )}
             </div>
-            {j.hasDropdown && isOpen && activeDropdown === j.title && (
-              <div className=" bg-white overflow-hidden transition-all  border-gray-300 ml-3 m space-y-1 border-l-2 pl-2 duration-200">
-                {j.available_topics.map((t) => (
-                  <div 
-                    key={t.id} 
-                    className='hover:bg-gray-100 transition-colors duration-100 rounded-md'
-                  >
-                    <button 
-                      onClick={() => setTopic(t.id)}
-                      className="px-7 py-1.5 text-gray-600 w-full text-left cursor-pointer text-sm font-medium"
-                    >
-                      {t.label} 
-                    </button>
-                  </div>
-                ))}
-              </div>
-            )}
-          </div>
-        ))}
-      </div>
-    </section>
+          ))}
+        </div>
+      </section>
+    </>
   );
 };
 

@@ -239,8 +239,8 @@ const RepositoryTable: React.FC = () => {
                     <td className="px-4 py-3 align-top">
                       <span
                         className={`${baseStyles} ${repo.language && languageStyles[repo.language]
-                            ? languageStyles[repo.language]
-                            : fallbackStyles
+                          ? languageStyles[repo.language]
+                          : fallbackStyles
                           }`}
                       >
                         {repo.language || 'N/A'}

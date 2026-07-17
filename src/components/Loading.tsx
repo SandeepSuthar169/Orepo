@@ -1,4 +1,4 @@
-const LoadingRepositories = () =>  {
+const LoadingRepositories = () => {
     return (
         <div className="flex-1 mt-11 p-8 flex flex-col items-center justify-center bg-white rounded-xl border border-gray-100 shadow-[0_2px_8px_-3px_rgba(0,0,0,0.05)]">
 

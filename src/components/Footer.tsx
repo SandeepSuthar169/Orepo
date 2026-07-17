@@ -23,7 +23,7 @@ const Footer = () => {
   return (
     <section className=" flex justify-center theme-zinc w-full bg-white">
       <div className="flex max-w-400 w-full items-center justify-center">
-        <div className="relative w-full overflow-hidden border-t border-neutral-100 bg-white px-11 pt-15 pb-5">
+        <div className="relative w-full overflow-hidden border-t border-neutral-100 bg-white px-9 pt-15 pb-5">
           <div className="mx-auto flex max-w-7xl flex-col items-start justify-between text-sm text-neutral-500 sm:flex-row md:px-8">
 
             <div>
@@ -33,8 +33,8 @@ const Footer = () => {
               </div>
             </div>
 
-            <div className="mt-7 grid grid-cols-2 items-start gap-10 sm:mt-0 md:mt-0 lg:grid-cols-3">
-              <div className="flex w-full flex-col justify-center space-y-4">
+            <div className="mt-7 grid grid-cols-2 items-start  sm:mt-0 md:mt-0 lg:grid-cols-3">
+              <div className="flex w-full flex-col justify-center space-y-3">
                 <p className="hover:text-text-neutral-800 font-bold text-neutral-600 transition-colors">Pages</p>
                 <ul className="hover:text-text-neutral-800  text-neutral-600 transition-colors">
                   <LiA name="All Collection" />
@@ -43,7 +43,7 @@ const Footer = () => {
                 </ul>
               </div>
 
-              <div className="flex w-full flex-col justify-center space-y-4">
+              <div className="flex w-full flex-col justify-center space-y-3">
                 <p className="hover:text-text-neutral-800 font-bold text-neutral-600 transition-colors">Socials</p>
                 <ul className="hover:text-text-neutral-800  text-neutral-600 transition-colors">
                   <li className="list-none">
@@ -59,7 +59,7 @@ const Footer = () => {
                       className="hover:text-text-neutral-800 transition-colors">
                         X.com
                     </Link>
-                  </li>                  ``
+                  </li>                 
                   <li className="list-none">
                     <Link 
                       to="https://peerlist.io/sssuthar004" 
@@ -77,7 +77,7 @@ const Footer = () => {
                 </ul>
               </div>
 
-              <div className="flex w-full flex-col justify-center space-y-4">
+              <div className="flex w-full flex-col justify-center space-y-3">
                 <p className="hover:text-text-neutral-800 font-bold text-neutral-600 transition-colors">Collection</p>
                 <ul className="hover:text-text-neutral-800  text-neutral-600 transition-colors">
                   <LiA name="AI" />
