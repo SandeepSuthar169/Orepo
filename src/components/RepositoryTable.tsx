@@ -14,7 +14,7 @@ const languageStyles: Record<string, string> = {
   Python: 'border border-pink-300 bg-pink-50 px-2 py-1 text-pink-700',
   C: 'border border-gray-300 bg-gray-100 px-2 py-1 text-gray-700',
   Rust: 'border border-orange-300 bg-orange-50 px-2 py-1 text-orange-700',
-  PHP: 'border border-emerald-300 bg-emerald-50 px-2 py-1 text-emerald-700',
+  PHP: 'border border-emerald-300 bg-emerald-50 px-2 py-1 text-emerald-700',  
   Haskell: 'border border-lime-300 bg-lime-50 px-2 py-1 text-lime-700',
   Elixir: 'border border-mauve-300 bg-mauve-100 px-2 py-1 text-mauve-700',
   HTML: 'border border-olive-300 bg-olive-100 px-2 py-1 text-olive-700',
@@ -83,13 +83,13 @@ const RepositoryTable: React.FC = () => {
   if (loading)
     return (
       <>
-        <LoadingRepositories />;
+        <LoadingRepositories />
       </>
     )
   if (error)
     return (
       <>
-        <ErrorRateLimit />;
+        <ErrorRateLimit />
       </>
     )
 

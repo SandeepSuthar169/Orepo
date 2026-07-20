@@ -9,7 +9,7 @@ import {
   PanelLeft, 
   type LucideIcon 
 } from 'lucide-react';
-import { TbLayoutSidebarRightFilled } from "react-icons/tb";
+import { BsLayoutSidebarInset } from "react-icons/bs";
 
 import { useState, type Dispatch, type SetStateAction } from 'react';
 import { useRepoStore } from '../store/useRepositoryStore';
@@ -142,7 +142,7 @@ const Sidebar = ({ isOpen, setIsOpen }: OpenProps) => {
             onClick={() => setIsOpen?.(!isOpen)}
             className='hover:bg-gray-100 p-2 cursor-pointer rounded-lg duration-600 flex items-center justify-center transition-colors shrink-0'
           >
-            {isOpen ? <PanelLeft size={19} strokeWidth={2.1} /> : <TbLayoutSidebarRightFilled size={21} strokeWidth={1} />}
+            {isOpen ? <PanelLeft size={19} strokeWidth={2.1} /> : <BsLayoutSidebarInset size={17} strokeWidth={0.5} />}
           </button>
         </div>
 

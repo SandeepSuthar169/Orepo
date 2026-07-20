@@ -123,7 +123,7 @@ const FAQSection = ()  => {
                   </div>
                 </div>
               </div>
-            );
+            )
           })}
         </div>
 
