@@ -47,33 +47,33 @@ const Footer = () => {
                 <p className="hover:text-text-neutral-800 font-bold text-neutral-600 transition-colors">Socials</p>
                 <ul className="hover:text-text-neutral-800  text-neutral-600 transition-colors">
                   <li className="list-none">
-                    <Link 
-                      to="https://www.linkedin.com/in/sandeep-suthar-1601442b3" 
+                    <Link
+                      to="https://www.linkedin.com/in/sandeep-suthar-1601442b3"
                       className="hover:text-text-neutral-800 transition-colors">
-                        Linkdin
+                      Linkdin
                     </Link>
-                  </li>                  
+                  </li>
                   <li className="list-none">
-                    <Link 
-                      to="https://x.com/Sandeep259579" 
+                    <Link
+                      to="https://x.com/Sandeep259579"
                       className="hover:text-text-neutral-800 transition-colors">
-                        X.com
+                      X.com
                     </Link>
-                  </li>                 
+                  </li>
                   <li className="list-none">
-                    <Link 
-                      to="https://peerlist.io/sssuthar004" 
+                    <Link
+                      to="https://peerlist.io/sssuthar004"
                       className="hover:text-text-neutral-800 transition-colors">
-                        Peerlist
+                      Peerlist
                     </Link>
-                  </li>                  
+                  </li>
                   <li className="list-none">
-                    <Link 
-                      to="https://github.com/SandeepSuthar169" 
+                    <Link
+                      to="https://github.com/SandeepSuthar169"
                       className="hover:text-text-neutral-800 transition-colors">
-                        GitHub
+                      GitHub
                     </Link>
-                  </li>                  
+                  </li>
                 </ul>
               </div>
 
@@ -88,13 +88,11 @@ const Footer = () => {
                   <LiA name="Databases" />
                 </ul>
               </div>
-
-
             </div>
 
           </div>
           <div>
-            <p className="inset-x-0 mt-10 bg-linear-to-b from-neutral-50 to-neutral-300 bg-clip-text text-center text-7xl font-bold text-transparent md:text-9xl lg:text-[12rem] xl:text-[15rem]  ">Orepo</p>
+            <p className="inset-x-0 mt-5 bg-linear-to-b from-neutral-50 to-neutral-300 bg-clip-text text-center text-5xl font-bold text-transparent md:text-7xl lg:text-[12rem] xl:text-[15rem]  ">Orepo</p>
           </div>
         </div>
       </div>

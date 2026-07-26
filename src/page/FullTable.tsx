@@ -9,7 +9,7 @@ export const FullTable = () => {
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth >= 768) {
-        setIsOpen(true); 
+        setIsOpen(true);
       } else {
         setIsOpen(false);
       }
@@ -22,14 +22,12 @@ export const FullTable = () => {
   }, []);
 
   return (
-    <div className="h-screen w-full flex flex-col md:flex-row bg-[#F3F5F7] pb-3 md:p-4 gap-2 md:gap-4 overflow-hidden relative">
-
+    <div className="h-screen w-full  bg-[#F3F5F7] pb-2 py-3 px-1 gap-2.5  overflow-hidden flex relative">
       <Sidebar isOpen={isOpen} setIsOpen={setIsOpen} />
 
-      <main className="flex-1 w-full h-full overflow-hidden p-3 md:p-0 flex flex-col">
+      <main className="flex-1 w-full h-full  overflow-hidden  flex flex-col rounded-xl">
         <RepositoryTable />
       </main>
-      
     </div>
   );
 };

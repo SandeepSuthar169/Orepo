@@ -4,6 +4,8 @@ import { useRepoStore } from '../store/useRepositoryStore';
 import ErrorRateLimit from './ErrorRateLimit';
 import LoadingRepositories from './Loading';
 import { Search, X } from 'lucide-react';
+import { Star, Search2 } from 'reicon-react';
+
 
 const languageStyles: Record<string, string> = {
   TypeScript: 'border border-blue-200 bg-blue-50 px-2 py-1 text-blue-700',
@@ -14,7 +16,7 @@ const languageStyles: Record<string, string> = {
   Python: 'border border-pink-300 bg-pink-50 px-2 py-1 text-pink-700',
   C: 'border border-gray-300 bg-gray-100 px-2 py-1 text-gray-700',
   Rust: 'border border-orange-300 bg-orange-50 px-2 py-1 text-orange-700',
-  PHP: 'border border-emerald-300 bg-emerald-50 px-2 py-1 text-emerald-700',  
+  PHP: 'border border-emerald-300 bg-emerald-50 px-2 py-1 text-emerald-700',
   Haskell: 'border border-lime-300 bg-lime-50 px-2 py-1 text-lime-700',
   Elixir: 'border border-mauve-300 bg-mauve-100 px-2 py-1 text-mauve-700',
   HTML: 'border border-olive-300 bg-olive-100 px-2 py-1 text-olive-700',
@@ -95,15 +97,15 @@ const RepositoryTable: React.FC = () => {
 
   return (
     <>
-      <div className="flex-1 mt-11 w-full h-9.8/10 pb-2.5 min-h-125 rounded-xl border border-gray-200 bg-white shadow-sm overflow-hidden flex flex-col">
+      <div className="flex-1 mt-12 w-full  h-9.8/10 pb-2.5 min-h-125 rounded-xl  border border-gray-200 bg-white shadow-sm overflow-hidden flex flex-col">
 
         <div className="px-3 pt-4">
           <form onSubmit={handleSearchSubmit} className="relative group inline-block w-8/10 sm:w-100">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 transition-colors duration-300 group-focus-within:text-gray-600" />
+            <Search2 className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500 transition-colors duration-300 group-focus-within:text-gray-600" />
 
             <input
               type="text"
-              placeholder="Search by Repository or topic...."
+              placeholder="Search by Repository or Topic...."
               value={inputValue}
               onChange={(e) => setInputValue(e.target.value)}
               aria-label="Search repositories"
@@ -148,7 +150,10 @@ const RepositoryTable: React.FC = () => {
                 <th className="px-4 py-3 font-medium">Description</th>
                 <th className="px-4 py-3 font-medium whitespace-nowrap">
                   <div className="flex items-center gap-1">
-                    <span className="text-gray-400">⭐</span> Stars
+                    <span className="text-gray-400">
+                      <Star size={24} weight="Filled" color='#EFBF04' />
+                    </span>
+                    Stars
                   </div>
                 </th>
                 <th className="px-4 py-3 font-medium whitespace-nowrap">Forks</th>
