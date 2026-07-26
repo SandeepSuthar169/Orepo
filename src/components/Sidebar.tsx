@@ -1,12 +1,5 @@
 import {
   Bot,
-  // CloudSync,
-  // Database,
-  // LaptopMinimal,
-  // Server,
-  // Smartphone,
-  // ArrowDown5,
-  // PanelLeft,
   type LucideIcon
 } from 'lucide-react';
 import { Sidebar2, Server4, Laptop2, Mobile, Cloud, Database, ArrowDown5 } from 'reicon-react';
