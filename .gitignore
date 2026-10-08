@@ -12,6 +12,15 @@ dist
 dist-ssr
 *.local
 
+
+
+
+
+
+
+
+
+
 src\assets
 src\ApiUrl.ts
 
