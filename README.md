@@ -1,36 +1,72 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-## Getting Started
+# Orepo
 
-First, run the development server:
+Orepo is open-source platform to help developers easily discover amazing 3100+ open-source projects on GitHub. It fectches open-source Project from GitHun, uses GitHub to massive Project collection browse througha rapidly growing collection, so you can find exactly what you want to work with.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+---
+
+#### Key highlights of the Orepo project include:
+
+1.  **Accessibility:** The Orepo Project is committed to removing barriers by providing access to its project collection. Developers can leverage there open-source project and contribute innovative application.
+
+2. **Diverse Repositiory Collection**:  The project offers a diverse and vast of Repositiory that span across diffrencet tech-stack and technologys. Wherether you require database, AI-ML, Devops, Backend, Frontend Projects, the Orepo helps to you. 
+
+3. **Open Source:** Our open-source project collection hub is built in the principle of open source. That means that the socuce code if freely available.
+
+4. **Free to Use**: We firmly believe in removeing barriers to entry. Which is why our Orepo completely free to use. Wherether you are a proficient developer or just starting you coding journey, you can leverage out platform without any cost limitaions. 
+
+
+---
+
+## Quick Start
+
+### Installation
+ 1. Clone the repository:
+
 ```
+https://github.com/SandeepSuthar169/Orepo.git
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+cd Orepo
+npm install  or bum install
+npm run dev  or bun run dev
+```
+Open localhost:3000
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Tech Stack
+React-19, Tailwind CSS-4, Zustand, Motion, Axios
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
-## Learn More
+### Project Structure
 
-To learn more about Next.js, take a look at the following resources:
+```
+Orepo/
+ ├── api/
+ │   └── Api.ts                    # Handles external API requests 
+ ├── assets/                       # Stores static assets  
+ ├── components/                 
+ │   ├── ErrorRateLimit.tsx        # Displays an error when API rate limits are exceeded
+ │   ├── Footer.tsx                # Bottom footer section of the app
+ │   ├── Loading.tsx               # Loading spinner  
+ │   ├── Navbar.tsx                # Top navigation bar
+ │   ├── NotFound.tsx              # 404 page component for unknown routes
+ │   ├── RepositoryTable.tsx       # Component to display repository data in a grid/table
+ │   └── Sidebar.tsx               # Side navigation menu
+ ├── layout/
+ │   └── Layout.tsx                # Main wrapper structural component
+ ├── page/                     
+ │   ├── FullTable.tsx             # Expanded or dedicated page view for the repository table
+ │   └── HomePage.tsx              # The main landing page of the application
+ ├── store/
+ │   └── useRepositoryStore.ts     # Global state management 
+ ├── types/
+ │   └── Types.ts                  # TypeScript interfaces and global type definitions
+ ├── ApiUrl.ts                     # Contains constant variables for API endpoint URLs
+ ├── App.tsx                       # Root React component that sets up routing and layout
+ ├── index.css                  
+ ├── main.tsx         
+ └── sample.json                   # sample API response used for testing
+```
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Philosophy
+We believe 

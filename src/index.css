@@ -1,0 +1,34 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+
+@theme {
+  --animate-marquee: marquee 20s linear infinite;
+  --color-background: #ffffff;
+}
+
+:root {
+  --color-background: #ffffff;
+  font-family: "Noto Sans", sans-serif;
+
+}
+
+
+
+body {
+  background: var(--color-background);
+  color: var(--color-text);
+  font-family: "Noto Sans", sans-serif;
+
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-150%);
+  }
+}
+
+
