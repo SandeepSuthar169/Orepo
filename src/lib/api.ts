@@ -16,11 +16,11 @@ const fetchReositoriesApi = async (topic: string) => {
           q: `topic:${topic}`,
           sort: "stars",
           order: "sync",
-          per_page: 10,
+          // per_page: 10,
         },
       },
     );
-    console.log("response", response);
+    // console.log("response", response);
     
     return response.data;
 
