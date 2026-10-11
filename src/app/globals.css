@@ -4,11 +4,12 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
+  --background: #fbfcf8;
   --foreground: #171717;
   color-scheme: light;
 }
-.dark { 
+/*  FBFCF8 */
+.dark {
   --background: #111111;
   --foreground: #ededed;
   color-scheme: dark;

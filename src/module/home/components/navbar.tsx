@@ -26,7 +26,7 @@ const SEARCH_ACTION = "/models"; // GET /models?q=...
 const focusRing =
   "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-400 dark:focus-visible:ring-white/40";
 
-const iconButton = `inline-flex h-9 w-9 items-center justify-center rounded-lg text-neutral-500 transition-colors hover:bg-neutral-100 hover:text-neutral-900 dark:hover:bg-white/10 dark:hover:text-white ${focusRing}`;
+const iconButton = `inline-flex h-9 w-9 items-center justify-center rounded-lg text-neutral-500 transition-colors hover:bg-neutral-100 hover:text-neutral-900 dark:hover:bg-[#FBFCF8]/10 dark:hover:text-white ${focusRing}`;
 
 // Home page logo
 
@@ -57,7 +57,7 @@ function SearchBox({
     <form
       action={SEARCH_ACTION}
       role="search"
-      className={`flex h-9 items-center gap-2 rounded-lg border border-neutral-200 bg-neutral-50 px-3 transition-colors focus-within:border-neutral-400 dark:border-white/10 dark:bg-white/5 dark:focus-within:border-white/30 ${className}`}
+      className={`flex h-9 items-center gap-2 rounded-lg border border-neutral-200 bg-neutral-50 px-3 transition-colors focus-within:border-neutral-400 dark:border-white/10 dark:bg-[#FBFCF8]/5 dark:focus-within:border-white/30 ${className}`}
     >
       <Search
         className="h-4 w-5 shrink-0 text-neutral-500"
@@ -116,7 +116,7 @@ export default function Navbar() {
     "rounded-lg text-sm font-medium transition-colors " + focusRing;
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-neutral-200 bg-white/90 backdrop-blur dark:border-white/10 dark:bg-[#111111]/90">
+    <header className="sticky top-0 z-50 max-w-[1800px] w-full border-b border-neutral-200 bg-[#FBFCF8]/95 backdrop-blur dark:border-white/10 dark:bg-[#111111]/90">
       <div className="mx-auto flex h-14 max-w-[1800px] items-center gap-4 px-4 sm:px-6 xl:gap-6">
         <Logo />
 
@@ -160,7 +160,7 @@ export default function Navbar() {
           <Link
             href="/feedback"
             aria-label="Send feedback"
-            className={`hidden h-9 items-center gap-2 rounded-lg border border-neutral-200 px-2.5 text-sm font-medium text-neutral-700 transition-colors hover:bg-neutral-100 dark:border-white/10 dark:bg-white/5 dark:text-neutral-200 dark:hover:bg-white/10 sm:inline-flex ${focusRing}`}
+            className={`hidden h-9 items-center gap-2 rounded-lg border border-neutral-200 px-2.5 text-sm font-medium text-neutral-700 transition-colors hover:bg-neutral-100 dark:border-white/10 dark:bg-[#FBFCF8]/5 dark:text-neutral-200 dark:hover:bg-[#FBFCF8]/10 sm:inline-flex ${focusRing}`}
           >
             <MessageCircle className="h-4 w-4" aria-hidden="true" />
             <span className="2xl:inline">Feedback</span>
@@ -189,7 +189,7 @@ export default function Navbar() {
       {menuOpen && (
         <div
           id="mobile-menu"
-          className="border-t border-neutral-200 bg-white px-4 pb-4 pt-3 dark:border-white/10 dark:bg-[#111111] sm:px-6 xl:hidden"
+          className="border-t border-neutral-200 bg-[#FBFCF8] px-4 pb-4 pt-3 dark:border-white/10 dark:bg-[#111111] sm:px-6 xl:hidden"
         >
           <SearchBox className="mb-3 md:hidden" />
 
@@ -203,8 +203,8 @@ export default function Navbar() {
                   aria-current={active ? "page" : undefined}
                   className={`${linkBase} px-3 py-2.5 ${
                     active
-                      ? "bg-neutral-100 text-neutral-900 dark:bg-white/10 dark:text-white"
-                      : "text-neutral-500 hover:bg-neutral-100 hover:text-neutral-900 dark:hover:bg-white/10 dark:hover:text-white"
+                      ? "bg-neutral-100 text-neutral-900 dark:bg-[#FBFCF8]/10 dark:text-white"
+                      : "text-neutral-500 hover:bg-neutral-100 hover:text-neutral-900 dark:hover:bg-[#FBFCF8]/10 dark:hover:text-white"
                   }`}
                 >
                   {label}
@@ -215,14 +215,14 @@ export default function Navbar() {
               href={GITHUB_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className={`${linkBase} flex items-center gap-2 px-3 py-2.5 text-neutral-500 hover:bg-neutral-100 hover:text-neutral-900 dark:hover:bg-white/10 dark:hover:text-white`}
+              className={`${linkBase} flex items-center gap-2 px-3 py-2.5 text-neutral-500 hover:bg-neutral-100 hover:text-neutral-900 dark:hover:bg-[#FBFCF8]/10 dark:hover:text-white`}
             >
               {/* icon */}
               <PiGithubLogoBold className="h-7 w-5" />
             </a>
             <Link
               href="/feedback"
-              className={`${linkBase} flex items-center gap-2 px-3 py-2.5 text-neutral-500 hover:bg-neutral-100 hover:text-neutral-900 sm:hidden dark:hover:bg-white/10 dark:hover:text-white`}
+              className={`${linkBase} flex items-center gap-2 px-3 py-2.5 text-neutral-500 hover:bg-neutral-100 hover:text-neutral-900 sm:hidden dark:hover:bg-[#FBFCF8]/10 dark:hover:text-white`}
             >
               <MessageCircle className="h-4 w-4" aria-hidden="true" />
               Feedback

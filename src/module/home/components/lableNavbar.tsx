@@ -264,12 +264,12 @@ function MoreMenu() {
       >
         <div
           id="more-leaderboards"
-          className="flex max-h-[85dvh] flex-col rounded-t-2xl border border-neutral-200 bg-white shadow-xl dark:border-white/10 dark:bg-[#161616] dark:shadow-black/50 sm:max-h-[calc(100dvh-8rem)] sm:rounded-2xl"
+          className="flex max-h-[85dvh] flex-col rounded-t-2xl border border-neutral-200 bg-[#FBFCF8] shadow-xl dark:border-white/10 dark:bg-[#161616] dark:shadow-black/50 sm:max-h-[calc(100dvh-8rem)] sm:rounded-2xl"
         >
           <div className="shrink-0 px-5 pt-3 sm:px-6 sm:pt-6">
             <span
               aria-hidden="true"
-              className="mx-auto mb-3 block h-1 w-10 rounded-full bg-neutral-300 dark:bg-white/20 sm:hidden"
+              className="mx-auto mb-3 block h-1 w-10 rounded-full bg-neutral-300 dark:bg-[#FBFCF8]/20 sm:hidden"
             />
             <div className="flex items-start justify-between gap-4">
               <div>
@@ -282,7 +282,7 @@ function MoreMenu() {
                 type="button"
                 aria-label="Close menu"
                 onClick={() => setOpen(false)}
-                className={`-mr-2 -mt-1 flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-neutral-500 hover:bg-neutral-100 dark:hover:bg-white/10 sm:hidden ${focusRing}`}
+                className={`-mr-2 -mt-1 flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-neutral-500 hover:bg-neutral-100 dark:hover:bg-[#FBFCF8]/10 sm:hidden ${focusRing}`}
               >
                 <X className="h-5 w-5" aria-hidden="true" />
               </button>
@@ -306,8 +306,8 @@ function MoreMenu() {
                             href={href}
                             onClick={() => setOpen(false)}
                             aria-current={active ? "page" : undefined}
-                            className={`group flex min-h-11 items-center gap-3 rounded-xl px-1.5 py-1.5 transition-colors hover:bg-neutral-100 active:bg-neutral-100 dark:hover:bg-white/5 dark:active:bg-white/10 sm:gap-4 sm:px-1 sm:py-2 ${
-                              active ? "bg-neutral-100 dark:bg-white/5" : ""
+                            className={`group flex min-h-11 items-center gap-3 rounded-xl px-1.5 py-1.5 transition-colors hover:bg-neutral-100 active:bg-neutral-100 dark:hover:bg-[#FBFCF8]/5 dark:active:bg-[#FBFCF8]/10 sm:gap-4 sm:px-1 sm:py-2 ${
+                              active ? "bg-neutral-100 dark:bg-[#FBFCF8]/5" : ""
                             } ${focusRing}`}
                           >
                             <span
@@ -378,7 +378,7 @@ export default function LeaderboardTabs() {
     "pointer-events-none absolute inset-y-0 z-10 w-8 [--fade:#ffffff] dark:[--fade:#111111] transition-opacity duration-150";
 
   return (
-    <div className="relative z-40 w-full bg-white dark:bg-[#111111]">
+    <div className="relative z-40 w-full bg-[#FBFCF8] dark:bg-[#111111]">
       {/* Tab bar */}
       <div className="mx-auto flex h-12 max-w-[1800px] items-stretch border-b border-neutral-200 px-2 dark:border-white/10 sm:px-6">
         <div className="relative flex min-w-0 flex-1">

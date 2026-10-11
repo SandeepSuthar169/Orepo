@@ -116,7 +116,7 @@ export default function RepoQuickLinks() {
   const pathname = usePathname();
 
   return (
-    <section className="w-full bg-white dark:border-white/10 dark:bg-[#111111]">
+    <section className="w-full bg-[#FBFCF8] dark:border-white/10 dark:bg-[#111111]">
       <div className=" mx-auto flex max-w-[1800px]  justify-around items-center  px-4 py-7 sm:px-6 lg:px-2">
         <nav
           aria-label="Languages"
@@ -157,8 +157,8 @@ export default function RepoQuickLinks() {
                 aria-current={active ? "page" : undefined}
                 className={`group flex items-center gap-4 rounded-2xl  px-6 py-5 transition-colors ${focusRing} ${
                   active
-                    ? "border-neutral-300 bg-black/6 dark:border-white/20 dark:bg-white/8"
-                    : "border-neutral-200 bg-black/3 hover:bg-black/6 dark:border-white/10 dark:bg-white/3 dark:hover:bg-white/6"
+                    ? "border-neutral-300 bg-black/6 dark:border-white/20 dark:bg-[#FBFCF8]/8"
+                    : "border-neutral-200 bg-black/3 hover:bg-black/6 dark:border-white/10 dark:bg-[#FBFCF8]/3 dark:hover:bg-[#FBFCF8]/6"
                 }`}
               >
                 <span

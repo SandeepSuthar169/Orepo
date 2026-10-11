@@ -12,6 +12,7 @@ import { useRepoStore } from "@/hooks/use-github-api";
 // import LoadingRepositories from './Loading';
 
 
+
 const BASE = "inline-flex items-center whitespace-nowrap rounded-md px-2 py-1 text-xs font-medium ring-1 ring-inset";
 
 const TONES = {
@@ -38,7 +39,6 @@ const TONES = {
 } as const;
 
 type Tone = keyof typeof TONES;
-
 
 const LANGUAGE_TONE: Record<string, Tone> = {
   TypeScript: "blue",
@@ -79,11 +79,16 @@ export const languageStyles: Record<string, string> = Object.fromEntries(
 export const getLanguageStyle = (language?: string | null): string =>
   `${BASE} ${TONES[(language && LANGUAGE_TONE[language]) || "slate"]}`;
 
-const fallbackStyles = "bg-gray-100 px-2 py-1 text-gray-700 border border-gray-400 border-transparent";
+/* -------------------------------------------------------------------------- */
+/*  Shared styles + helpers                                                    */
+/* -------------------------------------------------------------------------- */
 
-const baseStyles = "inline-flex items-center rounded-md text-xs font-medium whitespace-nowrap";
+const focusRing =
+  "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-neutral-900 dark:focus-visible:outline-[#FAFAFA]";
 
-const focusRing = "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#FAFAFA]";
+const repoLink = `font-medium text-neutral-900 wrap-break-word transition-colors hover:text-blue-600 hover:underline dark:text-[#FAFAFA] dark:hover:text-blue-400 ${focusRing}`;
+
+const homepageLink = `text-neutral-500 transition-colors hover:text-blue-600 dark:text-[#FAFAFA]/50 dark:hover:text-blue-400 ${focusRing}`;
 
 const formatStatExact = (num: number): string => {
   if (num > 1000) {
@@ -100,15 +105,13 @@ const rowTransition = (index: number) => ({
   ease: "easeOut" as const,
 });
 
-
+/* -------------------------------------------------------------------------- */
+/*  Small pieces                                                               */
+/* -------------------------------------------------------------------------- */
 
 function LanguageBadge({ language }: { language?: string | null }) {
-  const style =
-    language && languageStyles[language]
-      ? languageStyles[language]
-      : fallbackStyles;
-
-  return <span className={`${baseStyles} ${style}`}>{language || "N/A"}</span>;
+  // Unknown or missing languages automatically get the neutral (slate) tone.
+  return <span className={getLanguageStyle(language)}>{language || "N/A"}</span>;
 }
 
 function Topics({ topics, limit = 3 }: { topics: string[]; limit?: number }) {
@@ -117,13 +120,13 @@ function Topics({ topics, limit = 3 }: { topics: string[]; limit?: number }) {
       {topics.slice(0, limit).map((repoTopic) => (
         <span
           key={repoTopic}
-          className="inline-flex items-center rounded-md border border-gray-600 bg-[#262626] px-2 py-1 text-xs font-medium text-[#A1A1A1]"
+          className="inline-flex items-center rounded-md border border-neutral-200 bg-neutral-100 px-2 py-1 text-xs font-medium text-neutral-600 dark:border-gray-600 dark:bg-[#262626] dark:text-[#A1A1A1]"
         >
           {repoTopic}
         </span>
       ))}
       {topics.length > limit && (
-        <span className="text-xs font-medium text-[#FAFAFA]/50">
+        <span className="text-xs font-medium text-neutral-500 dark:text-[#FAFAFA]/50">
           +{topics.length - limit}
         </span>
       )}
@@ -134,7 +137,7 @@ function Topics({ topics, limit = 3 }: { topics: string[]; limit?: number }) {
 function Stat({ label, value }: { label: string; value: number }) {
   return (
     <span className="inline-flex items-center gap-1.5 text-sm">
-      <span className="text-[#FAFAFA]/50">{label}</span>
+      <span className="text-neutral-500 dark:text-[#FAFAFA]/50">{label}</span>
       <span className="font-medium">{formatStatExact(value)}</span>
     </span>
   );
@@ -149,16 +152,16 @@ function EmptyState({
 }) {
   return (
     <div className="flex flex-col items-center justify-center px-4 py-14 text-center sm:py-20">
-      <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-full border border-white/10 bg-[#1c1c1c] text-[#FAFAFA]/50 shadow-sm">
+      <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-full border border-neutral-200 bg-neutral-100 text-neutral-500 shadow-sm dark:border-white/10 dark:bg-[#1c1c1c] dark:text-[#FAFAFA]/50">
         <Search className="h-5 w-5 stroke-[1.5]" />
       </div>
 
-      <h3 className="mb-1 text-[14px] font-medium text-[#FAFAFA]">
+      <h3 className="mb-1 text-[14px] font-medium text-neutral-900 dark:text-[#FAFAFA]">
         No repositories found
       </h3>
-      <p className="mx-auto max-w-sm text-[13px] text-[#FAFAFA]/60">
+      <p className="mx-auto max-w-sm text-[13px] text-neutral-600 dark:text-[#FAFAFA]/60">
         We couldn&apos;t find anything matching{" "}
-        <span className="font-medium text-[#FAFAFA] wrap-break-word">
+        <span className="font-medium text-neutral-900 wrap-break-word dark:text-[#FAFAFA]">
           &quot;{query}&quot;
         </span>
         . Try adjusting your search term or browsing a different topic.
@@ -167,13 +170,17 @@ function EmptyState({
       <button
         type="button"
         onClick={onClear}
-        className={`mt-4 rounded-md border border-white/10 bg-[#121314] px-4 py-2 text-xs font-medium text-[#FAFAFA] shadow-sm transition-colors hover:bg-[#1c1c1c] ${focusRing}`}
+        className={`mt-4 rounded-md border border-neutral-200 bg-[#FBFCF8] px-4 py-2 text-xs font-medium text-neutral-900 shadow-sm transition-colors hover:bg-neutral-100 dark:border-white/10 dark:bg-[#121314] dark:text-[#FAFAFA] dark:hover:bg-[#1c1c1c] ${focusRing}`}
       >
         Clear search
       </button>
     </div>
   );
 }
+
+/* -------------------------------------------------------------------------- */
+/*  Main component                                                             */
+/* -------------------------------------------------------------------------- */
 
 export default function RepositoryTable() {
   const { repositories, loading, error, fetchRepositories, topic } =
@@ -216,13 +223,13 @@ export default function RepositoryTable() {
 
   return (
     <MotionConfig reducedMotion="user">
-      <div className="mt-6 flex h-9.8/10 min-h-125 w-full flex-1 flex-col overflow-hidden rounded-xl border border-white/10 bg-[#121314] pb-2.5 text-[#FAFAFA] shadow-sm sm:mt-12">
+      <div className="mt-6 flex h-9.8/10 min-h-125 w-full flex-1 flex-col overflow-hidden rounded-xl border border-neutral-200 bg-[#FBFCF8] pb-2.5 text-neutral-900 shadow-sm dark:border-white/10 dark:bg-[#121314] dark:text-[#FAFAFA] sm:mt-12">
         <div className="px-3 pt-4 sm:px-4">
           <form
             onSubmit={handleSearchSubmit}
             className="group relative block w-full sm:max-w-md"
           >
-            <Search2 className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-[#FAFAFA]/50 transition-colors duration-300 group-focus-within:text-[#FAFAFA]" />
+            <Search2 className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-neutral-500 transition-colors duration-300 group-focus-within:text-neutral-900 dark:text-[#FAFAFA]/50 dark:group-focus-within:text-[#FAFAFA]" />
 
             <input
               type="text"
@@ -230,12 +237,12 @@ export default function RepositoryTable() {
               value={inputValue}
               onChange={(e) => setInputValue(e.target.value)}
               aria-label="Search repositories"
-              className="w-full rounded-lg border border-white/10 bg-[#1c1c1c] py-2.5 pl-10 pr-24 text-base text-[#FAFAFA] outline-none transition-all duration-300 placeholder:text-[#FAFAFA]/40 focus:border-white/40 focus:ring-4 focus:ring-white/5 sm:py-2 sm:text-sm"
+              className="w-full rounded-lg border border-neutral-200 bg-neutral-50 py-2.5 pl-10 pr-24 text-base text-neutral-900 outline-none transition-all duration-300 placeholder:text-neutral-500 focus:border-neutral-400 focus:ring-4 focus:ring-neutral-900/5 dark:border-white/10 dark:bg-[#1c1c1c] dark:text-[#FAFAFA] dark:placeholder:text-[#FAFAFA]/40 dark:focus:border-white/40 dark:focus:ring-white/5 sm:py-2 sm:text-sm"
             />
 
             <button
               type="submit"
-              className={`absolute right-1.5 top-1/2 -translate-y-1/2 rounded-md bg-[#FAFAFA] px-3 py-1.5 text-xs font-medium text-[#121314] transition-all hover:bg-[#FAFAFA]/80 disabled:cursor-not-allowed disabled:opacity-50 ${focusRing}`}
+              className={`absolute right-1.5 top-1/2 -translate-y-1/2 rounded-md bg-neutral-900 px-3 py-1.5 text-xs font-medium text-white transition-all hover:bg-neutral-700 disabled:cursor-not-allowed disabled:opacity-50 dark:bg-[#FAFAFA] dark:text-[#121314] dark:hover:bg-[#FAFAFA]/80 ${focusRing}`}
             >
               Search
             </button>
@@ -243,13 +250,15 @@ export default function RepositoryTable() {
 
           {activeSearch && (
             <div className="mt-3 flex flex-wrap items-center gap-2">
-              <span className="text-sm text-[#FAFAFA]/60">Filtered by:</span>
-              <div className="inline-flex max-w-full items-center gap-1.5 rounded-md border border-white/10 bg-[#1c1c1c] py-1 pl-2.5 pr-1.5 text-xs font-medium text-[#FAFAFA]">
+              <span className="text-sm text-neutral-600 dark:text-[#FAFAFA]/60">
+                Filtered by:
+              </span>
+              <div className="inline-flex max-w-full items-center gap-1.5 rounded-md border border-neutral-200 bg-neutral-50 py-1 pl-2.5 pr-1.5 text-xs font-medium text-neutral-900 dark:border-white/10 dark:bg-[#1c1c1c] dark:text-[#FAFAFA]">
                 <span className="truncate">&quot;{activeSearch}&quot;</span>
                 <button
                   type="button"
                   onClick={clearActiveFilter}
-                  className={`shrink-0 rounded-full p-1 transition-colors hover:bg-white/10 ${focusRing}`}
+                  className={`shrink-0 rounded-full p-1 transition-colors hover:bg-neutral-200 dark:hover:bg-[#FBFCF8]/10 ${focusRing}`}
                   aria-label="Clear filter"
                 >
                   <X className="h-3 w-3" />
@@ -259,19 +268,20 @@ export default function RepositoryTable() {
           )}
         </div>
 
-        <div className="mt-4 min-h-0 flex-1 overflow-auto border-t border-white/10">
+        <div className="mt-4 min-h-0 flex-1 overflow-auto border-t border-neutral-200 dark:border-white/10">
           {filteredRepo.length === 0 ? (
             <EmptyState query={activeSearch} onClear={clearActiveFilter} />
           ) : (
             <>
-              <ul className="divide-y divide-white/10 lg:hidden">
+              {/* Mobile / tablet: card list */}
+              <ul className="divide-y divide-neutral-200 dark:divide-white/10 lg:hidden">
                 {filteredRepo.map((repo, index) => (
                   <motion.li
                     key={repo.full_name}
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={rowTransition(index)}
-                    className="px-3 py-4 transition-colors hover:bg-[#1c1c1c] active:bg-[#1c1c1c] sm:px-4"
+                    className="px-3 py-4 transition-colors hover:bg-neutral-50 active:bg-neutral-50 dark:hover:bg-[#1c1c1c] dark:active:bg-[#1c1c1c] sm:px-4"
                   >
                     <div className="flex items-start gap-3">
                       <Image
@@ -279,14 +289,14 @@ export default function RepositoryTable() {
                         alt={`${repo.owner.login} avatar`}
                         width={36}
                         height={36}
-                        className="h-9 w-9 shrink-0 rounded-full border border-white/10"
+                        className="h-9 w-9 shrink-0 rounded-full border border-neutral-200 dark:border-white/10"
                       />
                       <div className="min-w-0 flex-1">
                         <a
                           href={repo.html_url}
                           target="_blank"
                           rel="noreferrer"
-                          className={`block text-[15px] font-medium text-[#FAFAFA] wrap-break-word transition-colors hover:text-blue-400 hover:underline ${focusRing}`}
+                          className={`block text-[15px] ${repoLink}`}
                         >
                           {repo.full_name}
                         </a>
@@ -295,7 +305,7 @@ export default function RepositoryTable() {
                             href={repo.homepage}
                             target="_blank"
                             rel="noreferrer"
-                            className={`mt-0.5 inline-block text-xs text-[#FAFAFA]/50 transition-colors hover:text-blue-400 ${focusRing}`}
+                            className={`mt-0.5 inline-block text-xs ${homepageLink}`}
                           >
                             Homepage ↗
                           </a>
@@ -303,7 +313,7 @@ export default function RepositoryTable() {
                       </div>
                     </div>
 
-                    <p className="mt-2.5 line-clamp-3 text-sm text-[#FAFAFA]/60">
+                    <p className="mt-2.5 line-clamp-3 text-sm text-neutral-600 dark:text-[#FAFAFA]/60">
                       {repo.description || "No description provided."}
                     </p>
 
@@ -324,21 +334,22 @@ export default function RepositoryTable() {
                       </div>
                     )}
 
-                    <p className="mt-3 text-xs text-[#FAFAFA]/50">
+                    <p className="mt-3 text-xs text-neutral-500 dark:text-[#FAFAFA]/50">
                       Updated {formatDate(repo.updated_at)}
                     </p>
                   </motion.li>
                 ))}
               </ul>
 
+              {/* Desktop: table */}
               <div className="hidden lg:block">
-                <table className="w-full min-w-200 text-left text-[14px] text-[#FAFAFA]">
-                  <thead className="sticky top-0 z-20 border-b border-white/10 bg-[#121314] text-[#FAFAFA] shadow-sm">
+                <table className="w-full min-w-200 text-left text-[14px] text-neutral-900 dark:text-[#FAFAFA]">
+                  <thead className="sticky top-0 z-20 border-b border-neutral-200 bg-[#FBFCF8] text-neutral-900 shadow-sm dark:border-white/10 dark:bg-[#121314] dark:text-[#FAFAFA]">
                     <tr>
-                      <th className="sticky left-0 top-0 z-30 w-20 min-w-20 whitespace-nowrap bg-[#121314] px-4 py-3 font-medium">
+                      <th className="sticky left-0 top-0 z-30 w-20 min-w-20 whitespace-nowrap bg-[#FBFCF8] px-4 py-3 font-medium dark:bg-[#121314]">
                         Owner
                       </th>
-                      <th className="sticky left-20 top-0 z-30 whitespace-nowrap border-r border-white/10 bg-[#121314] px-4 py-3 font-medium">
+                      <th className="sticky left-20 top-0 z-30 whitespace-nowrap border-r border-neutral-200 bg-[#FBFCF8] px-4 py-3 font-medium dark:border-white/10 dark:bg-[#121314]">
                         Repository
                       </th>
                       <th className="px-4 py-3 font-medium">Description</th>
@@ -364,30 +375,30 @@ export default function RepositoryTable() {
                     </tr>
                   </thead>
 
-                  <tbody className="divide-y divide-white/10 text-[11px]">
+                  <tbody className="divide-y divide-neutral-200 text-[11px] dark:divide-white/10">
                     {filteredRepo.map((repo, index) => (
                       <motion.tr
                         key={repo.full_name}
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         transition={rowTransition(index)}
-                        className="group transition-colors hover:bg-[#1c1c1c]"
+                        className="group transition-colors hover:bg-neutral-50 dark:hover:bg-[#1c1c1c]"
                       >
-                        <td className="sticky left-0 z-10 w-20 min-w-20 bg-[#121314] px-4 py-3 align-top transition-colors group-hover:bg-[#1c1c1c]">
+                        <td className="sticky left-0 z-10 w-20 min-w-20 bg-[#FBFCF8] px-4 py-3 align-top transition-colors group-hover:bg-neutral-50 dark:bg-[#121314] dark:group-hover:bg-[#1c1c1c]">
                           <Image
                             src={repo.owner.avatar_url}
                             alt={`${repo.owner.login} avatar`}
                             width={32}
                             height={32}
-                            className="h-8 w-8 rounded-full border border-white/10"
+                            className="h-8 w-8 rounded-full border border-neutral-200 dark:border-white/10"
                           />
                         </td>
-                        <td className="sticky left-20 z-10 max-w-62.5 border-r border-white/10 bg-[#121314] px-4 py-3 align-top transition-colors group-hover:bg-[#1c1c1c]">
+                        <td className="sticky left-20 z-10 max-w-62.5 border-r border-neutral-200 bg-[#FBFCF8] px-4 py-3 align-top transition-colors group-hover:bg-neutral-50 dark:border-white/10 dark:bg-[#121314] dark:group-hover:bg-[#1c1c1c]">
                           <a
                             href={repo.html_url}
                             target="_blank"
                             rel="noreferrer"
-                            className={`font-medium text-[#FAFAFA] wrap-break-word transition-colors hover:text-blue-400 hover:underline ${focusRing}`}
+                            className={repoLink}
                           >
                             {repo.full_name}
                           </a>
@@ -397,7 +408,7 @@ export default function RepositoryTable() {
                                 href={repo.homepage}
                                 target="_blank"
                                 rel="noreferrer"
-                                className={`text-[#FAFAFA]/50 transition-colors hover:text-blue-400 ${focusRing}`}
+                                className={homepageLink}
                               >
                                 Homepage ↗
                               </a>
@@ -405,17 +416,17 @@ export default function RepositoryTable() {
                           )}
                         </td>
                         <td className="max-w-62.5 px-4 py-3 align-top">
-                          <p className="line-clamp-2 text-sm text-[#FAFAFA]/60">
+                          <p className="line-clamp-2 text-sm text-neutral-600 dark:text-[#FAFAFA]/60">
                             {repo.description || "No description provided."}
                           </p>
                         </td>
-                        <td className="px-4 py-3 align-top font-medium text-[#FAFAFA]">
+                        <td className="px-4 py-3 align-top font-medium text-neutral-900 dark:text-[#FAFAFA]">
                           {formatStatExact(repo.stargazers_count)}
                         </td>
-                        <td className="px-4 py-3 align-top text-[#FAFAFA]/80">
+                        <td className="px-4 py-3 align-top text-neutral-700 dark:text-[#FAFAFA]/80">
                           {formatStatExact(repo.forks_count)}
                         </td>
-                        <td className="px-4 py-3 align-top text-[#FAFAFA]/80">
+                        <td className="px-4 py-3 align-top text-neutral-700 dark:text-[#FAFAFA]/80">
                           {formatStatExact(repo.open_issues_count)}
                         </td>
                         <td className="px-4 py-3 align-top">
@@ -424,7 +435,7 @@ export default function RepositoryTable() {
                         <td className="max-w-62.5 px-4 py-3 align-top">
                           <Topics topics={repo.topics} />
                         </td>
-                        <td className="whitespace-nowrap px-4 py-3 align-top text-xs text-[#FAFAFA]/60">
+                        <td className="whitespace-nowrap px-4 py-3 align-top text-xs text-neutral-600 dark:text-[#FAFAFA]/60">
                           {formatDate(repo.updated_at)}
                         </td>
                       </motion.tr>
