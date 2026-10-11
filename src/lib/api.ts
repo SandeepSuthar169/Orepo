@@ -20,7 +20,6 @@ const fetchReositoriesApi = async (topic: string) => {
         },
       },
     );
-    // console.log("response", response);
     
     return response.data;
 

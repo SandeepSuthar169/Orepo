@@ -34,7 +34,7 @@ const btnIdle =
   "border-neutral-200 text-neutral-700 hover:bg-neutral-100 dark:border-white/10 dark:text-[#FAFAFA]/80 dark:hover:bg-[#1c1c1c]";
 
 const btnActive =
-  "border-neutral-900 bg-neutral-900 text-white dark:border-[#FAFAFA] dark:bg-[#FAFAFA] dark:text-[#121314]";
+  "border-gray-50 bg-neutral-100 text-gray-700 dark:border-gray-500 dark:bg-[#111111] dark:text-white";
 
 export default function Pagination({
   page,
