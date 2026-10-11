@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { PiGithubLogoBold } from "react-icons/pi";
 import { Menu, MessageCircle, Moon, Search, Sun, X } from "lucide-react";
+import { ThemeToggle } from "@/module/actions/components/theme-toggle";
 
 type NavLink = { label: string; href: string };
 
@@ -22,14 +23,12 @@ const NAV_LINKS: NavLink[] = [
 const GITHUB_URL = "https://github.com/SandeepSuthar169/Orepo";
 const SEARCH_ACTION = "/models"; // GET /models?q=...
 
-
-
 const focusRing =
   "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-400 dark:focus-visible:ring-white/40";
 
 const iconButton = `inline-flex h-9 w-9 items-center justify-center rounded-lg text-neutral-500 transition-colors hover:bg-neutral-100 hover:text-neutral-900 dark:hover:bg-white/10 dark:hover:text-white ${focusRing}`;
 
-// Home page logo 
+// Home page logo
 
 function Logo() {
   return (
@@ -45,7 +44,7 @@ function Logo() {
   );
 }
 
-// This is Serch input 
+// This is Serch input
 
 function SearchBox({
   className = "",
@@ -73,43 +72,13 @@ function SearchBox({
         autoComplete="off"
         className="min-w-4 flex-1 bg-transparent text-sm text-neutral-900 outline-none placeholder:text-neutral-500 dark:text-white [&::-webkit-search-cancel-button]:hidden"
       />
-      
     </form>
   );
 }
 
-// This is Theme toggle function 
+// This is Theme toggle function
 
-function ThemeToggle() {
-  const [isDark, setIsDark] = useState(true);
-
-  useEffect(() => {
-    setIsDark(document.documentElement.classList.contains("dark"));
-  }, []);
-
-  const toggle = () => {
-    const next = !isDark;
-    document.documentElement.classList.toggle("dark", next);
-    setIsDark(next);
-  };
-
-  return (
-    <button
-      type="button"
-      onClick={toggle}
-      aria-label={isDark ? "Switch to light theme" : "Switch to dark theme"}
-      className={iconButton}
-    >
-      {isDark ? (
-        <Moon className="h-4.5 w-4.5" aria-hidden="true" />
-      ) : (
-        <Sun className="h-4.5 w-4.5" aria-hidden="true" />
-      )}
-    </button>
-  );
-}
-
-// This is Navbar section 
+// This is Navbar section
 
 export default function Navbar() {
   const pathname = usePathname();
@@ -162,7 +131,7 @@ export default function Navbar() {
                 aria-current={active ? "page" : undefined}
                 className={`${linkBase} px-2.5 py-2 2xl:px-4 ${
                   active
-                    ? "text-neutral-900 dark:text-white"
+                    ? "text-gray-400 dark:text-white"
                     : "text-neutral-500 hover:text-neutral-900 dark:hover:text-white"
                 }`}
               >
@@ -177,7 +146,7 @@ export default function Navbar() {
             aria-label="Join our Discord"
             className={`${linkBase} px-2.5 py-2 text-neutral-500 hover:text-neutral-900 dark:hover:text-white 2xl:px-4`}
           >
-            <PiGithubLogoBold  className="h-7 w-5"/>
+            <PiGithubLogoBold className="h-7 w-5" />
           </a>
         </nav>
 
@@ -196,8 +165,6 @@ export default function Navbar() {
             <MessageCircle className="h-4 w-4" aria-hidden="true" />
             <span className="2xl:inline">Feedback</span>
           </Link>
-
-
 
           <ThemeToggle />
 
@@ -250,8 +217,8 @@ export default function Navbar() {
               rel="noopener noreferrer"
               className={`${linkBase} flex items-center gap-2 px-3 py-2.5 text-neutral-500 hover:bg-neutral-100 hover:text-neutral-900 dark:hover:bg-white/10 dark:hover:text-white`}
             >
-                {/* icon */}
-            <PiGithubLogoBold  className="h-7 w-5"/>
+              {/* icon */}
+              <PiGithubLogoBold className="h-7 w-5" />
             </a>
             <Link
               href="/feedback"

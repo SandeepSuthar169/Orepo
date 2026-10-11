@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import type { LucideIcon } from "lucide-react";
 import { GitFork, Star, TrendingUp, Users } from "lucide-react";
+import RepositoryTable from "@/module/home/components/repositoryTable";
 
 type RepoLink = {
   label: string;
@@ -141,7 +142,7 @@ export default function RepoQuickLinks() {
           })}
         </nav>
       </div>
-      
+
       <div className=" mx-auto w-full max-w-[1800px] border-b border-neutral-200 dark:border-white/20 px-4 py-8 sm:px-6 lg:px-12">
         <nav
           aria-label="Popular repositories"
@@ -180,10 +181,9 @@ export default function RepoQuickLinks() {
         </nav>
       </div>
 
-      <div className="mx-auto w-full max-w-[1800px] border-b border-neutral-200 dark:border-white/20 px-4 py-8 sm:px-6 lg:px-12">
-      
+      <div className="mx-auto w-full max-w-[1800px] border-b border-neutral-200 dark:border-white/20 px-4 pt-2 pb-8 sm:px-6 lg:px-12">
+        <RepositoryTable />
       </div>
-
     </section>
   );
 }

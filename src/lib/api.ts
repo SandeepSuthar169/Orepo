@@ -1,7 +1,7 @@
 import axios, { isAxiosError } from "axios";
 import type { GithubSearchResponse } from "./types";
 
-const GITHUB_SEARCH_BASE_URL = process.env.GITHUB_SEARCH_BASE_URL;
+const GITHUB_SEARCH_BASE_URL = "https://api.github.com/search/repositories";
 
 const fetchReositoriesApi = async (topic: string) => {
   try {
@@ -15,13 +15,15 @@ const fetchReositoriesApi = async (topic: string) => {
         params: {
           q: `topic:${topic}`,
           sort: "stars",
-          order: "desc",
-          per_page: 100,
+          order: "sync",
+          per_page: 10,
         },
       },
     );
-
+    console.log("response", response);
+    
     return response.data;
+
   } catch (error) {
     if (isAxiosError(error)) {
       console.error(`API Error: 

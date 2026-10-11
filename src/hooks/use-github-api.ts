@@ -16,7 +16,7 @@ export const useRepoStore = create<RepoState>((set, get) => ({
   repositories: [],
   loading: false,
   error: null,
-  topic: "react",
+  topic: "typescript",
 
   setTopic: (newTopic: string) => set({ topic: newTopic }),
 
@@ -24,10 +24,14 @@ export const useRepoStore = create<RepoState>((set, get) => ({
     const { topic } = get();
 
     set({ loading: true, error: null });
+    
     try {
+    
       const data = await fetchReositoriesApi(topic);
       set({ repositories: data.items, loading: false });
+    
     } catch (error: any) {
+
       let errorMessage =
         "Failed to fetch repositories. Please try again later.";
 
