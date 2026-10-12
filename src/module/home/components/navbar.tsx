@@ -10,14 +10,14 @@ import { ThemeToggle } from "@/module/actions/components/theme-toggle";
 type NavLink = { label: string; href: string };
 
 const NAV_LINKS: NavLink[] = [
-  { label: "Open Dashboard", href: "/opendashboard" },
-  { label: "AI", href: "/ai" },
-  { label: "Frontend", href: "/fontend" },
-  { label: "Backend", href: "/backend" },
-  { label: "Database", href: "/database" },
-  { label: "DevOps", href: "/devops" },
-  { label: "MlOps", href: "/mlops" },
-  { label: "Mobiles", href: "/mobiles" },
+  { label: "Open Dashboard", href: "/dashboard" },
+  { label: "AI",  href: "/dashboard" },
+  { label: "Frontend",   href: "/dashboard"},
+  { label: "Backend",  href: "/dashboard" },
+  { label: "Database",  href: "/dashboard" },
+  { label: "DevOps",  href: "/dashboard" },
+  { label: "MlOps",   href: "/dashboard" },
+  { label: "Mobiles",  href: "/dashboard" },
 ];
 
 const GITHUB_URL = "https://github.com/SandeepSuthar169/Orepo";
