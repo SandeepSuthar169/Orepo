@@ -7,17 +7,17 @@ import { PiGithubLogoBold } from "react-icons/pi";
 import { Menu, MessageCircle, Moon, Search, Sun, X } from "lucide-react";
 import { ThemeToggle } from "@/module/actions/components/theme-toggle";
 
-type NavLink = { label: string; href: string };
+type NavLink = {id: string; label: string; href: string };
 
 const NAV_LINKS: NavLink[] = [
-  { label: "Open Dashboard", href: "/dashboard" },
-  { label: "AI",  href: "/dashboard" },
-  { label: "Frontend",   href: "/dashboard"},
-  { label: "Backend",  href: "/dashboard" },
-  { label: "Database",  href: "/dashboard" },
-  { label: "DevOps",  href: "/dashboard" },
-  { label: "MlOps",   href: "/dashboard" },
-  { label: "Mobiles",  href: "/dashboard" },
+  { id: "open-dashboard", label: "Open Dashboard", href: "/dashboard" },
+  { id: "ai",       label: "AI",       href: "/dashboard" },
+  { id: "frontend", label: "Frontend", href: "/dashboard" },
+  { id: "backend", label: "Backend",  href: "/dashboard" },
+  { id: "database", label: "Database",  href: "/dashboard" },
+  { id: "devops", label: "DevOps",  href: "/dashboard" },
+  { id: "mlops",   label: "MlOps",   href: "/dashboard" },
+  { id: "mobiles",  label: "Mobiles",  href: "/dashboard" },
 ];
 
 const GITHUB_URL = "https://github.com/SandeepSuthar169/Orepo";
@@ -122,11 +122,11 @@ export default function Navbar() {
 
         {/* Desktop links */}
         <nav aria-label="Main" className="hidden items-center xl:flex">
-          {NAV_LINKS.map(({ label, href }) => {
+          {NAV_LINKS.map(({ id, label, href }) => {
             const active = isActive(href);
             return (
               <Link
-                key={href}
+                key={id}
                 href={href}
                 aria-current={active ? "page" : undefined}
                 className={`${linkBase} px-2.5 py-2 2xl:px-4 ${
@@ -194,11 +194,11 @@ export default function Navbar() {
           <SearchBox className="mb-3 md:hidden" />
 
           <nav aria-label="Mobile" className="flex flex-col gap-0.5">
-            {NAV_LINKS.map(({ label, href }) => {
+            {NAV_LINKS.map(({ id, label, href }) => {
               const active = isActive(href);
               return (
                 <Link
-                  key={href}
+                  key={id}
                   href={href}
                   aria-current={active ? "page" : undefined}
                   className={`${linkBase} px-3 py-2.5 ${
