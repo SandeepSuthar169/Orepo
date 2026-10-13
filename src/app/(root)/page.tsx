@@ -6,6 +6,7 @@ import type { LucideIcon } from "lucide-react";
 import { GitFork, Star, TrendingUp, Users } from "lucide-react";
 import RepositoryTable from "@/module/home/components/repositoryTable";
 import { AnchorHTMLAttributes, ReactNode } from "react";
+import RepoScatterChart from "@/module/graph/components/repoScatterChart";
 
 type RepoLink = {
   label: string;
@@ -225,6 +226,9 @@ export default function RepoQuickLinks() {
 
       <div className="mx-auto w-full max-w-[1800px] border-b border-neutral-200 dark:border-white/20 px-4 pt-2 pb-8 sm:px-6 lg:px-12">
         <RepositoryTable />
+      </div>
+      <div className="mx-auto w-full h-full max-w-[1800px] border-b border-neutral-200 dark:border-white/20 px-4 pt-5 pb-8 sm:px-6 lg:px-12">
+        <RepoScatterChart />
       </div>
     </section>
   );

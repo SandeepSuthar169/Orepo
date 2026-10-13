@@ -9,6 +9,7 @@ import { Star, Search2 } from "reicon-react";
 import Pagination from "@/lib/pagination";
 import { useRepoStore } from "@/hooks/use-github-api";
 import { div } from "framer-motion/client";
+import RepoScatterChart from "@/module/graph/components/repoScatterChart";
 
 const BASE =
   "inline-flex items-center whitespace-nowrap rounded-md px-2 py-1 text-xs font-medium ring-1 ring-inset";
@@ -513,6 +514,9 @@ export default function DashboardPae() {
           />
         </div>
       </MotionConfig>
+      <div className="mx-auto w-full h-full max-w-[1800px] border-b border-neutral-200 dark:border-white/20 py-6 ">
+        <RepoScatterChart />
+      </div>
     </div>
   );
 }

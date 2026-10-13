@@ -320,8 +320,8 @@ export default function RepositoryTable() {
                       <Image
                         src={repo.owner.avatar_url}
                         alt={`${repo.owner.login} avatar`}
-                        width={36}
-                        height={36}
+                        width={344}
+                        height={34}
                         className="h-9 w-9 shrink-0 rounded-full border border-neutral-200 dark:border-white/10"
                       />
 

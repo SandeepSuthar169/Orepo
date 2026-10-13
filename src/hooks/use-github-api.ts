@@ -14,7 +14,7 @@ interface RepoState {
 
 export const useRepoStore = create<RepoState>((set, get) => ({
   repositories: [],
-  loading: false,
+  loading: false, 
   error: null,
   topic: "typescript",
 
