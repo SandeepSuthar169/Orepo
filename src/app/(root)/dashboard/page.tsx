@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import type { FormEvent } from "react";
+import type { AnchorHTMLAttributes, FormEvent, ReactNode } from "react";
 import Image from "next/image";
 import { MotionConfig, motion } from "framer-motion";
 import { Search, X } from "lucide-react";
@@ -88,11 +88,8 @@ export const languageStyles: Record<string, string> = Object.fromEntries(
   ]),
 );
 
-export const getLanguageStyle = (
-  language?: string | null,
-): string =>
+export const getLanguageStyle = (language?: string | null): string =>
   `${BASE} ${TONES[(language && LANGUAGE_TONE[language]) || "slate"]}`;
-
 
 const focusRing =
   "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-neutral-900 dark:focus-visible:outline-[#FAFAFA]";
@@ -109,8 +106,7 @@ const formatStatExact = (num: number): string => {
   return num.toString();
 };
 
-const formatDate = (iso: string): string =>
-  new Date(iso).toLocaleDateString();
+const formatDate = (iso: string): string => new Date(iso).toLocaleDateString();
 
 const rowTransition = (index: number) => ({
   delay: Math.min(index, 12) * 0.03,
@@ -118,26 +114,13 @@ const rowTransition = (index: number) => ({
   ease: "easeOut" as const,
 });
 
-
-function LanguageBadge({
-  language,
-}: {
-  language?: string | null;
-}) {
+function LanguageBadge({ language }: { language?: string | null }) {
   return (
-    <span className={getLanguageStyle(language)}>
-      {language || "N/A"}
-    </span>
+    <span className={getLanguageStyle(language)}>{language || "N/A"}</span>
   );
 }
 
-function Topics({
-  topics,
-  limit = 3,
-}: {
-  topics: string[];
-  limit?: number;
-}) {
+function Topics({ topics, limit = 3 }: { topics: string[]; limit?: number }) {
   return (
     <div className="flex flex-wrap items-center gap-1">
       {topics.slice(0, limit).map((repoTopic) => (
@@ -158,22 +141,12 @@ function Topics({
   );
 }
 
-function Stat({
-  label,
-  value,
-}: {
-  label: string;
-  value: number;
-}) {
+function Stat({ label, value }: { label: string; value: number }) {
   return (
     <span className="inline-flex items-center gap-1.5 text-sm">
-      <span className="text-neutral-500 dark:text-[#FAFAFA]/50">
-        {label}
-      </span>
+      <span className="text-neutral-500 dark:text-[#FAFAFA]/50">{label}</span>
 
-      <span className="font-medium">
-        {formatStatExact(value)}
-      </span>
+      <span className="font-medium">{formatStatExact(value)}</span>
     </span>
   );
 }
@@ -240,27 +213,18 @@ export default function DashboardPae() {
     return repositories.filter(
       (repo) =>
         repo.full_name.toLowerCase().includes(query) ||
-        repo.topics.some((t) =>
-          t.toLowerCase().includes(query),
-        ),
+        repo.topics.some((t) => t.toLowerCase().includes(query)),
     );
   }, [repositories, activeSearch]);
 
-
-  const totalPages = Math.max(
-    1,
-    Math.ceil(filteredRepo.length / pageSize),
-  );
+  const totalPages = Math.max(1, Math.ceil(filteredRepo.length / pageSize));
 
   const currentPage = Math.min(page, totalPages);
 
   const paginatedRepo = useMemo(() => {
     const startIndex = (currentPage - 1) * pageSize;
 
-    return filteredRepo.slice(
-      startIndex,
-      startIndex + pageSize,
-    );
+    return filteredRepo.slice(startIndex, startIndex + pageSize);
   }, [filteredRepo, currentPage, pageSize]);
 
   useEffect(() => {
@@ -268,15 +232,10 @@ export default function DashboardPae() {
   }, [activeSearch, topic]);
 
   useEffect(() => {
-    setPage((previousPage) =>
-      Math.min(previousPage, totalPages),
-    );
+    setPage((previousPage) => Math.min(previousPage, totalPages));
   }, [totalPages]);
 
-
-  const handleSearchSubmit = (
-    e: FormEvent<HTMLFormElement>,
-  ) => {
+  const handleSearchSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     const trimmed = inputValue.trim();
@@ -291,308 +250,269 @@ export default function DashboardPae() {
     setActiveSearch("");
   };
 
-
   return (
     <div className="mx-auto w-full max-w-[1800px] border-b border-neutral-200 bg-[#1b1c1b] dark:border-white/20 px-4 py-8 sm:px-6 lg:px-12">
-    <MotionConfig reducedMotion="user">
-      <div className="mt-6 flex h-9.8/10 min-h-125 w-full flex-1 flex-col overflow-hidden rounded-xl border border-neutral-200 bg-[#FBFCF8] pb-2.5 text-neutral-900 shadow-sm dark:border-white/10 dark:bg-[#121314] dark:text-[#FAFAFA] sm:mt-12">
-        {/* Search bar */}
-        <div className="px-3 pt-4 sm:px-4">
-          <form
-            onSubmit={handleSearchSubmit}
-            className="group relative block w-full sm:max-w-md"
-          >
-            <Search2 className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-neutral-500 transition-colors duration-300 group-focus-within:text-neutral-900 dark:text-[#FAFAFA]/50 dark:group-focus-within:text-[#FAFAFA]" />
-
-            <input
-              type="text"
-              placeholder="Search by Repository or Topic...."
-              value={inputValue}
-              onChange={(e) =>
-                setInputValue(e.target.value)
-              }
-              aria-label="Search repositories"
-              className="w-full rounded-lg border border-neutral-200 bg-neutral-50 py-2.5 pl-10 pr-24 text-base text-neutral-900 outline-none transition-all duration-300 placeholder:text-neutral-500 focus:border-neutral-400 focus:ring-4 focus:ring-neutral-900/5 dark:border-white/10 dark:bg-[#1c1c1c] dark:text-[#FAFAFA] dark:placeholder:text-[#FAFAFA]/40 dark:focus:border-white/40 dark:focus:ring-white/5 sm:py-2 sm:text-sm"
-            />
-
-            <button
-              type="submit"
-              className={`absolute right-1.5 top-1/2 -translate-y-1/2 rounded-md bg-neutral-900 px-3 py-1.5 text-xs font-medium text-white transition-all hover:bg-neutral-700 disabled:cursor-not-allowed disabled:opacity-50 dark:bg-[#FAFAFA] dark:text-[#121314] dark:hover:bg-[#FAFAFA]/80 ${focusRing}`}
+      <MotionConfig reducedMotion="user">
+        <div className="mt-6 flex h-9.8/10 min-h-125 w-full flex-1 flex-col overflow-hidden rounded-xl border border-neutral-200 bg-[#FBFCF8] pb-2.5 text-neutral-900 shadow-sm dark:border-white/10 dark:bg-[#121314] dark:text-[#FAFAFA] sm:mt-12">
+          {/* Search bar */}
+          <div className="px-3 pt-4 sm:px-4">
+            <form
+              onSubmit={handleSearchSubmit}
+              className="group relative block w-full sm:max-w-md"
             >
-              Search
-            </button>
-          </form>
+              <Search2 className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-neutral-500 transition-colors duration-300 group-focus-within:text-neutral-900 dark:text-[#FAFAFA]/50 dark:group-focus-within:text-[#FAFAFA]" />
 
-          {/* Active search filter */}
-          {activeSearch && (
-            <div className="mt-3 flex flex-wrap items-center gap-2">
-              <span className="text-sm text-neutral-600 dark:text-[#FAFAFA]/60">
-                Filtered by:
-              </span>
+              <input
+                type="text"
+                placeholder="Search by Repository or Topic...."
+                value={inputValue}
+                onChange={(e) => setInputValue(e.target.value)}
+                aria-label="Search repositories"
+                className="w-full rounded-lg border border-neutral-200 bg-neutral-50 py-2.5 pl-10 pr-24 text-base text-neutral-900 outline-none transition-all duration-300 placeholder:text-neutral-500 focus:border-neutral-400 focus:ring-4 focus:ring-neutral-900/5 dark:border-white/10 dark:bg-[#1c1c1c] dark:text-[#FAFAFA] dark:placeholder:text-[#FAFAFA]/40 dark:focus:border-white/40 dark:focus:ring-white/5 sm:py-2 sm:text-sm"
+              />
 
-              <div className="inline-flex max-w-full items-center gap-1.5 rounded-md border border-neutral-200 bg-neutral-50 py-1 pl-2.5 pr-1.5 text-xs font-medium text-neutral-900 dark:border-white/10 dark:bg-[#1c1c1c] dark:text-[#FAFAFA]">
-                <span className="truncate">
-                  &quot;{activeSearch}&quot;
+              <button
+                type="submit"
+                className={`absolute right-1.5 top-1/2 -translate-y-1/2 rounded-md bg-neutral-900 px-3 py-1.5 text-xs font-medium text-white transition-all hover:bg-neutral-700 disabled:cursor-not-allowed disabled:opacity-50 dark:bg-[#FAFAFA] dark:text-[#121314] dark:hover:bg-[#FAFAFA]/80 ${focusRing}`}
+              >
+                Search
+              </button>
+            </form>
+
+            {/* Active search filter */}
+            {activeSearch && (
+              <div className="mt-3 flex flex-wrap items-center gap-2">
+                <span className="text-sm text-neutral-600 dark:text-[#FAFAFA]/60">
+                  Filtered by:
                 </span>
 
-                <button
-                  type="button"
-                  onClick={clearActiveFilter}
-                  className={`shrink-0 rounded-full p-1 transition-colors hover:bg-neutral-200 dark:hover:bg-[#FBFCF8]/10 ${focusRing}`}
-                  aria-label="Clear filter"
-                >
-                  <X className="h-3 w-3" />
-                </button>
-              </div>
-            </div>
-          )}
-        </div>
+                <div className="inline-flex max-w-full items-center gap-1.5 rounded-md border border-neutral-200 bg-neutral-50 py-1 pl-2.5 pr-1.5 text-xs font-medium text-neutral-900 dark:border-white/10 dark:bg-[#1c1c1c] dark:text-[#FAFAFA]">
+                  <span className="truncate">&quot;{activeSearch}&quot;</span>
 
-        {/* Repository list */}
-        <div className="mt-4 min-h-0 flex-1 overflow-auto border-t border-neutral-200 dark:border-white/10">
-          {filteredRepo.length === 0 ? (
-            <EmptyState
-              query={activeSearch}
-              onClear={clearActiveFilter}
-            />
-          ) : (
-            <>
-              {/* Mobile and tablet: card list */}
-              <ul className="divide-y divide-neutral-200 dark:divide-white/10 lg:hidden">
-                {paginatedRepo.map((repo, index) => (
-                  <motion.li
-                    key={repo.full_name}
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={rowTransition(index)}
-                    className="px-3 py-4 transition-colors hover:bg-neutral-50 active:bg-neutral-50 dark:hover:bg-[#1c1c1c] dark:active:bg-[#1c1c1c] sm:px-4"
+                  <button
+                    type="button"
+                    onClick={clearActiveFilter}
+                    className={`shrink-0 rounded-full p-1 transition-colors hover:bg-neutral-200 dark:hover:bg-[#FBFCF8]/10 ${focusRing}`}
+                    aria-label="Clear filter"
                   >
-                    <div className="flex items-start gap-3">
-                      <Image
-                        src={repo.owner.avatar_url}
-                        alt={`${repo.owner.login} avatar`}
-                        width={36}
-                        height={36}
-                        className="h-9 w-9 shrink-0 rounded-full border border-neutral-200 dark:border-white/10"
-                      />
+                    <X className="h-3 w-3" />
+                  </button>
+                </div>
+              </div>
+            )}
+          </div>
 
-                      <div className="min-w-0 flex-1">
-                        <a
-                          href={repo.html_url}
-                          target="_blank"
-                          rel="noreferrer"
-                          className={`block text-[15px] ${repoLink}`}
-                        >
-                          {repo.full_name}
-                        </a>
-
-                        {repo.homepage && (
-                          <a
-                            href={repo.homepage}
-                            target="_blank"
-                            rel="noreferrer"
-                            className={`mt-0.5 inline-block text-xs ${homepageLink}`}
-                          >
-                            Homepage ↗
-                          </a>
-                        )}
-                      </div>
-                    </div>
-
-                    <p className="mt-2.5 line-clamp-3 text-sm text-neutral-600 dark:text-[#FAFAFA]/60">
-                      {repo.description ||
-                        "No description provided."}
-                    </p>
-
-                    <div className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-2">
-                      <span className="inline-flex items-center gap-1 text-sm font-medium">
-                        <Star
-                          size={16}
-                          weight="Filled"
-                          color="#EFBF04"
+          {/* Repository list */}
+          <div className="mt-4 min-h-0 flex-1 overflow-auto border-t border-neutral-200 dark:border-white/10">
+            {filteredRepo.length === 0 ? (
+              <EmptyState query={activeSearch} onClear={clearActiveFilter} />
+            ) : (
+              <>
+                {/* Mobile and tablet: card list */}
+                <ul className="divide-y divide-neutral-200 dark:divide-white/10 lg:hidden">
+                  {paginatedRepo.map((repo, index) => (
+                    <motion.li
+                      key={repo.full_name}
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={rowTransition(index)}
+                      className="px-3 py-4 transition-colors hover:bg-neutral-50 active:bg-neutral-50 dark:hover:bg-[#1c1c1c] dark:active:bg-[#1c1c1c] sm:px-4"
+                    >
+                      <div className="flex items-start gap-3">
+                        <Image
+                          src={repo.owner.avatar_url}
+                          alt={`${repo.owner.login} avatar`}
+                          width={36}
+                          height={36}
+                          className="h-9 w-9 shrink-0 rounded-full border border-neutral-200 dark:border-white/10"
                         />
-                        <span className="sr-only">Stars</span>
-                        {formatStatExact(
-                          repo.stargazers_count,
-                        )}
-                      </span>
 
-                      <Stat
-                        label="Forks"
-                        value={repo.forks_count}
-                      />
-
-                      <Stat
-                        label="Issues"
-                        value={repo.open_issues_count}
-                      />
-
-                      <LanguageBadge
-                        language={repo.language}
-                      />
-                    </div>
-
-                    {repo.topics.length > 0 && (
-                      <div className="mt-3">
-                        <Topics topics={repo.topics} />
-                      </div>
-                    )}
-
-                    <p className="mt-3 text-xs text-neutral-500 dark:text-[#FAFAFA]/50">
-                      Updated {formatDate(repo.updated_at)}
-                    </p>
-                  </motion.li>
-                ))}
-              </ul>
-
-              {/* Desktop: table */}
-              <div className="hidden lg:block">
-                <table className="w-full min-w-200 text-left text-[14px] text-neutral-900 dark:text-[#FAFAFA]">
-                  <thead className="sticky top-0 z-20 border-b border-neutral-200 bg-[#FBFCF8] text-neutral-900 shadow-sm dark:border-white/10 dark:bg-[#121314] dark:text-[#FAFAFA]">
-                    <tr>
-                      <th className="sticky left-0 top-0 z-30 w-20 min-w-20 whitespace-nowrap bg-[#FBFCF8] px-4 py-3 font-medium dark:bg-[#121314]">
-                        Owner
-                      </th>
-
-                      <th className="sticky left-20 top-0 z-30 whitespace-nowrap border-r border-neutral-200 bg-[#FBFCF8] px-4 py-3 font-medium dark:border-white/10 dark:bg-[#121314]">
-                        Repository
-                      </th>
-
-                      <th className="px-4 py-3 font-medium">
-                        Description
-                      </th>
-
-                      <th className="whitespace-nowrap px-4 py-3 font-medium">
-                        <div className="flex items-center gap-1">
-                          <Star
-                            size={24}
-                            weight="Filled"
-                            color="#EFBF04"
-                          />
-                          Stars
-                        </div>
-                      </th>
-
-                      <th className="whitespace-nowrap px-4 py-3 font-medium">
-                        Forks
-                      </th>
-
-                      <th className="whitespace-nowrap px-4 py-3 font-medium">
-                        Issues
-                      </th>
-
-                      <th className="whitespace-nowrap px-4 py-3 font-medium">
-                        Language
-                      </th>
-
-                      <th className="px-4 py-3 font-medium">
-                        Topics
-                      </th>
-
-                      <th className="whitespace-nowrap px-4 py-3 font-medium">
-                        Updated
-                      </th>
-                    </tr>
-                  </thead>
-
-                  <tbody className="divide-y divide-neutral-200 text-[11px] dark:divide-white/10">
-                    {paginatedRepo.map((repo, index) => (
-                      <motion.tr
-                        key={repo.full_name}
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={rowTransition(index)}
-                        className="group transition-colors hover:bg-neutral-50 dark:hover:bg-[#1c1c1c]"
-                      >
-                        <td className="sticky left-0 z-10 w-20 min-w-20 bg-[#FBFCF8] px-4 py-3 align-top transition-colors group-hover:bg-neutral-50 dark:bg-[#121314] dark:group-hover:bg-[#1c1c1c]">
-                          <Image
-                            src={repo.owner.avatar_url}
-                            alt={`${repo.owner.login} avatar`}
-                            width={32}
-                            height={32}
-                            className="h-8 w-8 rounded-full border border-neutral-200 dark:border-white/10"
-                          />
-                        </td>
-
-                        <td className="sticky left-20 z-10 max-w-62.5 border-r border-neutral-200 bg-[#FBFCF8] px-4 py-3 align-top transition-colors group-hover:bg-neutral-50 dark:border-white/10 dark:bg-[#121314] dark:group-hover:bg-[#1c1c1c]">
+                        <div className="min-w-0 flex-1">
                           <a
                             href={repo.html_url}
                             target="_blank"
                             rel="noreferrer"
-                            className={repoLink}
+                            className={`block text-[15px] ${repoLink}`}
                           >
                             {repo.full_name}
                           </a>
 
                           {repo.homepage && (
-                            <div className="mt-1 text-xs">
-                              <a
-                                href={repo.homepage}
-                                target="_blank"
-                                rel="noreferrer"
-                                className={homepageLink}
-                              >
-                                Homepage ↗
-                              </a>
-                            </div>
+                            <a
+                              href={repo.homepage}
+                              target="_blank"
+                              rel="noreferrer"
+                              className={`mt-0.5 inline-block text-xs ${homepageLink}`}
+                            >
+                              Homepage ↗
+                            </a>
                           )}
-                        </td>
+                        </div>
+                      </div>
 
-                        <td className="max-w-62.5 px-4 py-3 align-top">
-                          <p className="line-clamp-2 text-sm text-neutral-600 dark:text-[#FAFAFA]/60">
-                            {repo.description ||
-                              "No description provided."}
-                          </p>
-                        </td>
+                      <p className="mt-2.5 line-clamp-3 text-sm text-neutral-600 dark:text-[#FAFAFA]/60">
+                        {repo.description || "No description provided."}
+                      </p>
 
-                        <td className="px-4 py-3 align-top font-medium text-neutral-900 dark:text-[#FAFAFA]">
-                          {formatStatExact(
-                            repo.stargazers_count,
-                          )}
-                        </td>
+                      <div className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-2">
+                        <span className="inline-flex items-center gap-1 text-sm font-medium">
+                          <Star size={16} weight="Filled" color="#EFBF04" />
+                          <span className="sr-only">Stars</span>
+                          {formatStatExact(repo.stargazers_count)}
+                        </span>
 
-                        <td className="px-4 py-3 align-top text-neutral-700 dark:text-[#FAFAFA]/80">
-                          {formatStatExact(repo.forks_count)}
-                        </td>
+                        <Stat label="Forks" value={repo.forks_count} />
 
-                        <td className="px-4 py-3 align-top text-neutral-700 dark:text-[#FAFAFA]/80">
-                          {formatStatExact(
-                            repo.open_issues_count,
-                          )}
-                        </td>
+                        <Stat label="Issues" value={repo.open_issues_count} />
 
-                        <td className="px-4 py-3 align-top">
-                          <LanguageBadge
-                            language={repo.language}
-                          />
-                        </td>
+                        <LanguageBadge language={repo.language} />
+                      </div>
 
-                        <td className="max-w-62.5 px-4 py-3 align-top">
+                      {repo.topics.length > 0 && (
+                        <div className="mt-3">
                           <Topics topics={repo.topics} />
-                        </td>
+                        </div>
+                      )}
 
-                        <td className="whitespace-nowrap px-4 py-3 align-top text-xs text-neutral-600 dark:text-[#FAFAFA]/60">
-                          {formatDate(repo.updated_at)}
-                        </td>
-                      </motion.tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            </>
-          )}
+                      <p className="mt-3 text-xs text-neutral-500 dark:text-[#FAFAFA]/50">
+                        Updated {formatDate(repo.updated_at)}
+                      </p>
+                    </motion.li>
+                  ))}
+                </ul>
+
+                {/* Desktop: table */}
+                <div className="hidden lg:block">
+                  <table className="w-full min-w-200 text-left text-[14px] text-neutral-900 dark:text-[#FAFAFA]">
+                    <thead className="sticky top-0 z-20 border-b border-neutral-200 bg-[#FBFCF8] text-neutral-900 shadow-sm dark:border-white/10 dark:bg-[#121314] dark:text-[#FAFAFA]">
+                      <tr>
+                        <th className="sticky left-0 top-0 z-30 w-20 min-w-20 whitespace-nowrap bg-[#FBFCF8] px-4 py-3 font-medium dark:bg-[#121314]">
+                          Owner
+                        </th>
+
+                        <th className="sticky left-20 top-0 z-30 whitespace-nowrap border-r border-neutral-200 bg-[#FBFCF8] px-4 py-3 font-medium dark:border-white/10 dark:bg-[#121314]">
+                          Repository
+                        </th>
+
+                        <th className="px-4 py-3 font-medium">Description</th>
+
+                        <th className="whitespace-nowrap px-4 py-3 font-medium">
+                          <div className="flex items-center gap-1">
+                            <Star size={24} weight="Filled" color="#EFBF04" />
+                            Stars
+                          </div>
+                        </th>
+
+                        <th className="whitespace-nowrap px-4 py-3 font-medium">
+                          Forks
+                        </th>
+
+                        <th className="whitespace-nowrap px-4 py-3 font-medium">
+                          Issues
+                        </th>
+
+                        <th className="whitespace-nowrap px-4 py-3 font-medium">
+                          Language
+                        </th>
+
+                        <th className="px-4 py-3 font-medium">Topics</th>
+
+                        <th className="whitespace-nowrap px-4 py-3 font-medium">
+                          Updated
+                        </th>
+                      </tr>
+                    </thead>
+
+                    <tbody className="divide-y divide-neutral-200 text-[11px] dark:divide-white/10">
+                      {paginatedRepo.map((repo, index) => (
+                        <motion.tr
+                          key={repo.full_name}
+                          initial={{ opacity: 0 }}
+                          animate={{ opacity: 1 }}
+                          transition={rowTransition(index)}
+                          className="group transition-colors hover:bg-neutral-50 dark:hover:bg-[#1c1c1c]"
+                        >
+                          <td className="sticky left-0 z-10 w-20 min-w-20 bg-[#FBFCF8] px-4 py-3 align-top transition-colors group-hover:bg-neutral-50 dark:bg-[#121314] dark:group-hover:bg-[#1c1c1c]">
+                            <Image
+                              src={repo.owner.avatar_url}
+                              alt={`${repo.owner.login} avatar`}
+                              width={32}
+                              height={32}
+                              className="h-8 w-8 rounded-full border border-neutral-200 dark:border-white/10"
+                            />
+                          </td>
+
+                          <td className="sticky left-20 z-10 max-w-62.5 border-r border-neutral-200 bg-[#FBFCF8] px-4 py-3 align-top transition-colors group-hover:bg-neutral-50 dark:border-white/10 dark:bg-[#121314] dark:group-hover:bg-[#1c1c1c]">
+                            <a
+                              href={repo.html_url}
+                              target="_blank"
+                              rel="noreferrer"
+                              className={repoLink}
+                            >
+                              {repo.full_name}
+                            </a>
+
+                            {repo.homepage && (
+                              <div className="mt-1 text-xs">
+                                <a
+                                  href={repo.homepage}
+                                  target="_blank"
+                                  rel="noreferrer"
+                                  className={homepageLink}
+                                >
+                                  Homepage ↗
+                                </a>
+                              </div>
+                            )}
+                          </td>
+
+                          <td className="max-w-62.5 px-4 py-3 align-top">
+                            <p className="line-clamp-2 text-sm text-neutral-600 dark:text-[#FAFAFA]/60">
+                              {repo.description || "No description provided."}
+                            </p>
+                          </td>
+
+                          <td className="px-4 py-3 align-top font-medium text-neutral-900 dark:text-[#FAFAFA]">
+                            {formatStatExact(repo.stargazers_count)}
+                          </td>
+
+                          <td className="px-4 py-3 align-top text-neutral-700 dark:text-[#FAFAFA]/80">
+                            {formatStatExact(repo.forks_count)}
+                          </td>
+
+                          <td className="px-4 py-3 align-top text-neutral-700 dark:text-[#FAFAFA]/80">
+                            {formatStatExact(repo.open_issues_count)}
+                          </td>
+
+                          <td className="px-4 py-3 align-top">
+                            <LanguageBadge language={repo.language} />
+                          </td>
+
+                          <td className="max-w-62.5 px-4 py-3 align-top">
+                            <Topics topics={repo.topics} />
+                          </td>
+
+                          <td className="whitespace-nowrap px-4 py-3 align-top text-xs text-neutral-600 dark:text-[#FAFAFA]/60">
+                            {formatDate(repo.updated_at)}
+                          </td>
+                        </motion.tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </>
+            )}
+          </div>
+
+          <Pagination
+            page={currentPage}
+            totalPages={totalPages}
+            onPageChange={setPage}
+            totalItems={filteredRepo.length}
+            pageSize={pageSize}
+          />
         </div>
-
-        <Pagination
-          page={currentPage}
-          totalPages={totalPages}
-          onPageChange={setPage}
-          totalItems={filteredRepo.length}
-          pageSize={pageSize}
-        />
-
-      </div>
-    </MotionConfig>
+      </MotionConfig>
     </div>
   );
 }

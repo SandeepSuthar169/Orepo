@@ -21,7 +21,7 @@ const NAV_LINKS: NavLink[] = [
 ];
 
 const GITHUB_URL = "https://github.com/SandeepSuthar169/Orepo";
-const SEARCH_ACTION = "/models"; // GET /models?q=...
+const SEARCH_ACTION = "/models"; 
 
 const focusRing =
   "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-400 dark:focus-visible:ring-white/40";
@@ -86,8 +86,7 @@ export default function Navbar() {
   const [modKey, setModKey] = useState("⌘");
   const searchRef = useRef<HTMLInputElement>(null);
   const { setTopic } = useRepoStore();
-    const router = useRouter();
-
+  const router = useRouter();
 
   const isActive = (href: string) =>
     pathname === href || pathname.startsWith(`${href}/`);
@@ -130,10 +129,10 @@ export default function Navbar() {
             return (
               <button
                 key={id}
-                  onClick={() => 
-                    {setTopic(id)
-                    router.push("/dashboard")}
-                  }
+                onClick={() => {
+                  setTopic(id);
+                  router.push("/dashboard");
+                }}
                 aria-current={active ? "page" : undefined}
                 className={`${linkBase} px-2.5 py-2 2xl:px-4 ${
                   active
@@ -205,10 +204,10 @@ export default function Navbar() {
               return (
                 <button
                   key={id}
-                  onClick={() => 
-                    {setTopic(id)
-                    router.push("/dashboard")}
-                  }
+                  onClick={() => {
+                    setTopic(id);
+                    router.push("/dashboard");
+                  }}
                   aria-current={active ? "page" : undefined}
                   className={`${linkBase} px-3 py-2.5 ${
                     active

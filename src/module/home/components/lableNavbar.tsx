@@ -190,21 +190,6 @@ const focusRing =
 const isActive = (pathname: string, href: string) =>
   pathname === href || pathname.startsWith(`${href}/`);
 
-type InlineLinkProps = AnchorHTMLAttributes<HTMLAnchorElement> & {
-  href: string;
-  children: ReactNode;
-};
-
-const InlineLink = ({ href, children, ...props }: InlineLinkProps) => (
-  <a
-    href={href}
-    {...props}
-    className="rounded-sm text-neutral-900 underline decoration-neutral-400/60 underline-offset-2 transition-colors duration-150 hover:text-teal-600 hover:decoration-teal-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-400 dark:text-white dark:decoration-white/40 dark:hover:text-teal-300 dark:hover:decoration-teal-300"
-  >
-    {children}
-  </a>
-);
-
 function MoreMenu() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
@@ -355,46 +340,44 @@ function MoreMenu() {
                   </h3>
                   {/* 2-up grid on phones to cut scrolling; single column from sm */}
                   <ul className="grid grid-cols-2 gap-1 sm:flex sm:flex-col sm:gap-0">
-                    {g.items.map(
-                      ({ id, label, icon: Icon, tileClass }) => {
-                        const active = topic === id;
-                        return (
-                          <li key={id} className="min-w-0">
-                            <button
-                              type="button"
-                              onClick={() => {
-                                setTopic(id);
-                                router.push("/dashboard");
-                              }}
-                              aria-current={active ? "page" : undefined}
-                              className={`group flex min-h-11 w-full cursor-pointer items-center gap-3 rounded-xl px-5 py-3 transition-colors duration-150 sm:gap-4 sm:px-4 sm:py-2 ${
-                                active
-                                  ? "hover:bg-neutral-100 active:bg-neutral-200/60 dark:hover:bg-[#FBFCF8]/5 dark:active:bg-[#FBFCF8]/10"
-                                  : "hover:bg-neutral-100 active:bg-neutral-200/60 dark:hover:bg-[#FBFCF8]/5 dark:active:bg-[#FBFCF8]/10"
-                              } ${focusRing}`}
+                    {g.items.map(({ id, label, icon: Icon, tileClass }) => {
+                      const active = topic === id;
+                      return (
+                        <li key={id} className="min-w-0">
+                          <button
+                            type="button"
+                            onClick={() => {
+                              setTopic(id);
+                              router.push("/dashboard");
+                            }}
+                            aria-current={active ? "page" : undefined}
+                            className={`group flex min-h-11 w-full cursor-pointer items-center gap-3 rounded-xl px-5 py-3 transition-colors duration-150 sm:gap-4 sm:px-4 sm:py-2 ${
+                              active
+                                ? "hover:bg-neutral-100 active:bg-neutral-200/60 dark:hover:bg-[#FBFCF8]/5 dark:active:bg-[#FBFCF8]/10"
+                                : "hover:bg-neutral-100 active:bg-neutral-200/60 dark:hover:bg-[#FBFCF8]/5 dark:active:bg-[#FBFCF8]/10"
+                            } ${focusRing}`}
+                          >
+                            <span
+                              className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-lg sm:h-10 sm:w-10 ${tileClass}`}
                             >
-                              <span
-                                className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-lg sm:h-10 sm:w-10 ${tileClass}`}
-                              >
-                                <Icon
-                                  className="h-4.5 w-4.5 sm:h-5 sm:w-5"
-                                  aria-hidden="true"
-                                />
-                              </span>
-                              <span
-                                className={`truncate text-sm transition-colors duration-150 sm:text-base ${
-                                  active
-                                    ? "text-neutral-600 group-hover:text-neutral-900 group-active:text-neutral-900 dark:text-neutral-400 dark:group-hover:text-white dark:group-active:text-white"
-                                    : "text-neutral-600 group-hover:text-neutral-900 group-active:text-neutral-900 dark:text-neutral-400 dark:group-hover:text-white dark:group-active:text-white"
-                                }`}
-                              >
-                                {label}
-                              </span>
-                            </button>
-                          </li>
-                        );
-                      },
-                    )}
+                              <Icon
+                                className="h-4.5 w-4.5 sm:h-5 sm:w-5"
+                                aria-hidden="true"
+                              />
+                            </span>
+                            <span
+                              className={`truncate text-sm transition-colors duration-150 sm:text-base ${
+                                active
+                                  ? "text-neutral-600 group-hover:text-neutral-900 group-active:text-neutral-900 dark:text-neutral-400 dark:group-hover:text-white dark:group-active:text-white"
+                                  : "text-neutral-600 group-hover:text-neutral-900 group-active:text-neutral-900 dark:text-neutral-400 dark:group-hover:text-white dark:group-active:text-white"
+                              }`}
+                            >
+                              {label}
+                            </span>
+                          </button>
+                        </li>
+                      );
+                    })}
                   </ul>
                 </section>
               ))}
@@ -498,31 +481,6 @@ export default function LeaderboardTabs() {
       </div>
 
       {/* Hero */}
-      <section
-        aria-label="AI Leaderboard"
-        className="mx-auto w-full max-w-[1800px] px-4 py-6 sm:px-6 sm:py-8 lg:px-12 lg:py-10"
-      >
-        <h1 className="mb-2 text-[15px] leading-snug sm:mb-2.5 sm:text-base lg:text-[17px]">
-          <span className="block font-semibold tracking-[-0.01em] text-neutral-900 dark:text-white sm:inline">
-            AI Leaderboard
-          </span>
-          <span className="block font-normal text-neutral-500 dark:text-gray-400 sm:inline">
-            <span aria-hidden="true" className="hidden sm:inline">
-              {" "}
-              &mdash;{" "}
-            </span>
-            Rankings for 300+ Top AI Models by Intelligence, Speed &amp; Price
-          </span>
-        </h1>
-        <p className="max-w-3xl text-[13px] leading-relaxed text-neutral-500 dark:text-gray-400">
-          Independent rankings of GPT, Claude, Gemini, Llama, DeepSeek and 300+
-          AI models &mdash; composite{" "}
-          <InlineLink href="#">LLM Stats Score</InlineLink>, updated
-          continuously from public benchmarks and live API metrics. See the full{" "}
-          <InlineLink href="#">LLM Leaderboard</InlineLink> for complete LLM
-          rankings with advanced filters.
-        </p>
-      </section>
     </div>
   );
 }

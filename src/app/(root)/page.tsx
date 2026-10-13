@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import type { LucideIcon } from "lucide-react";
 import { GitFork, Star, TrendingUp, Users } from "lucide-react";
 import RepositoryTable from "@/module/home/components/repositoryTable";
+import { AnchorHTMLAttributes, ReactNode } from "react";
 
 type RepoLink = {
   label: string;
@@ -115,8 +116,49 @@ const focusRing =
 export default function RepoQuickLinks() {
   const pathname = usePathname();
 
+  type InlineLinkProps = AnchorHTMLAttributes<HTMLAnchorElement> & {
+    href: string;
+    children: ReactNode;
+  };
+
+  const InlineLink = ({ href, children, ...props }: InlineLinkProps) => (
+    <a
+      href={href}
+      {...props}
+      className="rounded-sm text-neutral-900 underline decoration-neutral-400/60 underline-offset-2 transition-colors duration-150 hover:text-teal-600 hover:decoration-teal-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-400 dark:text-white dark:decoration-white/40 dark:hover:text-teal-300 dark:hover:decoration-teal-300"
+    >
+      {children}
+    </a>
+  );
+
   return (
     <section className="w-full bg-[#FBFCF8] dark:border-white/10 dark:bg-[#111111]">
+      <section
+        aria-label="AI Leaderboard"
+        className="mx-auto w-full max-w-[1800px] px-4 py-6 sm:px-6 sm:py-8 lg:px-12 lg:py-10"
+      >
+        <h1 className="mb-2 text-[15px] leading-snug sm:mb-2.5 sm:text-base lg:text-[17px]">
+          <span className="block font-semibold tracking-[-0.01em] text-neutral-900 dark:text-white sm:inline">
+            AI Leaderboard
+          </span>
+          <span className="block font-normal text-neutral-500 dark:text-gray-400 sm:inline">
+            <span aria-hidden="true" className="hidden sm:inline">
+              {" "}
+              &mdash;{" "}
+            </span>
+            Rankings for 300+ Top AI Models by Intelligence, Speed &amp; Price
+          </span>
+        </h1>
+        <p className="max-w-3xl text-[13px] leading-relaxed text-neutral-500 dark:text-gray-400">
+          Independent rankings of GPT, Claude, Gemini, Llama, DeepSeek and 300+
+          AI models &mdash; composite{" "}
+          <InlineLink href="#">LLM Stats Score</InlineLink>, updated
+          continuously from public benchmarks and live API metrics. See the full{" "}
+          <InlineLink href="#">LLM Leaderboard</InlineLink> for complete LLM
+          rankings with advanced filters.
+        </p>
+      </section>
+
       <div className=" mx-auto flex max-w-[1800px]  justify-around items-center  px-4 py-7 sm:px-6 lg:px-2">
         <nav
           aria-label="Languages"

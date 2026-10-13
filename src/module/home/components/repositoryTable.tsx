@@ -87,11 +87,8 @@ export const languageStyles: Record<string, string> = Object.fromEntries(
   ]),
 );
 
-export const getLanguageStyle = (
-  language?: string | null,
-): string =>
+export const getLanguageStyle = (language?: string | null): string =>
   `${BASE} ${TONES[(language && LANGUAGE_TONE[language]) || "slate"]}`;
-
 
 const focusRing =
   "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-neutral-900 dark:focus-visible:outline-[#FAFAFA]";
@@ -108,8 +105,7 @@ const formatStatExact = (num: number): string => {
   return num.toString();
 };
 
-const formatDate = (iso: string): string =>
-  new Date(iso).toLocaleDateString();
+const formatDate = (iso: string): string => new Date(iso).toLocaleDateString();
 
 const rowTransition = (index: number) => ({
   delay: Math.min(index, 12) * 0.03,
@@ -117,26 +113,13 @@ const rowTransition = (index: number) => ({
   ease: "easeOut" as const,
 });
 
-
-function LanguageBadge({
-  language,
-}: {
-  language?: string | null;
-}) {
+function LanguageBadge({ language }: { language?: string | null }) {
   return (
-    <span className={getLanguageStyle(language)}>
-      {language || "N/A"}
-    </span>
+    <span className={getLanguageStyle(language)}>{language || "N/A"}</span>
   );
 }
 
-function Topics({
-  topics,
-  limit = 3,
-}: {
-  topics: string[];
-  limit?: number;
-}) {
+function Topics({ topics, limit = 3 }: { topics: string[]; limit?: number }) {
   return (
     <div className="flex flex-wrap items-center gap-1">
       {topics.slice(0, limit).map((repoTopic) => (
@@ -157,22 +140,12 @@ function Topics({
   );
 }
 
-function Stat({
-  label,
-  value,
-}: {
-  label: string;
-  value: number;
-}) {
+function Stat({ label, value }: { label: string; value: number }) {
   return (
     <span className="inline-flex items-center gap-1.5 text-sm">
-      <span className="text-neutral-500 dark:text-[#FAFAFA]/50">
-        {label}
-      </span>
+      <span className="text-neutral-500 dark:text-[#FAFAFA]/50">{label}</span>
 
-      <span className="font-medium">
-        {formatStatExact(value)}
-      </span>
+      <span className="font-medium">{formatStatExact(value)}</span>
     </span>
   );
 }
@@ -214,8 +187,7 @@ function EmptyState({
 }
 
 export default function RepositoryTable() {
-  const { repositories, fetchRepositories, topic } =
-    useRepoStore();
+  const { repositories, fetchRepositories, topic } = useRepoStore();
 
   const [inputValue, setInputValue] = useState<string>("");
   const [activeSearch, setActiveSearch] = useState<string>("");
@@ -240,27 +212,18 @@ export default function RepositoryTable() {
     return repositories.filter(
       (repo) =>
         repo.full_name.toLowerCase().includes(query) ||
-        repo.topics.some((t) =>
-          t.toLowerCase().includes(query),
-        ),
+        repo.topics.some((t) => t.toLowerCase().includes(query)),
     );
   }, [repositories, activeSearch]);
 
-
-  const totalPages = Math.max(
-    1,
-    Math.ceil(filteredRepo.length / pageSize),
-  );
+  const totalPages = Math.max(1, Math.ceil(filteredRepo.length / pageSize));
 
   const currentPage = Math.min(page, totalPages);
 
   const paginatedRepo = useMemo(() => {
     const startIndex = (currentPage - 1) * pageSize;
 
-    return filteredRepo.slice(
-      startIndex,
-      startIndex + pageSize,
-    );
+    return filteredRepo.slice(startIndex, startIndex + pageSize);
   }, [filteredRepo, currentPage, pageSize]);
 
   useEffect(() => {
@@ -268,15 +231,10 @@ export default function RepositoryTable() {
   }, [activeSearch, topic]);
 
   useEffect(() => {
-    setPage((previousPage) =>
-      Math.min(previousPage, totalPages),
-    );
+    setPage((previousPage) => Math.min(previousPage, totalPages));
   }, [totalPages]);
 
-
-  const handleSearchSubmit = (
-    e: FormEvent<HTMLFormElement>,
-  ) => {
+  const handleSearchSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     const trimmed = inputValue.trim();
@@ -290,7 +248,6 @@ export default function RepositoryTable() {
   const clearActiveFilter = () => {
     setActiveSearch("");
   };
-
 
   return (
     <MotionConfig reducedMotion="user">
@@ -307,9 +264,7 @@ export default function RepositoryTable() {
               type="text"
               placeholder="Search by Repository or Topic...."
               value={inputValue}
-              onChange={(e) =>
-                setInputValue(e.target.value)
-              }
+              onChange={(e) => setInputValue(e.target.value)}
               aria-label="Search repositories"
               className="w-full rounded-lg border border-neutral-200 bg-neutral-50 py-2.5 pl-10 pr-24 text-base text-neutral-900 outline-none transition-all duration-300 placeholder:text-neutral-500 focus:border-neutral-400 focus:ring-4 focus:ring-neutral-900/5 dark:border-white/10 dark:bg-[#1c1c1c] dark:text-[#FAFAFA] dark:placeholder:text-[#FAFAFA]/40 dark:focus:border-white/40 dark:focus:ring-white/5 sm:py-2 sm:text-sm"
             />
@@ -330,9 +285,7 @@ export default function RepositoryTable() {
               </span>
 
               <div className="inline-flex max-w-full items-center gap-1.5 rounded-md border border-neutral-200 bg-neutral-50 py-1 pl-2.5 pr-1.5 text-xs font-medium text-neutral-900 dark:border-white/10 dark:bg-[#1c1c1c] dark:text-[#FAFAFA]">
-                <span className="truncate">
-                  &quot;{activeSearch}&quot;
-                </span>
+                <span className="truncate">&quot;{activeSearch}&quot;</span>
 
                 <button
                   type="button"
@@ -350,10 +303,7 @@ export default function RepositoryTable() {
         {/* Repository list */}
         <div className="mt-4 min-h-0 flex-1 overflow-auto border-t border-neutral-200 dark:border-white/10">
           {filteredRepo.length === 0 ? (
-            <EmptyState
-              query={activeSearch}
-              onClear={clearActiveFilter}
-            />
+            <EmptyState query={activeSearch} onClear={clearActiveFilter} />
           ) : (
             <>
               {/* Mobile and tablet: card list */}
@@ -399,36 +349,21 @@ export default function RepositoryTable() {
                     </div>
 
                     <p className="mt-2.5 line-clamp-3 text-sm text-neutral-600 dark:text-[#FAFAFA]/60">
-                      {repo.description ||
-                        "No description provided."}
+                      {repo.description || "No description provided."}
                     </p>
 
                     <div className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-2">
                       <span className="inline-flex items-center gap-1 text-sm font-medium">
-                        <Star
-                          size={16}
-                          weight="Filled"
-                          color="#EFBF04"
-                        />
+                        <Star size={16} weight="Filled" color="#EFBF04" />
                         <span className="sr-only">Stars</span>
-                        {formatStatExact(
-                          repo.stargazers_count,
-                        )}
+                        {formatStatExact(repo.stargazers_count)}
                       </span>
 
-                      <Stat
-                        label="Forks"
-                        value={repo.forks_count}
-                      />
+                      <Stat label="Forks" value={repo.forks_count} />
 
-                      <Stat
-                        label="Issues"
-                        value={repo.open_issues_count}
-                      />
+                      <Stat label="Issues" value={repo.open_issues_count} />
 
-                      <LanguageBadge
-                        language={repo.language}
-                      />
+                      <LanguageBadge language={repo.language} />
                     </div>
 
                     {repo.topics.length > 0 && (
@@ -457,17 +392,11 @@ export default function RepositoryTable() {
                         Repository
                       </th>
 
-                      <th className="px-4 py-3 font-medium">
-                        Description
-                      </th>
+                      <th className="px-4 py-3 font-medium">Description</th>
 
                       <th className="whitespace-nowrap px-4 py-3 font-medium">
                         <div className="flex items-center gap-1">
-                          <Star
-                            size={24}
-                            weight="Filled"
-                            color="#EFBF04"
-                          />
+                          <Star size={24} weight="Filled" color="#EFBF04" />
                           Stars
                         </div>
                       </th>
@@ -484,9 +413,7 @@ export default function RepositoryTable() {
                         Language
                       </th>
 
-                      <th className="px-4 py-3 font-medium">
-                        Topics
-                      </th>
+                      <th className="px-4 py-3 font-medium">Topics</th>
 
                       <th className="whitespace-nowrap px-4 py-3 font-medium">
                         Updated
@@ -539,15 +466,12 @@ export default function RepositoryTable() {
 
                         <td className="max-w-62.5 px-4 py-3 align-top">
                           <p className="line-clamp-2 text-sm text-neutral-600 dark:text-[#FAFAFA]/60">
-                            {repo.description ||
-                              "No description provided."}
+                            {repo.description || "No description provided."}
                           </p>
                         </td>
 
                         <td className="px-4 py-3 align-top font-medium text-neutral-900 dark:text-[#FAFAFA]">
-                          {formatStatExact(
-                            repo.stargazers_count,
-                          )}
+                          {formatStatExact(repo.stargazers_count)}
                         </td>
 
                         <td className="px-4 py-3 align-top text-neutral-700 dark:text-[#FAFAFA]/80">
@@ -555,15 +479,11 @@ export default function RepositoryTable() {
                         </td>
 
                         <td className="px-4 py-3 align-top text-neutral-700 dark:text-[#FAFAFA]/80">
-                          {formatStatExact(
-                            repo.open_issues_count,
-                          )}
+                          {formatStatExact(repo.open_issues_count)}
                         </td>
 
                         <td className="px-4 py-3 align-top">
-                          <LanguageBadge
-                            language={repo.language}
-                          />
+                          <LanguageBadge language={repo.language} />
                         </td>
 
                         <td className="max-w-62.5 px-4 py-3 align-top">
@@ -589,7 +509,6 @@ export default function RepositoryTable() {
           totalItems={filteredRepo.length}
           pageSize={pageSize}
         />
-
       </div>
     </MotionConfig>
   );
