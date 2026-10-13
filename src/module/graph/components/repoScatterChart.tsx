@@ -4,7 +4,6 @@ import { useEffect, useId, useMemo, useRef, useState } from "react";
 import { useRepoStore } from "@/hooks/use-github-api"; // adjust to where your store lives
 import type { Repository } from "@/lib/types";
 
-
 const MARGIN = { top: 28, right: 28, bottom: 56, left: 64 };
 const HIT_RADIUS = 18; // px: how close the pointer must be to pick a point
 const NEUTRAL = "#6b7280";
@@ -97,7 +96,6 @@ function useElementWidth<T extends HTMLElement>() {
   }, []);
   return [ref, width] as const;
 }
-
 
 const iconProps = {
   width: 13,
@@ -522,7 +520,9 @@ export default function RepoScatterChart() {
                 style={{ borderColor: l.color }}
               />
               {l.name}
-              <span className="text-zinc-300 dark:text-zinc-600">{l.count}</span>
+              <span className="text-zinc-300 dark:text-zinc-600">
+                {l.count}
+              </span>
             </li>
           ))}
         </ul>
