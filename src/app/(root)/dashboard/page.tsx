@@ -251,9 +251,9 @@ export default function DashboardPae() {
   };
 
   return (
-    <div className="mx-auto w-full max-w-[1800px] border-b border-neutral-200 bg-[#1b1c1b] dark:border-white/20 px-4 py-8 sm:px-6 lg:px-12">
+    <div className="mx-auto w-full max-w-[1800px] border-b border-neutral-200 bg-[#FBFCF8] dark:border-white/10 dark:bg-[#111111] pb-4 pt-2 py-8 sm:px-6 lg:px-12">
       <MotionConfig reducedMotion="user">
-        <div className="mt-6 flex h-9.8/10 min-h-125 w-full flex-1 flex-col overflow-hidden rounded-xl border border-neutral-200 bg-[#FBFCF8] pb-2.5 text-neutral-900 shadow-sm dark:border-white/10 dark:bg-[#121314] dark:text-[#FAFAFA] sm:mt-12">
+        <div className=" flex h-9.8/10 min-h-125 w-full flex-1 flex-col overflow-hidden rounded-xl border border-neutral-200 bg-[#FBFCF8] pb-2.5 text-neutral-900 shadow-sm dark:border-white/10 dark:bg-[#121314] dark:text-[#FAFAFA] sm:mt-12">
           {/* Search bar */}
           <div className="px-3 pt-4 sm:px-4">
             <form
