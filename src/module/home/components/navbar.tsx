@@ -6,18 +6,18 @@ import { useEffect, useRef, useState } from "react";
 import { PiGithubLogoBold } from "react-icons/pi";
 import { Menu, MessageCircle, Moon, Search, Sun, X } from "lucide-react";
 import { ThemeToggle } from "@/module/actions/components/theme-toggle";
-
-type NavLink = {id: string; label: string; href: string };
+import { useRepoStore } from "@/hooks/use-github-api";
+type NavLink = { id: string; label: string; href: string };
+import { useRouter } from "next/navigation";
 
 const NAV_LINKS: NavLink[] = [
-  { id: "open-dashboard", label: "Open Dashboard", href: "/dashboard" },
-  { id: "ai",       label: "AI",       href: "/dashboard" },
+  { id: "ai", label: "AI", href: "/dashboard" },
   { id: "frontend", label: "Frontend", href: "/dashboard" },
-  { id: "backend", label: "Backend",  href: "/dashboard" },
-  { id: "database", label: "Database",  href: "/dashboard" },
-  { id: "devops", label: "DevOps",  href: "/dashboard" },
-  { id: "mlops",   label: "MlOps",   href: "/dashboard" },
-  { id: "mobiles",  label: "Mobiles",  href: "/dashboard" },
+  { id: "backend", label: "Backend", href: "/dashboard" },
+  { id: "database", label: "Database", href: "/dashboard" },
+  { id: "devops", label: "DevOps", href: "/dashboard" },
+  { id: "mlops", label: "MlOps", href: "/dashboard" },
+  { id: "mobiles", label: "Mobiles", href: "/dashboard" },
 ];
 
 const GITHUB_URL = "https://github.com/SandeepSuthar169/Orepo";
@@ -85,6 +85,9 @@ export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [modKey, setModKey] = useState("⌘");
   const searchRef = useRef<HTMLInputElement>(null);
+  const { setTopic } = useRepoStore();
+    const router = useRouter();
+
 
   const isActive = (href: string) =>
     pathname === href || pathname.startsWith(`${href}/`);
@@ -125,9 +128,12 @@ export default function Navbar() {
           {NAV_LINKS.map(({ id, label, href }) => {
             const active = isActive(href);
             return (
-              <Link
+              <button
                 key={id}
-                href={href}
+                  onClick={() => 
+                    {setTopic(id)
+                    router.push("/dashboard")}
+                  }
                 aria-current={active ? "page" : undefined}
                 className={`${linkBase} px-2.5 py-2 2xl:px-4 ${
                   active
@@ -136,7 +142,7 @@ export default function Navbar() {
                 }`}
               >
                 {label}
-              </Link>
+              </button>
             );
           })}
           <a
@@ -197,9 +203,12 @@ export default function Navbar() {
             {NAV_LINKS.map(({ id, label, href }) => {
               const active = isActive(href);
               return (
-                <Link
+                <button
                   key={id}
-                  href={href}
+                  onClick={() => 
+                    {setTopic(id)
+                    router.push("/dashboard")}
+                  }
                   aria-current={active ? "page" : undefined}
                   className={`${linkBase} px-3 py-2.5 ${
                     active
@@ -208,7 +217,7 @@ export default function Navbar() {
                   }`}
                 >
                   {label}
-                </Link>
+                </button>
               );
             })}
             <a

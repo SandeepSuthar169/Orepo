@@ -15,8 +15,8 @@ const fetchReositoriesApi = async (topic: string) => {
         params: {
           q: `topic:${topic}`,
           sort: "stars",
-          order: "sync",
-          // per_page: 10,
+          order: "desc",
+          per_page: 100,
         },
       },
     );

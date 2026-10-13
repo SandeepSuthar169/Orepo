@@ -37,12 +37,11 @@ import {
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import type { AnchorHTMLAttributes, ReactNode } from "react";
-
-/* -------------------------------------------------------------------------- */
-/*  Data — edit labels / hrefs here                                            */
-/* -------------------------------------------------------------------------- */
+import { useRouter } from "next/navigation";
+import { useRepoStore } from "@/hooks/use-github-api";
 
 type CategoryTab = {
+  id: string;
   label: string;
   href: string;
   icon: LucideIcon;
@@ -50,19 +49,79 @@ type CategoryTab = {
 };
 
 const CATEGORY_TABS: CategoryTab[] = [
-  { label: "ML", href: "/leaderboards/ml", icon: Bot, iconClass: "text-emerald-500 dark:text-emerald-400" },
-  { label: "DL", href: "/leaderboards/dl", icon: Network, iconClass: "text-sky-500 dark:text-sky-400" },
-  { label: "Data Science", href: "/leaderboards/datascience", icon: BrainCircuit, iconClass: "text-indigo-500 dark:text-indigo-400" },
-  { label: "LLM", href: "/leaderboards/llm", icon: Sparkles, iconClass: "text-cyan-600 dark:text-cyan-500" },
-  { label: "CV", href: "/leaderboards/cv", icon: Eye, iconClass: "text-teal-500 dark:text-teal-400" },
-  { label: "NLP", href: "/leaderboards/nlp", icon: MessageSquareText, iconClass: "text-orange-500 dark:text-orange-400" },
-  { label: "React.js", href: "/leaderboards/reactjs", icon: Atom, iconClass: "text-violet-500 dark:text-violet-400" },
-  { label: "Vue.js", href: "/leaderboards/vuejs", icon: Component, iconClass: "text-pink-500" },
-  { label: "Tailwind CSS", href: "/leaderboards/tailwind-css", icon: Wind, iconClass: "text-rose-500" },
+  {
+    id: "machine-learning",
+    label: "ML",
+    href: "/dashboard",
+    icon: Bot,
+    iconClass: "text-emerald-500 dark:text-emerald-400",
+  },
+  {
+    id: "deep-learning",
+    label: "DL",
+    href: "/dashboard",
+    icon: Network,
+    iconClass: "text-sky-500 dark:text-sky-400",
+  },
+  {
+    id: "data-science",
+    label: "Data Science",
+    href: "/dashboard",
+    icon: BrainCircuit,
+    iconClass: "text-indigo-500 dark:text-indigo-400",
+  },
+  {
+    id: "llm",
+    label: "LLM",
+    href: "/dashboard",
+    icon: Sparkles,
+    iconClass: "text-cyan-600 dark:text-cyan-500",
+  },
+  {
+    id: "computer-vision",
+    label: "CV",
+    href: "/dashboard",
+    icon: Eye,
+    iconClass: "text-teal-500 dark:text-teal-400",
+  },
+  {
+    id: "nlp",
+    label: "NLP",
+    href: "/dashboard",
+    icon: MessageSquareText,
+    iconClass: "text-orange-500 dark:text-orange-400",
+  },
+  {
+    id: "react",
+    label: "React.js",
+    href: "/dashboard",
+    icon: Atom,
+    iconClass: "text-violet-500 dark:text-violet-400",
+  },
+  {
+    id: "vue",
+    label: "Vue.js",
+    href: "/dashboard",
+    icon: Component,
+    iconClass: "text-pink-500",
+  },
+  {
+    id: "tailwindcss",
+    label: "Tailwind CSS",
+    href: "/dashboard",
+    icon: Wind,
+    iconClass: "text-rose-500",
+  },
 ];
 
-type MenuItem = { label: string; href: string; icon: LucideIcon; tileClass: string };
-type MenuGroup = { title: string; items: MenuItem[] };
+type MenuItem = {
+  id: string;
+  label: string;
+  href: string;
+  icon: LucideIcon;
+  tileClass: string;
+};
+type MenuGroup = { title: string; href: string; items: MenuItem[] };
 
 // Tile colours cycle automatically, so new items only need a label + icon.
 const TONES = [
@@ -74,58 +133,56 @@ const TONES = [
   "bg-fuchsia-500/15 text-fuchsia-600 dark:text-fuchsia-400",
 ];
 
-const slug = (s: string) =>
-  s.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
-
-const group = (title: string, items: [string, LucideIcon][]): MenuGroup => ({
+const group = (
+  title: string,
+  items: [id: string, label: string, icon: LucideIcon][],
+): MenuGroup => ({
   title,
-  items: items.map(([label, icon], i) => ({
+  href: "/dashboard",
+  items: items.map(([id, label, icon], i) => ({
+    id,
     label,
     icon,
-    href: `/leaderboards/${slug(label)}`,
+    href: "/dashboard",
     tileClass: TONES[i % TONES.length],
   })),
 });
 
 const MORE_GROUPS: MenuGroup[] = [
   group("Databases", [
-    ["PostgreSQL", Database],
-    ["Redis", Zap],
-    ["MongoDB", HardDrive],
-    ["MySQL", Server],
-    ["Elasticsearch", Search],
-    ["Supabase", Cloud],
-    ["SQLite", Layers],
+    ["postgresql", "PostgreSQL", Database],
+    ["redis", "Redis", Zap],
+    ["mongodb", "MongoDB", HardDrive],
+    ["mysql", "MySQL", Server],
+    ["elasticsearch", "Elasticsearch", Search],
+    ["supabase", "Supabase", Cloud],
+    ["sqlite", "SQLite", Layers],
   ]),
   group("DevOps", [
-    ["Docker", Container],
-    ["Kubernetes", Boxes],
-    ["Terraform", Cloud],
-    ["Jenkins", Workflow],
-    ["Grafana", Gauge],
-    ["Ansible", Cog],
+    ["docker", "Docker", Container],
+    ["kubernetes", "Kubernetes", Boxes],
+    ["terraform", "Terraform", Cloud],
+    ["jenkins", "Jenkins", Workflow],
+    ["grafana", "Grafana", Gauge],
+    ["ansible", "Ansible", Cog],
   ]),
   group("Mobile Dev", [
-    ["Flutter", Smartphone],
-    ["React Native", Atom],
-    ["Swift", Bird],
-    ["Android Dev", Bot],
-    ["Kotlin", Code],
-    ["Ionic", Zap],
+    ["flutter", "Flutter", Smartphone],
+    ["react-native", "React Native", Atom],
+    ["swift", "Swift", Bird],
+    ["android", "Android Dev", Bot],
+    ["kotlin", "Kotlin", Code],
+    ["ionic", "Ionic", Zap],
   ]),
   group("Backend", [
-    ["Spring Boot", Leaf],
-    ["Laravel", Flame],
-    ["Django", Layers],
-    ["Go", Rocket],
-    ["Rust", Cog],
-    ["Node.js", Terminal],
+    ["spring-boot", "Spring Boot", Leaf],
+    ["laravel", "Laravel", Flame],
+    ["django", "Django", Layers],
+    ["go", "Go", Rocket],
+    ["rust", "Rust", Cog],
+    ["nodejs", "Node.js", Terminal],
   ]),
 ];
-
-/* -------------------------------------------------------------------------- */
-/*  Helpers                                                                    */
-/* -------------------------------------------------------------------------- */
 
 const focusRing =
   "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-neutral-400 dark:focus-visible:ring-white/40";
@@ -148,16 +205,14 @@ const InlineLink = ({ href, children, ...props }: InlineLinkProps) => (
   </a>
 );
 
-/* -------------------------------------------------------------------------- */
-/*  "More" menu — bottom sheet on phones, dropdown from sm up                  */
-/* -------------------------------------------------------------------------- */
-
 function MoreMenu() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const wrapperRef = useRef<HTMLDivElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
   const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const { topic, setTopic } = useRepoStore();
+  const router = useRouter();
 
   const clearTimer = () => {
     if (closeTimer.current) {
@@ -276,7 +331,9 @@ function MoreMenu() {
                 <h2 className="text-lg font-semibold text-neutral-900 dark:text-white">
                   More leaderboards
                 </h2>
-                <p className="mt-1 text-sm text-neutral-500">Browse by technology</p>
+                <p className="mt-1 text-sm text-neutral-500">
+                  Browse by technology
+                </p>
               </div>
               <button
                 type="button"
@@ -298,36 +355,46 @@ function MoreMenu() {
                   </h3>
                   {/* 2-up grid on phones to cut scrolling; single column from sm */}
                   <ul className="grid grid-cols-2 gap-1 sm:flex sm:flex-col sm:gap-0">
-                    {g.items.map(({ label, href, icon: Icon, tileClass }) => {
-                      const active = isActive(pathname, href);
-                      return (
-                        <li key={href} className="min-w-0">
-                          <Link
-                            href={href}
-                            onClick={() => setOpen(false)}
-                            aria-current={active ? "page" : undefined}
-                            className={`group flex min-h-11 items-center gap-3 rounded-xl px-1.5 py-1.5 transition-colors hover:bg-neutral-100 active:bg-neutral-100 dark:hover:bg-[#FBFCF8]/5 dark:active:bg-[#FBFCF8]/10 sm:gap-4 sm:px-1 sm:py-2 ${
-                              active ? "bg-neutral-100 dark:bg-[#FBFCF8]/5" : ""
-                            } ${focusRing}`}
-                          >
-                            <span
-                              className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-lg sm:h-10 sm:w-10 ${tileClass}`}
-                            >
-                              <Icon className="h-4.5 w-4.5 sm:h-5 sm:w-5" aria-hidden="true" />
-                            </span>
-                            <span
-                              className={`truncate text-sm transition-colors sm:text-base ${
+                    {g.items.map(
+                      ({ id, label, icon: Icon, tileClass }) => {
+                        const active = topic === id;
+                        return (
+                          <li key={id} className="min-w-0">
+                            <button
+                              type="button"
+                              onClick={() => {
+                                setTopic(id);
+                                router.push("/dashboard");
+                              }}
+                              aria-current={active ? "page" : undefined}
+                              className={`group flex min-h-11 w-full cursor-pointer items-center gap-3 rounded-xl px-5 py-3 transition-colors duration-150 sm:gap-4 sm:px-4 sm:py-2 ${
                                 active
-                                  ? "font-medium text-neutral-900 dark:text-white"
-                                  : "text-neutral-600 group-hover:text-neutral-900 dark:text-neutral-400 dark:group-hover:text-white"
-                              }`}
+                                  ? "bg-neutral-200/60 dark:bg-[#FBFCF8]/10"
+                                  : "hover:bg-neutral-100 active:bg-neutral-200/60 dark:hover:bg-[#FBFCF8]/5 dark:active:bg-[#FBFCF8]/10"
+                              } ${focusRing}`}
                             >
-                              {label}
-                            </span>
-                          </Link>
-                        </li>
-                      );
-                    })}
+                              <span
+                                className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-lg sm:h-10 sm:w-10 ${tileClass}`}
+                              >
+                                <Icon
+                                  className="h-4.5 w-4.5 sm:h-5 sm:w-5"
+                                  aria-hidden="true"
+                                />
+                              </span>
+                              <span
+                                className={`truncate text-sm transition-colors duration-150 sm:text-base ${
+                                  active
+                                    ? "font-medium text-neutral-900 dark:text-white"
+                                    : "text-neutral-600 group-hover:text-neutral-900 group-active:text-neutral-900 dark:text-neutral-400 dark:group-hover:text-white dark:group-active:text-white"
+                                }`}
+                              >
+                                {label}
+                              </span>
+                            </button>
+                          </li>
+                        );
+                      },
+                    )}
                   </ul>
                 </section>
               ))}
@@ -339,15 +406,12 @@ function MoreMenu() {
   );
 }
 
-/* -------------------------------------------------------------------------- */
-/*  Main component                                                             */
-/* -------------------------------------------------------------------------- */
-
 export default function LeaderboardTabs() {
   const pathname = usePathname();
   const navRef = useRef<HTMLElement>(null);
   const [edges, setEdges] = useState({ start: false, end: false });
-
+  const { setTopic } = useRepoStore();
+  const router = useRouter();
   // Track scroll position so we only show a fade where more tabs are hidden.
   const updateEdges = useCallback(() => {
     const el = navRef.current;
@@ -394,12 +458,15 @@ export default function LeaderboardTabs() {
             onScroll={updateEdges}
             className="relative flex min-w-0 flex-1 items-stretch overflow-x-auto overscroll-x-contain whitespace-nowrap scrollbar-none [&::-webkit-scrollbar]:hidden"
           >
-            {CATEGORY_TABS.map(({ label, href, icon: Icon, iconClass }) => {
+            {CATEGORY_TABS.map(({ id, label, href, icon: Icon, iconClass }) => {
               const active = isActive(pathname, href);
               return (
-                <Link
-                  key={href}
-                  href={href}
+                <button
+                  key={id}
+                  onClick={() => {
+                    setTopic(id);
+                    router.push("/dashboard");
+                  }}
                   aria-current={active ? "page" : undefined}
                   className={`relative flex shrink-0 items-center gap-2 px-3 text-sm font-medium transition-colors ${focusRing} ${
                     active
@@ -415,7 +482,7 @@ export default function LeaderboardTabs() {
                       className="absolute inset-x-3 bottom-0 h-0.5 rounded-full bg-blue-500"
                     />
                   )}
-                </Link>
+                </button>
               );
             })}
           </nav>
@@ -441,17 +508,19 @@ export default function LeaderboardTabs() {
           </span>
           <span className="block font-normal text-neutral-500 dark:text-gray-400 sm:inline">
             <span aria-hidden="true" className="hidden sm:inline">
-              {" "}&mdash;{" "}
+              {" "}
+              &mdash;{" "}
             </span>
             Rankings for 300+ Top AI Models by Intelligence, Speed &amp; Price
           </span>
         </h1>
         <p className="max-w-3xl text-[13px] leading-relaxed text-neutral-500 dark:text-gray-400">
-          Independent rankings of GPT, Claude, Gemini, Llama, DeepSeek and 300+ AI models
-          &mdash; composite <InlineLink href="#">LLM Stats Score</InlineLink>, updated
+          Independent rankings of GPT, Claude, Gemini, Llama, DeepSeek and 300+
+          AI models &mdash; composite{" "}
+          <InlineLink href="#">LLM Stats Score</InlineLink>, updated
           continuously from public benchmarks and live API metrics. See the full{" "}
-          <InlineLink href="#">LLM Leaderboard</InlineLink> for complete LLM rankings with
-          advanced filters.
+          <InlineLink href="#">LLM Leaderboard</InlineLink> for complete LLM
+          rankings with advanced filters.
         </p>
       </section>
     </div>
