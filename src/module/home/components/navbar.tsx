@@ -137,8 +137,8 @@ export default function Navbar() {
                 aria-current={active ? "page" : undefined}
                 className={`${linkBase} px-2.5 py-2 2xl:px-4 ${
                   active
-                    ? "text-gray-400 dark:text-white"
-                    : "text-neutral-500 hover:text-neutral-900 dark:hover:text-white"
+                    ? "text-neutral-500 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white"
+                    : "text-neutral-500 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white"
                 }`}
               >
                 {label}
@@ -212,7 +212,7 @@ export default function Navbar() {
                   aria-current={active ? "page" : undefined}
                   className={`${linkBase} px-3 py-2.5 ${
                     active
-                      ? "bg-neutral-100 text-neutral-900 dark:bg-[#FBFCF8]/10 dark:text-white"
+                      ? "text-neutral-500 hover:bg-neutral-100 hover:text-neutral-900 dark:hover:bg-[#FBFCF8]/10 dark:hover:text-white"
                       : "text-neutral-500 hover:bg-neutral-100 hover:text-neutral-900 dark:hover:bg-[#FBFCF8]/10 dark:hover:text-white"
                   }`}
                 >

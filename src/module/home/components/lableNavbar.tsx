@@ -369,7 +369,7 @@ function MoreMenu() {
                               aria-current={active ? "page" : undefined}
                               className={`group flex min-h-11 w-full cursor-pointer items-center gap-3 rounded-xl px-5 py-3 transition-colors duration-150 sm:gap-4 sm:px-4 sm:py-2 ${
                                 active
-                                  ? "bg-neutral-200/60 dark:bg-[#FBFCF8]/10"
+                                  ? "hover:bg-neutral-100 active:bg-neutral-200/60 dark:hover:bg-[#FBFCF8]/5 dark:active:bg-[#FBFCF8]/10"
                                   : "hover:bg-neutral-100 active:bg-neutral-200/60 dark:hover:bg-[#FBFCF8]/5 dark:active:bg-[#FBFCF8]/10"
                               } ${focusRing}`}
                             >
@@ -384,7 +384,7 @@ function MoreMenu() {
                               <span
                                 className={`truncate text-sm transition-colors duration-150 sm:text-base ${
                                   active
-                                    ? "font-medium text-neutral-900 dark:text-white"
+                                    ? "text-neutral-600 group-hover:text-neutral-900 group-active:text-neutral-900 dark:text-neutral-400 dark:group-hover:text-white dark:group-active:text-white"
                                     : "text-neutral-600 group-hover:text-neutral-900 group-active:text-neutral-900 dark:text-neutral-400 dark:group-hover:text-white dark:group-active:text-white"
                                 }`}
                               >
@@ -470,7 +470,7 @@ export default function LeaderboardTabs() {
                   aria-current={active ? "page" : undefined}
                   className={`relative flex shrink-0 items-center gap-2 px-3 text-sm font-medium transition-colors ${focusRing} ${
                     active
-                      ? "text-neutral-900 dark:text-white"
+                      ? "text-neutral-500 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-white"
                       : "text-neutral-500 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-white"
                   }`}
                 >
@@ -479,7 +479,7 @@ export default function LeaderboardTabs() {
                   {active && (
                     <span
                       aria-hidden="true"
-                      className="absolute inset-x-3 bottom-0 h-0.5 rounded-full bg-blue-500"
+                      className="absolute inset-x-3 bottom-0 h-0.5 rounded-full"
                     />
                   )}
                 </button>
